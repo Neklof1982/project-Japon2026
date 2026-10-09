@@ -62,7 +62,8 @@ Se han realizado las siguientes comprobaciones:
 
 Este proyecto está desplegado en **Netlify** para ofrecer un rendimiento rápido y fiable en producción.
 
-**Netlify:** [Pendiente de publicar]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/63fed62e-6ac0-456c-ac31-e605e81bc5ef/deploy-status)](https://app.netlify.com/projects/tarotconcata/deploys) 
+🔗 [Ver sitio en producción](https://japoncatalarom.netlify.app)
 
 ## Versionado 📌
 
