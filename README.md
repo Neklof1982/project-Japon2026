@@ -1,67 +1,78 @@
-# Japón 2026 · Guía de viaje
+# Japón 2026 🇯🇵
 
-Web estática hecha con [Astro](https://astro.build) para usar durante el viaje (Tokyo, Osaka, Nara y Kyoto, 21 OCT – 2 NOV 2026). Funciona sin conexión una vez guardada en el móvil.
+![Astro](https://img.shields.io/badge/Astro-7.3.5-BC52EE?style=flat&logo=astro&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=flat&logo=github&logoColor=white)
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)
 
-## Páginas
+Guía interactiva para organizar y disfrutar de un viaje por Japón en octubre y noviembre de 2026. Incluye itinerarios por Tokyo, Osaka y Kyoto, información sobre transportes, desplazamientos, visitas y recomendaciones prácticas para consultar durante el viaje desde el móvil.
 
-| Ruta | Contenido |
-|---|---|
-| `/` | Portada: ruta, día a día, kit de emergencia (hoteles), modo sin conexión |
-| `/tokyo-llegada/` | Fase 1 · 21 OCT · Haneda → hotel → Tokyo Station → Shinkansen → Shin-Osaka |
-| `/osaka/` | Fase 2 · 21–25 OCT · Hommachi, planes A–D (Nara incluida), salida a Kyoto |
-| `/kyoto/` | Fase 3 · 25–28 OCT · Higashiyama, Arashiyama, Fushimi Inari, Shinkansen a Tokyo |
-| `/tokyo/` | Fase 4 · 28 OCT – 2 NOV · Tokyo por días y vuelta por Haneda |
-| `/creditos/` | Autoría y licencia de las fotos |
+## Características principales 🚀
 
-Todas las páginas incluyen el **protocolo sin gluten** (tarjeta en japonés) y las **frases de ayuda** para taxi y estación. El botón rojo **🆘 Ayuda** está siempre visible.
+- 🗾 Itinerarios organizados por ciudades y zonas.
+- 🚆 Información para orientarse en estaciones y utilizar el transporte público.
+- 🚕 Tarjetas con indicaciones para enseñar a los taxistas.
+- 🏯 Información práctica sobre templos, santuarios, barrios y lugares de interés.
+- 📍 Mapas, fotografías y referencias visuales para facilitar los desplazamientos.
+- 🌾 Protocolo y recomendaciones para viajar con una persona celíaca.
+- 📱 Diseño adaptable a móviles, tablets y ordenadores.
+- 📶 Consulta de contenidos sin conexión a Internet.
 
-## Requisitos
+## Vista Previa 👀
 
-- Node.js **22.12 o superior** (`node -v`)
+**Guía publicada:** [Pendiente de publicar]
 
-## Arrancar en local
+**Capturas de pantalla:** [Pendiente de añadir]
 
-```bash
-npm install
-npm run dev
-```
+## Construido con 🛠️
 
-Abre la dirección que indique la consola (por defecto `http://localhost:4321/japon-2026/`).
+- [Astro](https://astro.build/) - Framework utilizado para desarrollar la guía.
+- HTML5 - Estructura de las páginas.
+- CSS3 - Diseño y adaptación a diferentes dispositivos.
+- JavaScript y TypeScript - Interactividad y funcionalidades del proyecto.
+- Service Worker - Soporte para la consulta sin conexión.
+- Git y GitHub - Control de versiones y alojamiento del código.
+- Netlify - Plataforma prevista para el despliegue.
 
-## Publicar en GitHub Pages
+## Funcionalidades principales 🧩
 
-1. En `astro.config.mjs` cambia `USUARIO` por tu usuario de GitHub. Si el repositorio no se llama `japon-2026`, cambia también `base`.
-2. Crea el repositorio y sube el código a la rama `main`.
-3. En GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Cada `push` a `main` publica la web con `.github/workflows/deploy.yml`.
+- Organización del viaje por ciudades, días y zonas.
+- Información sobre rutas y desplazamientos en transporte público.
+- Referencias visuales de estaciones, señales y accesos.
+- Tarjetas de información para facilitar la comunicación con los taxistas.
+- Recomendaciones para reducir los riesgos relacionados con el gluten durante el viaje.
+- Diseño responsive para consultar la guía desde el móvil.
+- Acceso a páginas y fotografías sin conexión, según las pruebas realizadas.
 
-La web queda en `https://USUARIO.github.io/japon-2026/`.
+## Realizando las pruebas ⚙️
 
-## Publicar en Netlify (alternativa)
+Se han realizado las siguientes comprobaciones:
 
-1. En Netlify: **Add new site → Import an existing project** y elige el repositorio.
-2. No hay que configurar nada: `netlify.toml` ya indica el comando (`npm run build`), la carpeta (`dist`), Node 22 y que la web va en la raíz (`BASE_PATH=/`).
+- Instalación limpia de dependencias mediante `npm ci`.
+- Compilación de producción mediante `npm run build`.
+- Revisión de 232 referencias entre imports y rutas, teniendo en cuenta las mayúsculas y minúsculas.
+- Comprobación del funcionamiento con la ruta base `/japon-2026/`.
+- Revisión de la configuración de Netlify para publicar la web desde la raíz.
+- Pruebas responsive en 112 combinaciones de páginas, tamaños de pantalla y variantes.
+- Comprobación de interacciones móviles.
+- Pruebas de funcionamiento sin conexión con 84 fotografías y las páginas disponibles.
 
-## Probar en el móvil antes del viaje
+## Deploy 🌐
 
-1. Abrir la web publicada con wifi y entrar en la portada.
-2. Bajar a **Guardar la guía en el móvil** y esperar a que ponga ✅ (84 fotos).
-3. Añadirla a la pantalla de inicio (Safari: Compartir → Añadir a pantalla de inicio · Chrome: menú → Instalar app).
-4. Poner el móvil en **modo avión** y abrir las cuatro fases: todo debe verse, fotos incluidas.
-5. Si se cambia algo de la web después, abrirla una vez con conexión para que se actualice.
+Este proyecto está desplegado en **Netlify** para ofrecer un rendimiento rápido y fiable en producción.
 
-## Dónde se cambia cada cosa
+**Netlify:** [Pendiente de publicar]
 
-| Qué | Fichero |
-|---|---|
-| Hoteles, fechas, relevos entre fases | `src/data/viaje.ts` |
-| Colores y nombres de las líneas | `src/data/lineas.ts` |
-| Frases comunes (estación, taxi, básicas) | `src/data/frases.ts` |
-| Tarjeta celíaca, reglas y frases de comida | `src/data/celiaco.ts` |
-| Fotos (autor, licencia, tamaño) | `src/data/fotos.json` + `public/img/` |
-| Contenido de cada fase | `src/pages/*.astro` |
-| Estilos | `src/styles/global.css` |
+## Versionado 📌
 
-## Modo sin conexión
+Este proyecto se ha utilizando **Git** y **GitHub** para el control de versiones, lo que permite mantener un registro detallado de los cambios realizados durante el desarrollo. 
 
-`src/pages/sw.js.ts` genera el *service worker* en cada build con la lista de páginas y fotos. Al abrir la web por primera vez se guardan las páginas y, en segundo plano, todas las fotos. En la portada hay un botón para comprobarlo o completarlo.
+## Licencia 📄
+
+Este proyecto está bajo la [MIT License](./LICENSE).
+
+## Expresiones de Gratitud 🎁
+
+📢Podéis invitarme a una cerveza 🍺 o un café ☕.\
+Gracias por la Lectura 🤓
