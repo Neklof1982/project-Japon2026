@@ -1,0 +1,11 @@
+---
+/** Frase para enseñar. El botón ⤢ la pone a pantalla completa en letra grande. */
+interface Props { jp: string; romaji?: string; es: string }
+const { jp, romaji, es } = Astro.props;
+---
+<div class="phrase">
+  <div class="jp">{jp}</div>
+  {romaji && <div class="romaji">{romaji}</div>}
+  <div class="es">{es}</div>
+  <button class="btn-grande" type="button" data-grande data-jp={jp} data-sub={es} data-peq={romaji} aria-label="Mostrar en grande">⤢</button>
+</div>

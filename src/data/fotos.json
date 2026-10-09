@@ -1,0 +1,758 @@
+{
+ "haneda-t3": {
+  "file": "img/tokyo-llegada/haneda-t3.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo-International-Airport_T3_Arrival-lobby.jpg",
+  "titulo": "Tokyo-International-Airport T3 Arrival-lobby.jpg"
+ },
+ "tokyo-yaesu": {
+  "file": "img/tokyo-llegada/tokyo-yaesu.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo-STA_Yaesu-South-Entrance.jpg",
+  "titulo": "Tokyo-STA Yaesu-South-Entrance.jpg"
+ },
+ "tokyo-marunouchi": {
+  "file": "img/tokyo-llegada/tokyo-marunouchi.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Alexandr3126",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo_Station_(Marunouchi_Building).jpg",
+  "titulo": "Tokyo Station (Marunouchi Building).jpg"
+ },
+ "shinkansen-sign": {
+  "file": "img/tokyo-llegada/shinkansen-sign.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:JR-Central-Tokyo-STA_Yaesu-central-south-Gate.jpg",
+  "titulo": "JR-Central-Tokyo-STA Yaesu-central-south-Gate.jpg"
+ },
+ "shinkansen-gates": {
+  "file": "img/tokyo-llegada/shinkansen-gates.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:JR-Central-Tokyo-STA_Yaesu-south-gate.jpg",
+  "titulo": "JR-Central-Tokyo-STA Yaesu-south-gate.jpg"
+ },
+ "shinkansen-board": {
+  "file": "img/tokyo-llegada/shinkansen-board.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:JR-Central-Tokyo-STA_Shinkansen-concourse_Digital-Signage.jpg",
+  "titulo": "JR-Central-Tokyo-STA Shinkansen-concourse Digital-Signage.jpg"
+ },
+ "shinkansen-platform": {
+  "file": "img/tokyo-llegada/shinkansen-platform.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Syced",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shinkansen_platform_at_Tokyo_Station_22.jpg",
+  "titulo": "Shinkansen platform at Tokyo Station 22.jpg"
+ },
+ "nozomi": {
+  "file": "img/tokyo-llegada/nozomi.jpg",
+  "w": 1280,
+  "h": 854,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Series-N700S-J2.jpg",
+  "titulo": "Series-N700S-J2.jpg"
+ },
+ "ekiben": {
+  "file": "img/tokyo-llegada/ekiben.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "電車(新幹線)でゴー！",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:%E9%A7%85%E5%BC%81%E5%B1%8B_%E7%A5%AD%E3%82%BB%E3%83%AC%E3%82%AF%E3%83%88.jpg",
+  "titulo": "駅弁屋 祭セレクト.jpg"
+ },
+ "shin-osaka": {
+  "file": "img/osaka/shin-osaka.jpg",
+  "w": 1164,
+  "h": 692,
+  "autor": "SElefant",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shin-Osaka_Station.jpg",
+  "titulo": "Shin-Osaka Station.jpg"
+ },
+ "shin-osaka-metro": {
+  "file": "img/osaka/shin-osaka-metro.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "そらみみ",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shin-Osaka_Station_Sign_(Midosuji_Line).jpg",
+  "titulo": "Shin-Osaka Station Sign (Midosuji Line).jpg"
+ },
+ "midosuji": {
+  "file": "img/osaka/midosuji.jpg",
+  "w": 1280,
+  "h": 1024,
+  "autor": "S5A-0043",
+  "licencia": "CC BY 2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:(JPN-Osaka)_Midosuji_Line_30000_series_31617F_@_Shin-Osaka_2024-11-17.jpg",
+  "titulo": "(JPN-Osaka) Midosuji Line 30000 series 31617F @ Shin-Osaka 2024-11-17.jpg"
+ },
+ "hommachi": {
+  "file": "img/osaka/hommachi.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hommachi-STA_South-Gate.jpg",
+  "titulo": "Hommachi-STA South-Gate.jpg"
+ },
+ "osaka-castle": {
+  "file": "img/osaka/osaka-castle.jpg",
+  "w": 1024,
+  "h": 768,
+  "autor": "alisdair",
+  "licencia": "CC BY 2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Osaka_Castle,_Main_Tower_(2850633888).jpg",
+  "titulo": "Osaka Castle, Main Tower (2850633888).jpg"
+ },
+ "museo-historia": {
+  "file": "img/osaka/museo-historia.jpg",
+  "w": 1280,
+  "h": 958,
+  "autor": "Tokumeigakarinoaoshima",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Osaka_Museum_of_History_and_NHK_Osaka_Broadcasting_Center_Building.jpg",
+  "titulo": "Osaka Museum of History and NHK Osaka Broadcasting Center Building.jpg"
+ },
+ "nakanoshima": {
+  "file": "img/osaka/nakanoshima.jpg",
+  "w": 1280,
+  "h": 737,
+  "autor": "Daniel Lu (User:dllu)",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Osaka_City_Central_Public_Hall_main_facade_2026_dllu.jpg",
+  "titulo": "Osaka City Central Public Hall main facade 2026 dllu.jpg"
+ },
+ "tenmangu": {
+  "file": "img/osaka/tenmangu.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Sakai Yayoi",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Osaka_Tenmangu_Shrine_2026.jpg",
+  "titulo": "Osaka Tenmangu Shrine 2026.jpg"
+ },
+ "tenjinbashi": {
+  "file": "img/osaka/tenjinbashi.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "DVMG",
+  "licencia": "CC BY 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tenjinbashisuji_shopping_street_-_panoramio_(25).jpg",
+  "titulo": "Tenjinbashisuji shopping street - panoramio (25).jpg"
+ },
+ "umeda-sky": {
+  "file": "img/osaka/umeda-sky.jpg",
+  "w": 1280,
+  "h": 822,
+  "autor": "Martin Falbisoner",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Umeda_Sky_Building,_Osaka,_November_2016_-01.jpg",
+  "titulo": "Umeda Sky Building, Osaka, November 2016 -01.jpg"
+ },
+ "shitennoji": {
+  "file": "img/osaka/shitennoji.jpg",
+  "w": 448,
+  "h": 600,
+  "autor": "Chris Gladis from Kyoto, Japan",
+  "licencia": "CC BY 2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shitennoji_-_pagoda.jpg",
+  "titulo": "Shitennoji - pagoda.jpg"
+ },
+ "shinsekai": {
+  "file": "img/osaka/shinsekai.jpg",
+  "w": 853,
+  "h": 1280,
+  "autor": "king nikochan from Shinsekai, Naniwa, Osaka",
+  "licencia": "CC BY 2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Blowfish_and_Tsutenkaku_by_king_nikochan_in_Shinsekai,_Osaka.jpg",
+  "titulo": "Blowfish and Tsutenkaku by king nikochan in Shinsekai, Osaka.jpg"
+ },
+ "namba-yasaka": {
+  "file": "img/osaka/namba-yasaka.jpg",
+  "w": 960,
+  "h": 1280,
+  "autor": "Immanuelle",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Namba-Yasaka-Shrine-lions_head_theater.jpg",
+  "titulo": "Namba-Yasaka-Shrine-lions head theater.jpg"
+ },
+ "kuromon": {
+  "file": "img/osaka/kuromon.jpg",
+  "w": 1280,
+  "h": 1280,
+  "autor": "Mc681",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kuromon-ichiba_in_201408.JPG",
+  "titulo": "Kuromon-ichiba in 201408.JPG"
+ },
+ "denden": {
+  "file": "img/osaka/denden.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Kansai explorer",
+  "licencia": "CC BY 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Nipponbashi-3S_south_view20100320.JPG",
+  "titulo": "Nipponbashi-3S south view20100320.JPG"
+ },
+ "dotonbori": {
+  "file": "img/osaka/dotonbori.jpg",
+  "w": 1280,
+  "h": 850,
+  "autor": "Schellack",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Glico_Man_sign,_Dotonbori.JPG",
+  "titulo": "Glico Man sign, Dotonbori.JPG"
+ },
+ "hozenji": {
+  "file": "img/osaka/hozenji.jpg",
+  "w": 1280,
+  "h": 961,
+  "autor": "Hyppolyte de Saint-Rambert",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hozenji_(Osaka_Chuo-ku)_Temple_hdsr_S5_24.jpg",
+  "titulo": "Hozenji (Osaka Chuo-ku) Temple hdsr S5 24.jpg"
+ },
+ "shinsaibashi": {
+  "file": "img/osaka/shinsaibashi.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "そらみみ",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shinsaibashi-suji_Shopping_Street_20190201.jpg",
+  "titulo": "Shinsaibashi-suji Shopping Street 20190201.jpg"
+ },
+ "kintetsu-namba": {
+  "file": "img/osaka/kintetsu-namba.jpg",
+  "w": 960,
+  "h": 1280,
+  "autor": "そらみみ",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Osaka-Namba_Station_Sign_(Kintetsu).jpg",
+  "titulo": "Osaka-Namba Station Sign (Kintetsu).jpg"
+ },
+ "kintetsu-nara": {
+  "file": "img/osaka/kintetsu-nara.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Degueulasse",
+  "licencia": "CC BY 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kintetsu_Nara_station_20140902.jpg",
+  "titulo": "Kintetsu Nara station 20140902.jpg"
+ },
+ "todaiji": {
+  "file": "img/osaka/todaiji.jpg",
+  "w": 1280,
+  "h": 1035,
+  "autor": "ONO Masanobu",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Todai-ji_Daibutsuden_front_view_in_2011.jpg",
+  "titulo": "Todai-ji Daibutsuden front view in 2011.jpg"
+ },
+ "kofukuji": {
+  "file": "img/osaka/kofukuji.jpg",
+  "w": 877,
+  "h": 1280,
+  "autor": "Zairon",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Nara_Kofuku-ji_Five-Storied_Pagoda_06.jpg",
+  "titulo": "Nara Kofuku-ji Five-Storied Pagoda 06.jpg"
+ },
+ "kasuga": {
+  "file": "img/osaka/kasuga.jpg",
+  "w": 1280,
+  "h": 766,
+  "autor": "Gzzz",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lanterns_Kasuga-taisha_Nara.jpg",
+  "titulo": "Lanterns Kasuga-taisha Nara.jpg"
+ },
+ "kyoto-station": {
+  "file": "img/kyoto/kyoto-station.jpg",
+  "w": 1280,
+  "h": 874,
+  "autor": "Martin Falbisoner",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kyoto_Station_November_2016_-02.jpg",
+  "titulo": "Kyoto Station November 2016 -02.jpg"
+ },
+ "kyoto-tower": {
+  "file": "img/kyoto/kyoto-tower.jpg",
+  "w": 960,
+  "h": 1280,
+  "autor": "Asturio Cantabrio",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kyoto_Tower_2023-12_ac_(1).jpg",
+  "titulo": "Kyoto Tower 2023-12 ac (1).jpg"
+ },
+ "nara-line": {
+  "file": "img/kyoto/nara-line.jpg",
+  "w": 1280,
+  "h": 720,
+  "autor": "Mr.ちゅらさん",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:JR-West_221_Kyoto_Green_Tea_Train_at_Kyoto_Station1.jpg",
+  "titulo": "JR-West 221 Kyoto Green Tea Train at Kyoto Station1.jpg"
+ },
+ "inari-station": {
+  "file": "img/kyoto/inari-station.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "切干大根",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Inari_Station_2018.jpg",
+  "titulo": "Inari Station 2018.jpg"
+ },
+ "saga-arashiyama": {
+  "file": "img/kyoto/saga-arashiyama.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Mti",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Saga-Arashiyama_Station_in_2012.JPG",
+  "titulo": "Saga-Arashiyama Station in 2012.JPG"
+ },
+ "sagano-line": {
+  "file": "img/kyoto/sagano-line.jpg",
+  "w": 1280,
+  "h": 720,
+  "autor": "Mr.ちゅらさん",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:JR-West_223_Sagano_Sanin_Line_at_Kyoto_Station.jpg",
+  "titulo": "JR-West 223 Sagano Sanin Line at Kyoto Station.jpg"
+ },
+ "kiyomizu": {
+  "file": "img/kyoto/kiyomizu.jpg",
+  "w": 1280,
+  "h": 845,
+  "autor": "Martin Falbisoner",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kiyomizu-dera,_Kyoto,_November_2016_-02.jpg",
+  "titulo": "Kiyomizu-dera, Kyoto, November 2016 -02.jpg"
+ },
+ "sannenzaka": {
+  "file": "img/kyoto/sannenzaka.jpg",
+  "w": 1280,
+  "h": 852,
+  "autor": "Aporon999",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sannenzaka-kyoto.JPG",
+  "titulo": "Sannenzaka-kyoto.JPG"
+ },
+ "yasaka-pagoda": {
+  "file": "img/kyoto/yasaka-pagoda.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Basile Morin",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_(Hokan-ji_Temple),_Kyoto,_Japan.jpg",
+  "titulo": "Yasaka-dori early morning with street lanterns and the Tower of Yasaka (Hokan-ji Temple), Kyoto, Japan.jpg"
+ },
+ "yasaka-shrine": {
+  "file": "img/kyoto/yasaka-shrine.jpg",
+  "w": 1280,
+  "h": 820,
+  "autor": "DXR",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Nishiromon_Gate,_Yasaka_Shrine,_Kyoto,_West_view_20190416_1.jpg",
+  "titulo": "Nishiromon Gate, Yasaka Shrine, Kyoto, West view 20190416 1.jpg"
+ },
+ "bambu": {
+  "file": "img/kyoto/bambu.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Bjørn Christian Tørrissen",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Arashiyama-Bamboo-Grove-Sunset.jpg",
+  "titulo": "Arashiyama-Bamboo-Grove-Sunset.jpg"
+ },
+ "tenryuji": {
+  "file": "img/kyoto/tenryuji.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Chainwit.",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sand_garden_at_Tenry%C5%AB-ji_(2020)_-_img_01.jpg",
+  "titulo": "Sand garden at Tenryū-ji (2020) - img 01.jpg"
+ },
+ "togetsukyo": {
+  "file": "img/kyoto/togetsukyo.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Basile Morin",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Togetsu-ky%C5%8D_bridge_at_golden_hour,_Kyoto,_Japan.jpg",
+  "titulo": "Togetsu-kyō bridge at golden hour, Kyoto, Japan.jpg"
+ },
+ "ryoanji": {
+  "file": "img/kyoto/ryoanji.jpg",
+  "w": 1280,
+  "h": 926,
+  "autor": "lumoplank",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Ninna-ji_and_Ryoan-ji,_Kyoto_-_Ryoanji7753.jpg",
+  "titulo": "Ninna-ji and Ryoan-ji, Kyoto - Ryoanji7753.jpg"
+ },
+ "kinkakuji": {
+  "file": "img/kyoto/kinkakuji.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Nacaru",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Golden_Pavilion_Kinkaku-ji_2024.jpg",
+  "titulo": "Golden Pavilion Kinkaku-ji 2024.jpg"
+ },
+ "inari-romon": {
+  "file": "img/kyoto/inari-romon.jpg",
+  "w": 1280,
+  "h": 1085,
+  "autor": "DXR",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Romon,_Fushimi_Inari-taisha,_Kyoto,_West_view_20190416_1.jpg",
+  "titulo": "Romon, Fushimi Inari-taisha, Kyoto, West view 20190416 1.jpg"
+ },
+ "senbon-torii": {
+  "file": "img/kyoto/senbon-torii.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Luka Peternel",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fushimi-Inari-Shrine-Senbon-Torii-2016-Luka-Peternel.jpg",
+  "titulo": "Fushimi-Inari-Shrine-Senbon-Torii-2016-Luka-Peternel.jpg"
+ },
+ "nijo": {
+  "file": "img/kyoto/nijo.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "CCP2017",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Nijo_Castle_2017.jpg",
+  "titulo": "Nijo Castle 2017.jpg"
+ },
+ "shintomicho": {
+  "file": "img/tokyo/shintomicho.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Kansai-good",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shintomicho-station-Exit5.jpg",
+  "titulo": "Shintomicho-station-Exit5.jpg"
+ },
+ "kamiyacho": {
+  "file": "img/tokyo/kamiyacho.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "LERK (talk · contribs)",
+  "licencia": "CC BY 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:TokyoMetro-H05-kamiyacho-station-platform.jpg",
+  "titulo": "TokyoMetro-H05-kamiyacho-station-platform.jpg"
+ },
+ "azabudai": {
+  "file": "img/tokyo/azabudai.jpg",
+  "w": 1280,
+  "h": 964,
+  "autor": "Syced",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Azabudai_Hills_4.jpg",
+  "titulo": "Azabudai Hills 4.jpg"
+ },
+ "tsukiji": {
+  "file": "img/tokyo/tsukiji.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Aimaimyi",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tsukiji_Outer_Market_-02.jpg",
+  "titulo": "Tsukiji Outer Market -02.jpg"
+ },
+ "hongwanji": {
+  "file": "img/tokyo/hongwanji.jpg",
+  "w": 1280,
+  "h": 801,
+  "autor": "Kakidai",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:2019_Tsukiji_Honganji.jpg",
+  "titulo": "2019 Tsukiji Honganji.jpg"
+ },
+ "hamarikyu": {
+  "file": "img/tokyo/hamarikyu.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Reinhold Möller Ermell",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokio_Hamarikyu-Garten-20091017-RM-141110.jpg",
+  "titulo": "Tokio Hamarikyu-Garten-20091017-RM-141110.jpg"
+ },
+ "ginza": {
+  "file": "img/tokyo/ginza.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "This Photo was taken by Supanut Arunoprayote. Feel free to use any of my images, but please mention me as the author and",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Ginza_Wako_20241021.jpg",
+  "titulo": "Ginza Wako 20241021.jpg"
+ },
+ "meiji-torii": {
+  "file": "img/tokyo/meiji-torii.jpg",
+  "w": 1280,
+  "h": 961,
+  "autor": "Zairon",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Meiji-jingu_Torii_1.jpg",
+  "titulo": "Meiji-jingu Torii 1.jpg"
+ },
+ "takeshita": {
+  "file": "img/tokyo/takeshita.jpg",
+  "w": 1280,
+  "h": 721,
+  "autor": "japanvlogjp",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Japan_Tokyo_Takeshita_street_at_summer_-_%E6%9D%B1%E4%BA%AC%E7%AB%B9%E4%B8%8B.jpg",
+  "titulo": "Japan Tokyo Takeshita street at summer - 東京竹下.jpg"
+ },
+ "omotesando": {
+  "file": "img/tokyo/omotesando.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "gog.creator",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Omotesando_Avenue_at_sunset_from_pedestrian_bridge,_Jingumae,_Shibuya,_Tokyo.jpg",
+  "titulo": "Omotesando Avenue at sunset from pedestrian bridge, Jingumae, Shibuya, Tokyo.jpg"
+ },
+ "shibuya-cruce": {
+  "file": "img/tokyo/shibuya-cruce.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Benh LIEU SONG (Flickr)",
+  "licencia": "CC BY-SA 2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo_Shibuya_Scramble_Crossing_2018-10-09.jpg",
+  "titulo": "Tokyo Shibuya Scramble Crossing 2018-10-09.jpg"
+ },
+ "shibuya-sky": {
+  "file": "img/tokyo/shibuya-sky.jpg",
+  "w": 1280,
+  "h": 779,
+  "autor": "Kakidai",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shibuya_Scramble_Square_-_SHIBUYA_SKY_10.jpg",
+  "titulo": "Shibuya Scramble Square - SHIBUYA SKY 10.jpg"
+ },
+ "odaiba": {
+  "file": "img/tokyo/odaiba.jpg",
+  "w": 1280,
+  "h": 961,
+  "autor": "Zairon",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Odaiba_Statue_of_Liberty_%26_Rainbow_Bridge_4.jpg",
+  "titulo": "Odaiba Statue of Liberty & Rainbow Bridge 4.jpg"
+ },
+ "kaminarimon": {
+  "file": "img/tokyo/kaminarimon.jpg",
+  "w": 640,
+  "h": 480,
+  "autor": "User: (WT-shared) Jonas Ryberg at wts wikivoyage",
+  "licencia": "Public domain",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kaminari_gate,_Asakusa_temple.jpg",
+  "titulo": "Kaminari gate, Asakusa temple.jpg"
+ },
+ "sensoji": {
+  "file": "img/tokyo/sensoji.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "No machine-readable author provided. Arcimboldo assumed (based on copyright claims).",
+  "licencia": "CC BY 2.5",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Senso-ji_main_hall_012006.JPG",
+  "titulo": "Senso-ji main hall 012006.JPG"
+ },
+ "kappabashi": {
+  "file": "img/tokyo/kappabashi.jpg",
+  "w": 1280,
+  "h": 1019,
+  "autor": "Basile Morin",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kappabashi-dori_streetcorner_(Kitchen_town_-_southern_end)_a_sunny_morning_in_Tokyo_Japan.jpg",
+  "titulo": "Kappabashi-dori streetcorner (Kitchen town - southern end) a sunny morning in Tokyo Japan.jpg"
+ },
+ "ameyoko": {
+  "file": "img/tokyo/ameyoko.jpg",
+  "w": 857,
+  "h": 1280,
+  "autor": "663highland",
+  "licencia": "CC BY 2.5",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Ameya-yokocho01s5s3200.jpg",
+  "titulo": "Ameya-yokocho01s5s3200.jpg"
+ },
+ "akihabara": {
+  "file": "img/tokyo/akihabara.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Phineyes",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sotokanda,_Akihabara_Electric_Town_at_night_20231114.png",
+  "titulo": "Sotokanda, Akihabara Electric Town at night 20231114.png"
+ },
+ "tmg": {
+  "file": "img/tokyo/tmg.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Markus Leupold-Löwenthal",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:TokyoMetropolitanGovernmentOffice.jpg",
+  "titulo": "TokyoMetropolitanGovernmentOffice.jpg"
+ },
+ "omoide": {
+  "file": "img/tokyo/omoide.jpg",
+  "w": 960,
+  "h": 1280,
+  "autor": "Grendelkhan",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Entrance_to_Omoide_Yokocho.jpg",
+  "titulo": "Entrance to Omoide Yokocho.jpg"
+ },
+ "golden-gai": {
+  "file": "img/tokyo/golden-gai.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Alexkom000",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:2024-10-20_Shinjuku_Golden_Gai_at_night.jpg",
+  "titulo": "2024-10-20 Shinjuku Golden Gai at night.jpg"
+ },
+ "yamanote": {
+  "file": "img/tokyo/yamanote.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Series-E235-0_9.jpg",
+  "titulo": "Series-E235-0 9.jpg"
+ },
+ "ginza-line": {
+  "file": "img/tokyo/ginza-line.jpg",
+  "w": 1280,
+  "h": 913,
+  "autor": "Toshinori baba",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo_Metro_1000_ginza_line.JPG",
+  "titulo": "Tokyo Metro 1000 ginza line.JPG"
+ },
+ "hibiya-line": {
+  "file": "img/tokyo/hibiya-line.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo-Metro_Series13000-13010.jpg",
+  "titulo": "Tokyo-Metro Series13000-13010.jpg"
+ },
+ "marunouchi-line": {
+  "file": "img/tokyo/marunouchi-line.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tokyo-Metro-Series02-2000.jpg",
+  "titulo": "Tokyo-Metro-Series02-2000.jpg"
+ },
+ "asakusa-line": {
+  "file": "img/tokyo/asakusa-line.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "MaedaAkihiko This photo was taken with Panasonic Lumix DC-FZ1000 II",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Asakusa-Line_Series5500-5503.jpg",
+  "titulo": "Asakusa-Line Series5500-5503.jpg"
+ },
+ "metro-sign": {
+  "file": "img/tokyo/metro-sign.jpg",
+  "w": 1280,
+  "h": 720,
+  "autor": "LERK",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:TokyoMetro-G13-Kanda-station-sign-20170907-170454.jpg",
+  "titulo": "TokyoMetro-G13-Kanda-station-sign-20170907-170454.jpg"
+ },
+ "haneda-taxi": {
+  "file": "img/tokyo-llegada/haneda-taxi.jpg",
+  "w": 900,
+  "h": 675,
+  "autor": "Benespit",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Daiwa_Taxi_142_Toyota_JPN_Taxi_at_Aoyama_1-chome_Crossing_Tokyo.jpg",
+  "titulo": "Daiwa Taxi 142 Toyota JPN Taxi at Aoyama 1-chome Crossing Tokyo.jpg"
+ },
+ "tenshiba": {
+  "file": "img/osaka/tenshiba.jpg",
+  "w": 853,
+  "h": 1280,
+  "autor": "Laitche",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Square_pyramid_skylight_on_the_roof_with_Abeno_Harukas_in_sunset_-_HDR.jpg",
+  "titulo": "Square pyramid skylight on the roof with Abeno Harukas in sunset - HDR.jpg"
+ },
+ "nara-ciervos": {
+  "file": "img/osaka/nara-ciervos.jpg",
+  "w": 1280,
+  "h": 812,
+  "autor": "Daniel Lu (User:dllu)",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sika_deer_doe_and_fawn_Nara_2026_dllu.jpg",
+  "titulo": "Sika deer doe and fawn Nara 2026 dllu.jpg"
+ },
+ "hanamikoji": {
+  "file": "img/kyoto/hanamikoji.jpg",
+  "w": 1280,
+  "h": 864,
+  "autor": "lumoplank",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Streets_of_Gion,_Kyoto_-_Gion7708.jpg",
+  "titulo": "Streets of Gion, Kyoto - Gion7708.jpg"
+ },
+ "shirakawa": {
+  "file": "img/kyoto/shirakawa.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Moja",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kyoto_gion01.jpg",
+  "titulo": "Kyoto gion01.jpg"
+ },
+ "hatchobori": {
+  "file": "img/tokyo/hatchobori.jpg",
+  "w": 960,
+  "h": 1280,
+  "autor": "LERK (talk · contribs)",
+  "licencia": "CC BY 2.5",
+  "fuente": "https://commons.wikimedia.org/wiki/File:TokyoMetro-hatchobori-A1-entrance.jpg",
+  "titulo": "TokyoMetro-hatchobori-A1-entrance.jpg"
+ },
+ "godzilla": {
+  "file": "img/tokyo/godzilla.jpg",
+  "w": 1280,
+  "h": 1061,
+  "autor": "Kakidai",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shinjuku_Toho_Building_from_Godzilla_Street.jpg",
+  "titulo": "Shinjuku Toho Building from Godzilla Street.jpg"
+ }
+}

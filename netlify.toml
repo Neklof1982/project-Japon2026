@@ -1,0 +1,14 @@
+# Netlify: la web se publica en la raíz del dominio, no en /japon-2026/.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  BASE_PATH = "/"
+
+# El service worker tiene que comprobarse siempre: si se cachea, el móvil no ve las actualizaciones.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

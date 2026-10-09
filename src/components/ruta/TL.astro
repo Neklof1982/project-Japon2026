@@ -1,0 +1,23 @@
+---
+/** Elemento de la línea temporal. `tipo` marca el color del punto y de la etiqueta. */
+import Prio from '../ui/Prio.astro';
+interface Props {
+  hora: string;
+  titulo: string;
+  tipo?: 'visita' | 'vuelo' | 'taxi' | 'tren' | 'metro' | 'andar' | 'descanso';
+  etiqueta?: string;
+  prio?: 'must' | 'maybe' | 'opt';
+  prioTexto?: string;
+}
+const { hora, titulo, tipo = 'visita', etiqueta, prio, prioTexto } = Astro.props;
+---
+<div class={`tl-item ${tipo}`}>
+  <div class="tl-time">{hora}</div>
+  <div class="tl-title">
+    {prio && <Prio t={prio} texto={prioTexto} />}
+    <span set:html={titulo} />
+    {etiqueta && <span class={`tl-badge ${tipo}`}>{etiqueta}</span>}
+  </div>
+  {Astro.slots.has('lineas') && <div class="tl-lineas"><slot name="lineas" /></div>}
+  <div class="tl-desc"><slot /></div>
+</div>

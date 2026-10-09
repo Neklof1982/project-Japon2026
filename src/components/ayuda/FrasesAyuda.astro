@@ -1,0 +1,32 @@
+---
+/** Sección de frases: las propias de la fase arriba y las comunes del viaje debajo. */
+import Frase from './Frase.astro';
+import { BASICAS, ESTACION, TAXI, type Frase as F } from '../../data/frases';
+interface Props { extra?: F[]; extraTitulo?: string }
+const { extra = [], extraTitulo = 'Para esta parte del viaje' } = Astro.props;
+---
+<section id="frases" class="alt">
+  <div class="container">
+    <div class="section-title">Ayuda rápida para usar allí</div>
+    <h2>Frases preparadas para <strong>enseñar en el móvil</strong></h2>
+    <p class="lead">No hace falta pronunciarlas: mostramos la frase y señalamos el billete, la pantalla o el sitio. Con <strong>⤢</strong> se ve en grande.</p>
+    {extra.length > 0 && (
+      <div class="show-card">
+        <div class="kicker oro">📍 {extraTitulo.toUpperCase()}</div>
+        <div class="phrase-grid">{extra.map((f) => <Frase {...f} />)}</div>
+      </div>
+    )}
+    <div class="show-card">
+      <div class="kicker oro">🚉 EN LA ESTACIÓN · OPERACIÓN DE TRENES</div>
+      <div class="phrase-grid">{ESTACION.map((f) => <Frase {...f} />)}</div>
+    </div>
+    <div class="show-card">
+      <div class="kicker oro">🚕 TAXI</div>
+      <div class="phrase-grid">{TAXI.map((f) => <Frase {...f} />)}</div>
+    </div>
+    <div class="show-card">
+      <div class="kicker oro">💬 BÁSICAS</div>
+      <div class="phrase-grid">{BASICAS.map((f) => <Frase {...f} />)}</div>
+    </div>
+  </div>
+</section>

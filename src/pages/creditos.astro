@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import fotos from '../data/fotos.json';
+import { url } from '../lib/url';
+
+type F = { file: string; autor: string; licencia: string; fuente: string; titulo?: string };
+const lista = Object.entries(fotos as Record<string, F>).sort((a, b) => a[1].file.localeCompare(b[1].file));
+---
+<BaseLayout title="Japón 2026 · Créditos de las fotos" description="Autoría y licencias de las fotografías usadas en la guía.">
+  <Hero tag="Japón 2026" titulo="Créditos de las <strong>fotos</strong>" parrafos={['Todas las fotografías proceden de Wikimedia Commons y se usan según su licencia libre, citando autor y enlace. Los carteles de estación, esquemas y mini mapas son recreaciones propias.']} />
+  <Seccion kicker="Fotografías" titulo={`${lista.length} <strong>fotos</strong>`}>
+    <div class="tabla-wrap">
+      <table class="transport-table">
+        <thead><tr><th></th><th>Archivo</th><th>Autor</th><th>Licencia</th></tr></thead>
+        <tbody>
+          {lista.map(([id, f]) => (
+            <tr>
+              <td style="width:90px"><img src={url(f.file)} alt={id} loading="lazy" style="width:80px;height:54px;object-fit:cover;border-radius:4px" /></td>
+              <td><a href={f.fuente} target="_blank" rel="noopener">{f.titulo ?? id}</a></td>
+              <td set:html={f.autor} />
+              <td>{f.licencia}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="lead" style="margin-top:20px">Colores de las líneas: tomados de la señalética oficial de cada operador (Tokyo Metro, Toei, JR East, JR Central, JR West, Osaka Metro, Kintetsu). Los enlaces de mapas abren Google Maps.</p>
+  </Seccion>
+  <FrasesAyuda />
+  <BloqueCeliaco ciudad="todo el viaje" />
+  <Footer slot="footer" titulo="JAPÓN 2026 · CRÉDITOS" />
+</BaseLayout>

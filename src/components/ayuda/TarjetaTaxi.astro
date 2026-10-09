@@ -1,0 +1,14 @@
+---
+/** Tarjeta para enseñar al taxista. ⤢ la pone a pantalla completa. */
+interface Props { etiqueta: string; jp: string; romaji: string; frase?: string; fraseEs?: string; dire?: string }
+const { etiqueta, jp, romaji, frase, fraseEs, dire } = Astro.props;
+const fraseFinal = frase ?? `${jp}までお願いします。`;
+---
+<div class="taxicard">
+  <div class="taxi-label">🚕 {etiqueta}</div>
+  <div class="jp-dest jp">{jp}</div>
+  <div class="romaji">{romaji}</div>
+  <div class="frase jp">{fraseFinal}{fraseEs && <small>{fraseEs}</small>}</div>
+  {dire && <div class="dire jp">{dire}</div>}
+  <button class="btn-grande" type="button" data-grande data-jp={jp} data-sub={fraseFinal} data-peq={dire ?? romaji} aria-label="Mostrar al taxista a pantalla completa">⤢</button>
+</div>

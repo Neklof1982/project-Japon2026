@@ -1,0 +1,8 @@
+---
+interface Props { fecha: string; titulo: string; zona?: string }
+const { fecha, titulo, zona } = Astro.props;
+---
+<div class="day-head">
+  <div><div class="date">{fecha}</div><h2 set:html={titulo} /></div>
+  {zona && <div class="zone">{zona}</div>}
+</div>

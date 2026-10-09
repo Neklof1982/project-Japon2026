@@ -1,0 +1,10 @@
+---
+/** Bloque verde de regreso. rutas: [{ ruta (html), texto (html) }] */
+interface Props { titulo?: string; rutas: { ruta: string; texto: string }[] }
+const { titulo = '🌙 VUELTA AL HOTEL', rutas } = Astro.props;
+---
+<div class="return-box">
+  <h3>{titulo}</h3>
+  {rutas.map((r) => (<><div class="return-route" set:html={r.ruta} /><p set:html={r.texto} /></>))}
+  <slot />
+</div>

@@ -1,0 +1,8 @@
+---
+/** Pastilla de línea con su color oficial. Uso: <Linea l="midosuji" dir="Nakamozu" /> */
+import type { LineaId } from '../../data/lineas';
+import { lin, dir as d } from '../../lib/html';
+interface Props { l: LineaId; corta?: boolean; dir?: string }
+const { l, corta = false, dir } = Astro.props;
+---
+<Fragment set:html={lin(l, corta) + (dir ? ' ' + d(dir) : '')} />

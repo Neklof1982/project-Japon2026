@@ -1,0 +1,44 @@
+---
+/**
+ * Foto local (public/img) con pie y crédito. Al tocarla se abre a pantalla completa.
+ * Si una foto no existe o no carga, se muestra un recuadro con su descripción:
+ * nunca un hueco roto.
+ */
+import fotos from '../../data/fotos.json';
+import { url } from '../../lib/url';
+type F = { file: string; w: number; h: number; autor: string; licencia: string; fuente: string; alt?: string };
+interface Props { id: string; titulo?: string; texto?: string; wide?: boolean; h?: string; alt?: string }
+const { id, titulo, texto, wide = false, h, alt } = Astro.props;
+const f = (fotos as Record<string, F>)[id];
+const desc = alt ?? f?.alt ?? titulo ?? id;
+const src = f ? url(f.file) : '';
+---
+<figure class={`photo-card${wide ? ' wide' : ''}`} style={h ? `--h:${h}` : undefined}>
+  {f ? (
+    <div class="ph" data-zoom={src} data-alt={desc}>
+      <img
+        src={src}
+        alt={desc}
+        width={f.w}
+        height={f.h}
+        loading="lazy"
+        decoding="async"
+        onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph-fallback',textContent:'📷 '+this.alt}))"
+      />
+      <span class="zoom">⤢</span>
+    </div>
+  ) : (
+    <div class="ph-fallback">📷 {desc}</div>
+  )}
+  {(titulo || texto || f) && (
+    <figcaption class="photo-caption">
+      {titulo && <h4 set:html={titulo} />}
+      {texto && <p set:html={texto} />}
+      {f && (
+        <p class="photo-credit">
+          Foto: <span set:html={f.autor} /> · <a href={f.fuente} target="_blank" rel="noopener">{f.licencia}</a>
+        </p>
+      )}
+    </figcaption>
+  )}
+</figure>

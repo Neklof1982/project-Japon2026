@@ -1,0 +1,8 @@
+---
+/** Código de estación con el color de su línea. Uso: <Est l="midosuji" n={18} nombre="Hommachi" /> */
+import type { LineaId } from '../../data/lineas';
+import { est } from '../../lib/html';
+interface Props { l: LineaId; n: string | number; nombre?: string }
+const { l, n, nombre } = Astro.props;
+---
+<Fragment set:html={est(l, n, nombre)} />

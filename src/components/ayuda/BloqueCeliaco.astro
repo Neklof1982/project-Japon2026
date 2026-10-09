@@ -1,0 +1,46 @@
+---
+/** Protocolo sin gluten: igual en todas las páginas + consejos propios de cada ciudad. */
+import Frase from './Frase.astro';
+import { TARJETA, FRASES_COMIDA, REGLAS } from '../../data/celiaco';
+interface Props { ciudad: string; consejos?: string[] }
+const { ciudad, consejos = [] } = Astro.props;
+---
+<section id="celiaco">
+  <div class="container">
+    <div class="section-title">Atención especial · 1 viajero celíaco</div>
+    <h2>Protocolo <strong>sin gluten</strong></h2>
+    <p class="lead">La salsa de soja (shoyu) lleva trigo y está en la mayoría de los platos. <strong>“Parece que no lleva trigo” no significa “es seguro”</strong>: preguntamos por ingredientes y por contaminación cruzada.</p>
+
+    <div class="tarjeta-celiaca">
+      <div class="kicker">🪪 TARJETA PARA ENSEÑAR EN EL RESTAURANTE</div>
+      <div class="jp">{TARJETA.jp}</div>
+      <div class="es">{TARJETA.es}</div>
+      <button class="btn-grande" type="button" data-grande data-largo data-jp={TARJETA.jp} data-sub={TARJETA.es} aria-label="Mostrar la tarjeta a pantalla completa">⤢</button>
+    </div>
+
+    {consejos.length > 0 && (
+      <div class="celiac">
+        <h3>📍 En {ciudad}</h3>
+        <ul>{consejos.map((c) => <li set:html={c} />)}</ul>
+      </div>
+    )}
+
+    <div class="celiac">
+      <h3>
+        <svg fill="none" height="24" stroke="#c9a961" stroke-width="2" viewBox="0 0 24 24" width="24" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7l-10-5z" /><path d="M12 22V12M2 7l10 5 10-5" /></svg>
+        Reglas básicas para todo el viaje
+      </h3>
+      <ul>{REGLAS.map((r) => <li set:html={r} />)}</ul>
+    </div>
+
+    <div class="show-card">
+      <div class="kicker oro">🍜 FRASES DE COMIDA</div>
+      <div class="phrase-grid">{FRASES_COMIDA.map((f) => <Frase {...f} />)}</div>
+    </div>
+
+    <div class="aviso" style="margin-top:22px">
+      <strong>⚠️ Si no pueden confirmarlo</strong>
+      <p>No improvisamos: buscamos otra opción o tiramos de la comida segura que llevamos.</p>
+    </div>
+  </div>
+</section>

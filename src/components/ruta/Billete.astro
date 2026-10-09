@@ -1,0 +1,20 @@
+---
+interface Props {
+  linea: string; tren: string; clase: string; asientos: string;
+  origen: string; origenJp: string; destino: string; destinoJp: string;
+  duracion: string; duracionNota?: string; direccion: string; direccionNota?: string;
+}
+const p = Astro.props;
+---
+<div class="ticket">
+  <div class="ticket-top">
+    <div><div class="t-label">{p.linea}</div><div class="t-big">{p.tren}</div></div>
+    <div style="text-align:right"><div class="t-label">{p.clase}</div><div class="t-mid">{p.asientos}</div></div>
+  </div>
+  <div class="ticket-row">
+    <div class="ticket-item"><div class="label">Origen</div><div class="value">{p.origen}<small class="jp">{p.origenJp}</small></div></div>
+    <div class="ticket-item"><div class="label">Destino</div><div class="value">{p.destino}<small class="jp">{p.destinoJp}</small></div></div>
+    <div class="ticket-item"><div class="label">Duración</div><div class="value">{p.duracion}<small>{p.duracionNota ?? 'Sin transbordos'}</small></div></div>
+    <div class="ticket-item"><div class="label">Dirección</div><div class="value">{p.direccion}<small>{p.direccionNota}</small></div></div>
+  </div>
+</div>

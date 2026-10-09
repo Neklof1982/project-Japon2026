@@ -1,0 +1,507 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import NavSecciones from '../components/marco/NavSecciones.astro';
+import Conexion from '../components/marco/Conexion.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import DiaHead from '../components/ui/DiaHead.astro';
+import Mision from '../components/ui/Mision.astro';
+import Aviso from '../components/ui/Aviso.astro';
+import VueltaHotel from '../components/ui/VueltaHotel.astro';
+import Foto from '../components/ui/Foto.astro';
+import Galeria from '../components/ui/Galeria.astro';
+import Timeline from '../components/ruta/Timeline.astro';
+import TL from '../components/ruta/TL.astro';
+import Linea from '../components/ruta/Linea.astro';
+import Est from '../components/ruta/Est.astro';
+import MiniMapa from '../components/ruta/MiniMapa.astro';
+import MapaAndando from '../components/ruta/MapaAndando.astro';
+import TarjetaEstacion from '../components/ruta/TarjetaEstacion.astro';
+import Pasos from '../components/ruta/Pasos.astro';
+import TablaTransporte from '../components/ruta/TablaTransporte.astro';
+import TarjetaTaxi from '../components/ayuda/TarjetaTaxi.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import { HOTELES } from '../data/viaje';
+import { LINEAS, type LineaId } from '../data/lineas';
+import { lin, est, dir } from '../lib/html';
+
+const Ht = HOTELES.tokyo;
+const Hh = (n: number, nom?: string) => est('hibiya', n, nom);
+const G = (n: number, nom?: string) => est('ginza', n, nom);
+const Mm = (n: number, nom?: string) => est('marunouchi', n, nom);
+const JY = (n: number, nom?: string) => est('yamanote', n, nom);
+
+const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, string][]; uso: string; extra: string }[] = [
+  { l: 'hibiya', foto: 'hibiya-line', pista: 'La H dentro del círculo gris plata.', codigos: [[5, 'Kamiyacho'], [9, 'Ginza'], [11, 'Tsukiji'], [12, 'Hatchobori'], [16, 'Akihabara'], [18, 'Ueno']], uso: 'Nuestra línea “de casa”: Hatchobori → Tsukiji, Ginza, Kamiyacho y Akihabara.', extra: '<strong>H12 Hatchobori</strong> es nuestra referencia principal. Direcciones: <strong>Naka-meguro</strong> (hacia Ginza/Kamiyacho) y <strong>Kita-senju</strong> (hacia Akihabara/Ueno).' },
+  { l: 'ginza', foto: 'ginza-line', pista: 'El círculo naranja con G.', codigos: [[1, 'Shibuya'], [2, 'Omote-sando'], [9, 'Ginza'], [16, 'Ueno'], [19, 'Asakusa']], uso: 'Shibuya ↔ Omotesando ↔ Ginza ↔ Ueno ↔ Asakusa.', extra: 'El 31/10: <strong>G19 Asakusa → G16 Ueno</strong> (3 paradas), dirección <strong>Shibuya</strong>.' },
+  { l: 'yamanote', foto: 'yamanote', pista: 'Banda verde claro y código JY.', codigos: [[1, 'Tokyo'], [3, 'Akihabara'], [5, 'Ueno'], [17, 'Shinjuku'], [19, 'Harajuku'], [20, 'Shibuya']], uso: 'Gran conector circular. Útil Ueno → Akihabara y Shinjuku → Harajuku/Shibuya.', extra: 'Direcciones: <strong>Inner Loop / 内回り</strong> y <strong>Outer Loop / 外回り</strong>. Si dudamos, manda el destino de la pantalla.' },
+  { l: 'marunouchi', foto: 'marunouchi-line', pista: 'Círculo rojo con M. La veremos para Shinjuku.', codigos: [[8, 'Shinjuku'], [16, 'Ginza'], [17, 'Tokyo']], uso: 'Alternativa clara para Ginza → Shinjuku sin depender de JR.', extra: 'El 1/11: <strong>M16 Ginza → M08 Shinjuku</strong> (8 paradas), dirección <strong>Ogikubo</strong>.' },
+  { l: 'asakusa', foto: 'asakusa-line', pista: 'La A en círculo rosa. No confundir con la G naranja.', codigos: [[11, 'Higashi-ginza']], uso: 'Plan B ferroviario hacia Haneda (conecta con Keikyu).', extra: 'La <strong>pantalla</strong> decide si el tren continúa hasta Haneda. No subimos solo por ver una A.' },
+  { l: 'yurakucho', foto: 'shintomicho', pista: 'Y dorada. Alternativa desde Shintomicho.', codigos: [[20, 'Shintomicho']], uso: 'Alternativa para salir desde el hotel: salida 5, a unos 2 min.', extra: 'No es nuestra línea principal: <strong>H12 Hatchobori</strong> sigue siendo la referencia.' },
+];
+---
+<BaseLayout title="Japón 2026 · Fase 4 — Tokyo" description="Tokyo del 28 de octubre al 2 de noviembre: Ginza, Tsukiji, Meiji, Shibuya, Odaiba, Asakusa, Akihabara, Shinjuku y Haneda." fase="tokyo">
+  <Hero
+    tag="Japón · Octubre–Noviembre 2026 · Fase 4"
+    titulo="Tokyo · <strong>guía para movernos sin perdernos</strong>"
+    parrafos={['28 OCT – 1 NOV · 4 personas · base: <strong>APA Hotel Hatchobori Shintomicho</strong>. La prioridad no es ver “todo Tokyo”: es movernos por zonas, entender las líneas y llegar a cada sitio sin dudas.']}
+    meta={[
+      { v: '28 OCT', l: 'Centro · Ginza · teamLab' },
+      { v: '29 OCT', l: 'Tsukiji · Hamarikyu · Ginza' },
+      { v: '30 OCT', l: 'Meiji · Shibuya · Odaiba' },
+      { v: '31 OCT', l: 'Asakusa · Ueno · Akihabara' },
+      { v: '1 NOV', l: 'Shinjuku · Haneda' },
+    ]}
+  />
+  <NavSecciones items={[
+    { href: '#mapa', label: 'Mapa mental' },
+    { href: '#d28', label: '28 · Llegada', clave: true },
+    { href: '#hotel', label: 'Hotel' },
+    { href: '#lineas', label: 'Líneas' },
+    { href: '#d29', label: '29 OCT' },
+    { href: '#d30', label: '30 OCT' },
+    { href: '#d31', label: '31 OCT' },
+    { href: '#d1', label: '1 NOV · Haneda', clave: true },
+    { href: '#taxi', label: 'Taxi' },
+    { href: '#decision', label: 'Decisión' },
+    { href: '#transporte', label: 'Transporte' },
+  ]} />
+
+  <Conexion fase="tokyo" modo="desde" />
+
+  <Seccion id="mapa" kicker="1 · Antes de salir" titulo="El <strong>mapa mental</strong> que vamos a usar" lead="Tokyo no se divide oficialmente en cuatro zonas, pero para nuestro viaje sí nos sirve pensar así. La regla: <strong>no cruzamos la ciudad sin motivo</strong>.">
+    <div class="cards">
+      <div class="card"><h3>① Centro / Este</h3><p>Tokyo Station · Marunouchi · Ginza · Tsukiji · Hamarikyu · Hatchobori.</p><p><strong>Base del hotel.</strong></p></div>
+      <div class="card"><h3>② Noreste tradicional</h3><p>Asakusa · Kappabashi · Ueno · Ameyoko · Akihabara.</p><p><strong>Ginza Line + Hibiya + JR.</strong></p></div>
+      <div class="card"><h3>③ Oeste</h3><p>Shinjuku · Meiji Jingu · Harajuku · Omotesando · Shibuya.</p><p><strong>Yamanote / Metro / taxi.</strong></p></div>
+      <div class="card"><h3>④ Sur / bahía</h3><p>Azabudai Hills · Tokyo Tower · Odaiba. Aquí el taxi para 4 nos ahorra tiempo y cambios.</p></div>
+    </div>
+    <h3 class="sub-h">📸 Primero miramos la foto; después Google Maps</h3>
+    <p class="lead">Las señales y lugares que nos interesa reconocer de verdad. Buscamos el nombre y el código antes de bajar al andén o elegir una salida.</p>
+    <Galeria cols={4} h="165px">
+      <Foto id="tokyo-yaesu" titulo="Tokyo Station · Yaesu South" texto="El 28/10 salimos por aquí con las maletas: 八重洲南口." />
+      <Foto id="hatchobori" titulo={`Hatchobori · ${Hh(12)}`} texto="Nuestra estación de casa. Salida A3 para el hotel." />
+      <Foto id="kamiyacho" titulo={`Kamiyacho · ${Hh(5)}`} texto="Para teamLab Borderless. Exit 5 hacia Azabudai Hills." />
+      <Foto id="kaminarimon" titulo="Asakusa · Kaminarimon" texto={`El 31/10 empezamos aquí. Metro: ${G(19)}.`} />
+      <Foto id="tokyo-marunouchi" titulo="Marunouchi" texto="La fachada roja de Tokyo Station: punto visual del 28/10." />
+      <Foto id="tsukiji" titulo="Tsukiji Outer Market" texto="El 29/10 entramos por el mercado y caminamos a Hamarikyu." />
+      <Foto id="meiji-torii" titulo="Meiji Jingu" texto="El 30/10 por la entrada de Harajuku. Hasta el santuario, ~10 min más." />
+      <Foto id="shibuya-cruce" titulo="Shibuya" texto="El cruce y Shibuya Sky (reserva con hora)." />
+      <Foto id="odaiba" titulo="Odaiba" texto="Estatua de la Libertad + Rainbow Bridge. No incluimos el Gundam." />
+      <Foto id="akihabara" titulo="Akihabara" texto={`Último tramo del 31/10. Desde Ueno, ${JY(5)} → ${JY(3)}.`} />
+      <Foto id="godzilla" titulo="Shinjuku · Godzilla" texto="El 1/11 hacia las 17:00, con ambiente de tarde-noche." />
+      <Foto id="tmg" titulo="Tokyo Metropolitan Government" texto="Mirador gratuito en Shinjuku si hay visibilidad." />
+    </Galeria>
+    <Aviso titulo="Tokyo parece complicado, pero no necesitamos memorizar el mapa.">
+      <p>En cada estación buscamos siempre cuatro cosas: <strong>COLOR → LÍNEA → DESTINO/DIRECCIÓN → PANTALLA</strong>. Si una no coincide, no subimos todavía.</p>
+    </Aviso>
+  </Seccion>
+
+  <Seccion id="d28" fondo="alt">
+    <DiaHead fecha="MIÉRCOLES · 28 OCT · desde la Fase 3" titulo="Tokyo Station → hotel → Marunouchi → Ginza → <strong>teamLab Borderless</strong>" zona="Centro" />
+    <p class="lead">Día de llegada desde Kyoto. No lo cargamos: primero dejamos las maletas en el hotel y después un recorrido compacto.</p>
+    <Mision kicker="KYOTO → TOKYO" main="Shinkansen → Tokyo Station → taxi al hotel" ruta={['京都', '東京', 'Yaesu', 'Hotel']} small="Bajamos en los andenes 14–19 del Shinkansen. Seguimos 八重洲 / Yaesu y la señal de taxi. Exactamente al revés que el día 21." />
+    <TarjetaEstacion kicker="Llegada · el tramo que une Kyoto con Tokyo" titulo="Andén del Shinkansen → Yaesu South → taxi" texto="Ya conocemos esta estación: es la misma ruta del día 21, en sentido contrario.">
+      <MiniMapa
+        titulo="Tokyo Station → APA Hotel Hatchobori Shintomicho"
+        paradas={[
+          { nombre: 'Andenes 14–19', sub: 'Shinkansen', tipo: 'destacado', sig: { modo: 'andar', label: '🚶 bajar a 1F' } },
+          { nombre: 'Puertas', sub: 'Shinkansen', sig: { modo: 'andar', label: '🚶' } },
+          { nombre: 'Yaesu South', sub: '八重洲南口 · taxis', tipo: 'destacado', sig: { modo: 'taxi', label: '🚕 10–12 min' } },
+          { nombre: 'Hotel', sub: 'Shintomi 1-17-8', tipo: 'hotel' },
+        ]}
+      />
+      <Pasos items={[
+        { t: 'Al bajar del tren, buscamos 出口 / Exit y 八重洲 / Yaesu.', d: 'Escaleras mecánicas o ascensor hasta la planta de las puertas.' },
+        { t: 'Salimos por las puertas del Shinkansen hacia Yaesu South.', d: 'Metemos el billete/QR igual que a la entrada.' },
+        { t: 'Fuera: parada de taxis (タクシー乗り場).', d: 'Enseñamos la tarjeta del hotel. Con 4 personas y maletas, taxi grande si hay.' },
+      ]} />
+    </TarjetaEstacion>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Tokyo Station → hotel" jp={Ht.jp} romaji={Ht.nombre} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={Ht.direccionJp} />
+      <Foto id="tokyo-marunouchi" titulo="Después: Marunouchi" texto="La fachada histórica de Tokyo Station, al otro lado de la estación." h="220px" />
+    </div>
+    <Timeline>
+      <TL hora="Llegada" titulo="Tokyo Station → hotel" tipo="taxi" etiqueta="Taxi">Dejamos maletas (o hacemos el check-in si ya es la hora).</TL>
+      <TL hora="Tarde" titulo="Marunouchi + Ginza" tipo="andar">Volvemos a Tokyo Station (taxi corto o andando ~17 min), miramos la fachada de Marunouchi y caminamos hacia Ginza. Si queremos ahorrar piernas: <Est l="marunouchi" n={17} /> Tokyo → <Est l="marunouchi" n={16} nombre="Ginza" />, 1 parada.</TL>
+      <TL hora="17:30–18:00" titulo="teamLab Borderless" prio="must" prioTexto="MUST" tipo="metro">
+        <Fragment slot="lineas"><Linea l="hibiya" dir="Naka-meguro" /></Fragment>
+        Desde Ginza <Est l="hibiya" n={9} /> → <Est l="hibiya" n={5} nombre="Kamiyacho" />, 4 paradas. En H05 buscamos <strong>Exit 5</strong> hacia Azabudai Hills.
+      </TL>
+      <TL hora="Noche" titulo="Cena + vuelta" tipo="taxi">Cena por Azabudai/Roppongi o taxi directo al hotel. No complicamos el regreso.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Marunouchi → Ginza a pie"
+      sub="De la fachada de Tokyo Station a Ginza por Marunouchi Naka-dori y Yurakucho."
+      ciudad="Tokyo"
+      distancia="≈ 1,8 km"
+      tiempo="~25 min + paradas"
+      puntos={[
+        { n: 'Tokyo Station · Marunouchi', lat: 35.6812, lon: 139.7649, q: 'Tokyo Station Marunouchi Building' },
+        { n: 'Marunouchi Naka-dori', lat: 35.6780, lon: 139.7635, q: 'Marunouchi Naka-dori, Tokyo' },
+        { n: 'Yurakucho', lat: 35.6751, lon: 139.7630, q: 'Yurakucho Station, Tokyo' },
+        { n: 'Ginza 4-chome · Wako', lat: 35.6717, lon: 139.7650, t: 'fin', q: 'Ginza Wako, Tokyo' },
+      ]}
+      zonas={[{ n: 'Marunouchi', lat: 35.6800, lon: 139.7610 }, { n: 'Ginza', lat: 35.6705, lon: 139.7680 }]}
+    />
+    <MiniMapa
+      titulo={`Ginza ${Hh(9)} → Kamiyacho ${Hh(5)} · teamLab`}
+      nota={`${lin('hibiya')} ${dir('Naka-meguro')} · 4 paradas`}
+      paradas={[
+        { nombre: 'Ginza', est: ['hibiya', 9], tipo: 'destacado', sig: { modo: 'linea', l: 'hibiya' } },
+        { nombre: 'Hibiya', est: ['hibiya', 8], sig: { modo: 'linea', l: 'hibiya' } },
+        { nombre: 'Kasumigaseki', est: ['hibiya', 7], sig: { modo: 'linea', l: 'hibiya' } },
+        { nombre: 'Toranomon Hills', est: ['hibiya', 6], sig: { modo: 'linea', l: 'hibiya' } },
+        { nombre: 'Kamiyacho', sub: 'Exit 5', est: ['hibiya', 5], tipo: 'destacado', sig: { modo: 'andar', label: '🚶 conectado' } },
+        { nombre: 'teamLab', sub: 'Azabudai Hills', tipo: 'destacado' },
+      ]}
+      check="<strong>Importante:</strong> la hora exacta de entrada a teamLab depende de la reserva. No la dejamos para el último momento."
+    />
+    <Galeria cols={3} h="190px">
+      <Foto id="ginza" titulo="Ginza · Wako" texto="El reloj de Wako en el cruce de Ginza 4-chome." />
+      <Foto id="kamiyacho" titulo="Kamiyacho H05" texto="Estación gris plata de la Hibiya Line." />
+      <Foto id="azabudai" titulo="Azabudai Hills" texto="Aquí dentro está teamLab Borderless." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="hotel" kicker="2 · Referencia" titulo="Nuestro hotel: <strong>el punto de referencia</strong>" lead="1-17-8 Shintomi, Chuo-ku. Dos accesos útiles: <strong>Shintomicho Y20 · salida 5</strong> (unos 2 min) y <strong>Hatchobori H12 · salida A3</strong> (unos 5 min). Para nuestras rutas usaremos sobre todo la Hibiya Line en Hatchobori.">
+    <TarjetaEstacion
+      kicker="Señal que reconocemos"
+      titulo={`${Hh(12)} · Hatchobori 八丁堀`}
+      texto="Tokyo Metro Hibiya Line (gris plata). Salida A3 → hotel, unos 5 min."
+      cartel={{ nombre: 'Hatchobori', jp: '八丁堀', operador: 'Tokyo Metro · Hibiya Line', codigos: [['hibiya', 12]] }}
+      foto="shintomicho"
+      fotoTitulo="Shintomicho · salida 5"
+      fotoTexto="La salida más cercana al hotel (Yurakucho Line Y20)."
+    >
+      <Pasos items={[
+        { t: 'Desde el hotel, Hatchobori salida A3.', d: `Para casi todo: ${lin('hibiya')}.` },
+        { t: 'Hacia Ginza, Tsukiji, Kamiyacho:', d: `${dir('Naka-meguro')}.` },
+        { t: 'Hacia Akihabara, Ueno:', d: `${dir('Kita-senju')}.` },
+      ]} />
+    </TarjetaEstacion>
+    <MapaAndando
+      titulo="Hotel ↔ estaciones de metro"
+      sub="Shintomicho (2 min) y Hatchobori (5 min)."
+      ciudad="Tokyo"
+      distancia="≈ 200–450 m"
+      tiempo="2–5 min"
+      puntos={[
+        { n: 'Shintomicho Y20 · salida 5', lat: 35.6707, lon: 139.7737, t: 'estacion', q: 'Shintomicho Station Exit 5, Tokyo' },
+        { n: 'APA Hatchobori Shintomicho', lat: 35.6718, lon: 139.7745, t: 'paso', q: 'APA Hotel Hatchobori Shintomicho' },
+        { n: 'Hatchobori H12 · salida A3', lat: 35.6745, lon: 139.7772, t: 'estacion', q: 'Hatchobori Station Exit A3, Tokyo' },
+      ]}
+    />
+    <Aviso titulo="Importante"><p>Hay varios APA en la zona de Hatchobori. En taxi o en Google Maps enseñamos siempre el nombre completo <strong>APA Hotel Hatchobori Shintomicho / <span class="jp">アパホテル〈八丁堀 新富町〉</span></strong>.</p></Aviso>
+  </Seccion>
+
+  <Seccion id="regla" fondo="crema" kicker="3 · La regla" titulo="La regla de los <strong>4 datos</strong>">
+    <div class="cards">
+      <div class="card"><h3>① COLOR</h3><p>Ej.: Hibiya = <Linea l="hibiya" corta /> gris plata. Ginza = <Linea l="ginza" corta /> naranja.</p></div>
+      <div class="card"><h3>② LÍNEA</h3><p>Ej.: Hibiya Line <strong>H</strong>. Ginza Line <strong>G</strong>.</p></div>
+      <div class="card"><h3>③ DESTINO</h3><p>No buscamos el número de nuestra estación: miramos el <strong>destino final</strong> del tren.</p></div>
+      <div class="card"><h3>④ PANTALLA</h3><p>La pantalla manda: <strong>hora + destino + andén</strong>. Ejemplo: de Hatchobori a Tsukiji buscamos <Est l="hibiya" n={11} /> y el tren hacia <strong>Naka-meguro</strong>.</p></div>
+    </div>
+    <Galeria cols={2}>
+      <Foto id="metro-sign" titulo="Así es un cartel de andén de Tokyo Metro" texto="Arriba: el código de la estación dentro del círculo del color de la línea, el nombre en japonés e inglés y, a los lados, la estación anterior y la siguiente con flechas. Debajo, el plano de la línea con los minutos a cada parada." />
+      <Foto id="hatchobori" titulo="Boca de metro de Hatchobori" texto="El símbolo azul de Tokyo Metro y el nombre 八丁堀. Nuestra estación de casa." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="lineas" kicker="4 · Las líneas" titulo="Nuestras líneas de <strong>Tokyo</strong>" lead="No hace falta aprender toda la red. Estas 6 líneas son las que realmente usamos. El color es la primera pista visual.">
+    <div class="cards">
+      {lineasTokyo.map((x) => (
+        <div class="card" style={`border-top:6px solid ${LINEAS[x.l].color}`}>
+          <div style="margin:-26px -26px 16px;overflow:hidden;border-radius:10px 10px 0 0"><Foto id={x.foto} h="140px" /></div>
+          <Linea l={x.l} />
+          <p style="margin-top:8px;font-size:12px"><em>{x.pista}</em> · color <strong>{LINEAS[x.l].colorEs}</strong></p>
+          <p style="display:flex;flex-wrap:wrap;gap:6px">{x.codigos.map(([n, nom]) => <span><Est l={x.l} n={n} /> <small>{nom}</small></span>)}</p>
+          <p><strong>Uso:</strong> {x.uso}</p>
+          <p set:html={x.extra} />
+        </div>
+      ))}
+    </div>
+    <Aviso titulo="Regla visual en el andén"><p>Primero el <strong>COLOR</strong>, después la <strong>LETRA</strong>, luego el <strong>DESTINO</strong> y por último la <strong>PANTALLA</strong>. Ejemplo: <Linea l="hibiya" corta /> gris → <Est l="hibiya" n={12} nombre="Hatchobori" /> → dirección <strong>Naka-meguro</strong>.</p></Aviso>
+  </Seccion>
+
+  <Seccion id="d29" fondo="alt">
+    <DiaHead fecha="JUEVES · 29 OCT" titulo="Tsukiji → Hamarikyu → Ginza → <strong>Yurakucho / Tokyo</strong>" zona="Centro / Este" />
+    <MiniMapa
+      titulo={`Desde el hotel, la ruta fácil: ${Hh(12)} → ${Hh(11)}`}
+      nota="El día más sencillo: una sola parada de Hibiya para empezar y todo lo demás a pie."
+      paradas={[
+        { nombre: 'Hatchobori', est: ['hibiya', 12], tipo: 'hotel', sig: { modo: 'linea', l: 'hibiya', label: '1 parada' } },
+        { nombre: 'Tsukiji', est: ['hibiya', 11], tipo: 'destacado', sig: { modo: 'andar', label: '🚶' } },
+        { nombre: 'Hamarikyu', sub: 'a pie', sig: { modo: 'andar', label: '🚶' } },
+        { nombre: 'Ginza', sub: 'paseo', tipo: 'destacado' },
+      ]}
+      giros={[
+        `Hotel → ${Hh(12, 'Hatchobori')}.`,
+        `${lin('hibiya', true)} ${dir('Naka-meguro')} → ${Hh(11, 'Tsukiji')}.`,
+        'Después del jardín, a <strong>Ginza</strong> caminando o en taxi corto.',
+      ]}
+    />
+    <Timeline>
+      <TL hora="08:30" titulo={`Hatchobori ${Hh(12)} → Tsukiji ${Hh(11)}`} tipo="metro"><Fragment slot="lineas"><Linea l="hibiya" dir="Naka-meguro" /></Fragment>Solo 1 parada.</TL>
+      <TL hora="09:00" titulo="Tsukiji Outer Market" prio="must" prioTexto="MUST">Salida que indique la señalización hacia Outer Market / Tsukiji Hongwanji.</TL>
+      <TL hora="10:30" titulo="Tsukiji Hongwanji → Hamarikyu" tipo="andar">Tramo a pie. No volvemos al metro.</TL>
+      <TL hora="11:00–13:00" titulo="Hamarikyu" prio="must" prioTexto="MUST">Entrada general 9:00–17:00; última entrada 16:30. Dejamos margen.</TL>
+      <TL hora="13:00+" titulo="Hamarikyu → Ginza" tipo="andar">Si estamos bien, caminamos. Si llueve o hay cansancio, taxi corto.</TL>
+      <TL hora="Tarde" titulo="Ginza → Yurakucho → Tokyo" tipo="andar">Paseo libre.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Tsukiji → Hamarikyu → Ginza"
+      sub="Mercado, templo, jardín y Ginza: todo andando."
+      ciudad="Tokyo"
+      distancia="≈ 3 km"
+      tiempo="~40 min andando + visitas"
+      puntos={[
+        { n: 'Tsukiji H11', lat: 35.6680, lon: 139.7718, t: 'estacion', q: 'Tsukiji Station, Tokyo' },
+        { n: 'Tsukiji Hongwanji', lat: 35.6665, lon: 139.7727, q: 'Tsukiji Hongwanji' },
+        { n: 'Outer Market', lat: 35.6655, lon: 139.7705, q: 'Tsukiji Outer Market' },
+        { n: 'Hamarikyu', lat: 35.6600, lon: 139.7637, q: 'Hamarikyu Gardens' },
+        { n: 'Ginza 4-chome', lat: 35.6717, lon: 139.7650, t: 'fin', q: 'Ginza Wako, Tokyo' },
+      ]}
+      zonas={[{ n: 'Tsukiji', lat: 35.6640, lon: 139.7740 }, { n: 'Ginza', lat: 35.6735, lon: 139.7625 }]}
+    />
+    <VueltaHotel rutas={[{ ruta: `Ginza ${Hh(9)} → Hatchobori ${Hh(12)}`, texto: `${lin('hibiya')} ${dir('Kita-senju')} · <strong>3 paradas</strong>: ${Hh(10)} → ${Hh(11)} → ${Hh(12)}.` }]} />
+    <Galeria cols={3} h="200px">
+      <Foto id="tsukiji" titulo="Tsukiji Outer Market" texto="Puestos de pescado y comida. Para el celíaco: preguntar siempre." />
+      <Foto id="hongwanji" titulo="Tsukiji Hongwanji" texto="Templo de estilo indio, a la salida del metro." />
+      <Foto id="hamarikyu" titulo="Hamarikyu" texto="Jardín junto a la bahía con la casa de té en el estanque." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="d30">
+    <DiaHead fecha="VIERNES · 30 OCT" titulo="Meiji Jingu → Harajuku → Omotesando → Shibuya Sky → <strong>Odaiba</strong>" zona="Oeste + bahía" />
+    <Aviso titulo="Este es el día más largo."><p>Para 4 personas usamos taxi en los dos saltos incómodos: <strong>hotel → Meiji Jingu</strong> y <strong>Shibuya → Odaiba</strong>. Dentro de cada zona, a pie.</p></Aviso>
+    <MiniMapa
+      titulo="Mini mapa · 30/10"
+      nota="Caminar dentro de la zona y taxi solo para los saltos grandes."
+      paradas={[
+        { nombre: 'Hotel', tipo: 'hotel', sig: { modo: 'taxi', label: '🚕 ~30 min' } },
+        { nombre: 'Meiji', sub: 'Harajuku', tipo: 'destacado', sig: { modo: 'andar', label: '🚶' } },
+        { nombre: 'Shibuya', sub: 'Sky', tipo: 'destacado', sig: { modo: 'taxi', label: '🚕 ~30 min' } },
+        { nombre: 'Odaiba', sub: 'Marine Park', tipo: 'destacado', sig: { modo: 'taxi', label: '🚕 ~20 min' } },
+        { nombre: 'Hotel', tipo: 'hotel' },
+      ]}
+    />
+    <Timeline>
+      <TL hora="08:30" titulo="Taxi hotel → Meiji Jingu" tipo="taxi" etiqueta="Taxi">Pedir <strong class="jp">明治神宮 原宿口</strong> / Meiji Jingu Harajuku entrance.</TL>
+      <TL hora="09:00" titulo="Meiji Jingu" prio="must" prioTexto="MUST">En octubre abre a las 05:40 y cierra a las 16:40. Desde la entrada hay unos 10 min de paseo hasta el santuario principal.</TL>
+      <TL hora="10:30" titulo="Harajuku → Omotesando" tipo="andar">Takeshita-dori si apetece y después hacia Omotesando.</TL>
+      <TL hora="13:00" titulo="Shibuya" tipo="andar">Caminando desde Omotesando. Si estamos cansados: <Est l="ginza" n={2} /> → <Est l="ginza" n={1} nombre="Shibuya" />.</TL>
+      <TL hora="15:30–17:30" titulo="SHIBUYA SKY" prio="must" prioTexto="MUST">Reserva con hora. La tarde es la interesante por la puesta de sol de finales de octubre.</TL>
+      <TL hora="17:45" titulo="Taxi Shibuya → Odaiba" tipo="taxi" etiqueta="Taxi">Para 4, puerta a puerta. Sin fijar minuto exacto de llegada por el tráfico.</TL>
+      <TL hora="18:30+" titulo="Odaiba Marine Park" tipo="andar">Estatua de la Libertad → Rainbow Bridge → Aqua City.</TL>
+      <TL hora="20:00+" titulo="Taxi Odaiba → hotel" tipo="taxi" etiqueta="Taxi">Si estamos cansados, no encadenamos Yurikamome + otros transbordos.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Meiji → Harajuku → Omotesando → Shibuya"
+      sub="El santuario en el bosque, la calle Takeshita, la avenida Omotesando y el cruce de Shibuya."
+      ciudad="Tokyo"
+      distancia="≈ 4 km"
+      tiempo="~55 min andando + visitas"
+      puntos={[
+        { n: 'Meiji · entrada Harajuku', lat: 35.6702, lon: 139.7020, t: 'inicio', q: 'Meiji Jingu Harajuku Entrance' },
+        { n: 'Santuario principal', lat: 35.6764, lon: 139.6993, q: 'Meiji Jingu Main Shrine' },
+        { n: 'Takeshita-dori', lat: 35.6712, lon: 139.7050, q: 'Takeshita Street, Harajuku' },
+        { n: 'Omotesando', lat: 35.6654, lon: 139.7124, q: 'Omotesando Crossing, Tokyo' },
+        { n: 'Cruce de Shibuya', lat: 35.6595, lon: 139.7005, q: 'Shibuya Scramble Crossing' },
+        { n: 'Shibuya Sky', lat: 35.6585, lon: 139.7022, t: 'fin', q: 'Shibuya Sky' },
+      ]}
+      zonas={[{ n: 'Harajuku', lat: 35.6690, lon: 139.7080 }, { n: 'Shibuya', lat: 35.6570, lon: 139.6975 }]}
+    />
+    <Galeria cols={3} h="200px">
+      <Foto id="meiji-torii" titulo="Meiji Jingu" texto="El gran torii de madera a la entrada del bosque." />
+      <Foto id="takeshita" titulo="Takeshita-dori" texto="Calle estrecha y llena de tiendas frente a la estación de Harajuku." />
+      <Foto id="omotesando" titulo="Omotesando" texto="La avenida arbolada hacia Shibuya." />
+      <Foto id="shibuya-cruce" titulo="Cruce de Shibuya" texto="El famoso cruce: lo vemos de cerca y desde arriba." />
+      <Foto id="shibuya-sky" titulo="Shibuya Sky" texto="Mirador en lo alto de Shibuya Scramble Square." />
+      <Foto id="odaiba" titulo="Odaiba" texto="Estatua de la Libertad y Rainbow Bridge de noche." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="d31" fondo="alt">
+    <DiaHead fecha="SÁBADO · 31 OCT" titulo="Asakusa → Kappabashi → Ueno / Ameyoko → <strong>Akihabara</strong>" zona="Noreste tradicional" />
+    <Mision kicker="OBJETIVO" main="Asakusa tradicional → Kappabashi → Ueno / Ameyoko → Akihabara" small="Aquí interesa caminar. No vamos saltando de estación en estación cada diez minutos." />
+    <Timeline>
+      <TL hora="08:30" titulo="Taxi hotel → Kaminarimon" tipo="taxi" etiqueta="Taxi">Nos deja directamente al comienzo del recorrido.</TL>
+      <TL hora="09:00" titulo="Kaminarimon → Nakamise → Senso-ji" prio="must" prioTexto="MUST">Si usamos metro: <Est l="ginza" n={19} nombre="Asakusa" />. Salidas 1/8 útiles para la zona.</TL>
+      <TL hora="11:00" titulo="Kappabashi" tipo="andar">Andando desde Asakusa. Más lógico que volver al metro.</TL>
+      <TL hora="13:00" titulo="Ueno / Ameyoko" tipo="andar">Caminando hacia Ueno. Para ahorrar piernas: Ginza Line hasta <Est l="ginza" n={16} nombre="Ueno" />.</TL>
+      <TL hora="16:00" titulo="Akihabara" prio="must" prioTexto="MUST" tipo="tren"><Fragment slot="lineas"><Linea l="yamanote" /> <Linea l="hibiya" corta /></Fragment>Ueno → Akihabara por JR Yamanote: <Est l="yamanote" n={5} /> → <Est l="yamanote" n={3} />, 2 paradas. Alternativa Hibiya: <Est l="hibiya" n={18} /> → <Est l="hibiya" n={16} />.</TL>
+      <TL hora="Noche" titulo={`Akihabara ${Hh(16)} → hotel ${Hh(12)}`} tipo="metro"><Fragment slot="lineas"><Linea l="hibiya" dir="Naka-meguro" /></Fragment>4 paradas.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Asakusa → Kappabashi → Ueno → Ameyoko"
+      sub="La primera parte del día es peatonal."
+      ciudad="Tokyo"
+      distancia="≈ 3,5 km"
+      tiempo="~50 min andando + visitas"
+      puntos={[
+        { n: 'Kaminarimon', lat: 35.7111, lon: 139.7963, t: 'inicio', q: 'Kaminarimon Gate, Asakusa' },
+        { n: 'Senso-ji', lat: 35.7148, lon: 139.7967, q: 'Senso-ji Temple' },
+        { n: 'Kappabashi', lat: 35.7130, lon: 139.7880, q: 'Kappabashi Dougu Street' },
+        { n: 'Ueno', lat: 35.7138, lon: 139.7773, q: 'Ueno Station, Tokyo' },
+        { n: 'Ameyoko', lat: 35.7105, lon: 139.7745, t: 'fin', q: 'Ameyoko Shopping Street' },
+      ]}
+      zonas={[{ n: 'Asakusa', lat: 35.7090, lon: 139.7990 }, { n: 'Ueno', lat: 35.7160, lon: 139.7740 }]}
+      reco={{ t: '🚇 ¿PIERNAS? GINZA LINE', d: 'G19 Asakusa → G16 Ueno · 3 paradas' }}
+    />
+    <MiniMapa
+      titulo={`Ueno ${JY(5)} → Akihabara ${JY(3)}`}
+      nota={`${lin('yamanote')} · 2 paradas · dirección Tokyo / Shinagawa (内回り)`}
+      paradas={[
+        { nombre: 'Ueno', est: ['yamanote', 5], tipo: 'destacado', sig: { modo: 'linea', l: 'yamanote' } },
+        { nombre: 'Okachimachi', est: ['yamanote', 4], sig: { modo: 'linea', l: 'yamanote' } },
+        { nombre: 'Akihabara', est: ['yamanote', 3], tipo: 'destacado' },
+      ]}
+    />
+    <VueltaHotel rutas={[{ ruta: `Akihabara ${Hh(16)} → Hatchobori ${Hh(12)}`, texto: `${lin('hibiya')} ${dir('Naka-meguro')} · <strong>4 paradas</strong>: ${Hh(15)} → ${Hh(14)} → ${Hh(13)} → ${Hh(12)}.` }]} />
+    <Galeria cols={3} h="200px">
+      <Foto id="kaminarimon" titulo="Kaminarimon" texto="La puerta del farol rojo gigante." />
+      <Foto id="sensoji" titulo="Senso-ji" texto="El templo al final de Nakamise." />
+      <Foto id="kappabashi" titulo="Kappabashi" texto="La calle de los utensilios de cocina." />
+      <Foto id="ameyoko" titulo="Ameyoko" texto="Mercado bajo las vías del tren en Ueno." />
+      <Foto id="akihabara" titulo="Akihabara" texto="Electric Town: electrónica, anime y luces." />
+      <Foto id="ginza-line" titulo="Ginza Line" texto="Naranja. El plan B entre Asakusa y Ueno." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="d1">
+    <DiaHead fecha="DOMINGO · 1 NOV" titulo="Shinjuku → Godzilla → cena → hotel → <strong>Haneda</strong>" zona="Oeste → Haneda" />
+    <Aviso titulo="Último día: nada de correr."><p>El vuelo sale sobre las <strong>00:20 del 2 de noviembre</strong>. Margen amplio para volver al hotel, recoger maletas y llegar a Haneda.</p></Aviso>
+    <MiniMapa
+      titulo="Hotel → Shinjuku: dos líneas, un cambio en Ginza"
+      paradas={[
+        { nombre: 'Hatchobori', est: ['hibiya', 12], tipo: 'hotel', sig: { modo: 'linea', l: 'hibiya', label: '3 paradas' } },
+        { nombre: 'Ginza', sub: 'cambio', est: ['hibiya', 9], sig: { modo: 'andar', label: '🚶 cambio' } },
+        { nombre: 'Ginza', est: ['marunouchi', 16], sig: { modo: 'linea', l: 'marunouchi', label: '8 paradas' } },
+        { nombre: 'Shinjuku', est: ['marunouchi', 8], tipo: 'destacado' },
+      ]}
+      giros={[
+        `${Hh(12)} → ${Hh(9)} · ${lin('hibiya', true)} ${dir('Naka-meguro')}.`,
+        `En Ginza cambiamos a ${lin('marunouchi')} (rojo): seguir las señales rojas.`,
+        `${Mm(16)} → ${Mm(8, 'Shinjuku')} · ${dir('Ogikubo')}.`,
+      ]}
+    />
+    <Timeline>
+      <TL hora="Mañana" titulo="Hotel → Shinjuku" tipo="metro"><Fragment slot="lineas"><Linea l="hibiya" dir="Naka-meguro" /> <Linea l="marunouchi" dir="Ogikubo" /></Fragment>Cambio en Ginza.</TL>
+      <TL hora="10:00–13:00" titulo="Tokyo Metropolitan Government Building + Shinjuku" prio="must" prioTexto="MUST">Mirador si está abierto y hay visibilidad. Después Hanazono Shrine y compras.</TL>
+      <TL hora="17:00" titulo="Kabukicho → Godzilla Head" prio="must" prioTexto="MUST">Con ambiente de tarde-noche.</TL>
+      <TL hora="18:00–20:00" titulo="Golden Gai / Omoide Yokocho + cena" tipo="descanso">No llenamos la noche de más visitas.</TL>
+      <TL hora="20:15–20:45" titulo="Regreso al hotel + maletas" tipo="taxi">Si hay cansancio, taxi Shinjuku → hotel. El último día no experimentamos con rutas.</TL>
+      <TL hora="21:00 aprox." titulo="Hotel → Haneda" tipo="taxi" prio="must" prioTexto="MUST">Para 4 con maletas, <strong>taxi directo</strong>. La alternativa en tren (<Linea l="asakusa" corta /> → <Linea l="keikyu" corta />) se comprueba ese mismo día.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Shinjuku a pie"
+      sub="Del mirador del oeste al ambiente del este."
+      ciudad="Tokyo"
+      distancia="≈ 3 km"
+      tiempo="~40 min andando + visitas"
+      puntos={[
+        { n: 'Shinjuku M08', lat: 35.6900, lon: 139.7004, t: 'estacion', q: 'Shinjuku Station' },
+        { n: 'Tokyo Metropolitan Gov.', lat: 35.6896, lon: 139.6922, q: 'Tokyo Metropolitan Government Building' },
+        { n: 'Hanazono Shrine', lat: 35.6935, lon: 139.7050, q: 'Hanazono Shrine, Shinjuku' },
+        { n: 'Godzilla Head', lat: 35.6948, lon: 139.7019, q: 'Godzilla Head, Shinjuku' },
+        { n: 'Golden Gai', lat: 35.6939, lon: 139.7045, q: 'Golden Gai, Shinjuku' },
+        { n: 'Omoide Yokocho', lat: 35.6930, lon: 139.6995, t: 'fin', q: 'Omoide Yokocho, Shinjuku' },
+      ]}
+      zonas={[{ n: 'Kabukicho', lat: 35.6960, lon: 139.7035 }, { n: 'Nishi-Shinjuku', lat: 35.6880, lon: 139.6950 }]}
+    />
+    <MiniMapa
+      titulo="Final del viaje: hotel → Haneda"
+      paradas={[
+        { nombre: 'Hotel', sub: 'maletas', tipo: 'hotel', sig: { modo: 'taxi', label: '🚕 ~25–30 min' } },
+        { nombre: 'Haneda T3', sub: 'vuelo 00:20', tipo: 'destacado' },
+      ]}
+      check="<strong>Regla final:</strong> no fijamos de memoria un “último tren”. Con vuelo a las 00:20, el taxi directo es la opción que menos riesgo tiene. Confirmar terminal en el billete."
+    />
+    <Galeria cols={3} h="200px">
+      <Foto id="tmg" titulo="Tokyo Metropolitan Government" texto="Las dos torres con mirador gratuito." />
+      <Foto id="godzilla" titulo="Godzilla Head" texto="Asoma sobre el edificio Toho en Kabukicho." />
+      <Foto id="omoide" titulo="Omoide Yokocho" texto="Callejones de puestos junto a la estación." />
+      <Foto id="golden-gai" titulo="Golden Gai" texto="Bares diminutos en callejuelas." />
+      <Foto id="haneda-t3" titulo="Haneda T3" texto="El final del viaje. Facturación con margen." />
+    </Galeria>
+  </Seccion>
+
+  <Conexion fase="tokyo" modo="hacia" />
+
+  <Seccion id="taxi" fondo="crema" kicker="5 · Mostrar al taxista" titulo="Tarjetas de <strong>taxi</strong>" lead="Con ⤢ se ponen a pantalla completa para enseñarlas.">
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Tokyo Station → hotel (28/10)" jp={Ht.jp} romaji={Ht.nombre} frase="このホテルまでお願いします。" dire={Ht.direccionJp} />
+      <TarjetaTaxi etiqueta="Hotel → Meiji Jingu (30/10)" jp="明治神宮 原宿口" romaji="Meiji Jingu · Harajuku entrance" frase="明治神宮の原宿口までお願いします。" />
+      <TarjetaTaxi etiqueta="Shibuya → Odaiba (30/10)" jp="お台場海浜公園" romaji="Odaiba Marine Park" frase="お台場海浜公園までお願いします。" />
+      <TarjetaTaxi etiqueta="Hotel → Kaminarimon (31/10)" jp="浅草 雷門" romaji="Asakusa · Kaminarimon" frase="浅草の雷門までお願いします。" />
+      <TarjetaTaxi etiqueta="Odaiba / Shinjuku → hotel" jp={Ht.jp} romaji={Ht.nombre} frase="このホテルまでお願いします。" dire={Ht.direccionJp} />
+      <TarjetaTaxi etiqueta="Hotel → Haneda (1/11)" jp="羽田空港 第3ターミナル" romaji="Haneda Airport Terminal 3" frase="羽田空港の第3ターミナルまでお願いします。" fraseEs="Confirmar la terminal en el billete antes de salir." />
+    </div>
+  </Seccion>
+
+  <Seccion id="decision" fondo="alt" kicker="6 · Decisión rápida" titulo="🧭 Cómo <strong>decidimos</strong>">
+    <div class="choice-grid">
+      <div class="choice"><h3>🟢 Día perfecto</h3><p>Plan completo. Caminamos entre zonas próximas y metro en los saltos claros.</p></div>
+      <div class="choice"><h3>🟡 Mucha gente</h3><p>No peleamos con una estación enorme: taxi para 4 en el siguiente salto corto y retomamos.</p></div>
+      <div class="choice"><h3>🔴 Estamos cansados</h3><p>Taxi. Sobre todo hotel → Meiji, Shibuya → Odaiba, Odaiba → hotel y Shinjuku → hotel.</p></div>
+      <div class="choice"><h3>🌧️ Lluvia</h3><p>Menos exteriores: Ginza, Tokyo Station, centros comerciales y teamLab ganan prioridad.</p></div>
+    </div>
+  </Seccion>
+
+  <Seccion id="transporte" kicker="9 · Tabla maestra" titulo="Tabla maestra de <strong>transporte</strong>" lead="La chuleta rápida. Si estamos cansados, miramos aquí antes de movernos.">
+    <TablaTransporte
+      cab={['Origen', 'Destino', 'Ruta', 'Dirección / referencia']}
+      filas={[
+        ['🏨 Hotel', 'Tsukiji', `${Hh(12)} → ${Hh(11)}`, `${lin('hibiya', true)} ${dir('Naka-meguro')} · 1 parada`],
+        ['Ginza', 'Kamiyacho', `${Hh(9)} → ${Hh(5)}`, `${lin('hibiya', true)} ${dir('Naka-meguro')} · 4 paradas`],
+        ['Ginza', '🏨 Hotel', `${Hh(9)} → ${Hh(12)}`, `${lin('hibiya', true)} ${dir('Kita-senju')} · 3 paradas`],
+        ['Asakusa', 'Ueno', `${G(19)} → ${G(16)}`, `${lin('ginza', true)} ${dir('Shibuya')} · 3 paradas`],
+        ['Ueno', 'Akihabara', `${JY(5)} → ${JY(3)}`, `${lin('yamanote', true)} · 2 paradas`],
+        ['Akihabara', '🏨 Hotel', `${Hh(16)} → ${Hh(12)}`, `${lin('hibiya', true)} ${dir('Naka-meguro')} · 4 paradas`],
+        ['Ginza', 'Shinjuku', `${Mm(16)} → ${Mm(8)}`, `${lin('marunouchi', true)} ${dir('Ogikubo')} · 8 paradas`],
+        ['Tokyo Station', '🏨 Hotel', '🚕 Taxi', 'Yaesu South · 10–12 min'],
+        ['Shibuya', 'Odaiba', '🚕 Taxi', 'Odaiba Marine Park · recomendado para 4'],
+        ['🏨 Hotel', 'Haneda', '🚕 Taxi', 'Confirmar terminal antes de salir'],
+      ]}
+    />
+    <div class="card" style="margin-top:18px">
+      <h3>Cómo leer esta tabla</h3>
+      <p><strong>Ejemplo:</strong> <Est l="hibiya" n={12} /> → <Est l="hibiya" n={11} /> significa: buscar la <strong>Hibiya Line gris plata</strong>, comprobar que salimos de <strong>H12 Hatchobori</strong> y bajar en <strong>H11 Tsukiji</strong>.</p>
+      <p><strong>Si color + letra + destino no coinciden, no subimos todavía.</strong></p>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>10 · Fuentes y comprobación</h3>
+      <ul>
+        <li><a href="https://www.apahotel.com/" target="_blank" rel="noopener">APA Hotel · acceso oficial</a></li>
+        <li><a href="https://www.tokyometro.jp/lang_es/station/hatchobori/index.html" target="_blank" rel="noopener">Tokyo Metro · Hatchobori H12</a></li>
+        <li><a href="https://www.tokyometro.jp/lang_es/station/kamiyacho/index.html" target="_blank" rel="noopener">Tokyo Metro · Kamiyacho H05</a></li>
+        <li><a href="https://www.teamlab.art/e/borderless-azabudai/" target="_blank" rel="noopener">teamLab Borderless · acceso y horarios</a></li>
+        <li><a href="https://www.meijijingu.or.jp/en/" target="_blank" rel="noopener">Meiji Jingu · horarios</a></li>
+        <li><a href="https://www.shibuya-scramble-square.com/sky/" target="_blank" rel="noopener">SHIBUYA SKY · horarios</a></li>
+        <li><a href="https://www.tokyometro.jp/en/subwaymap/index.html" target="_blank" rel="noopener">Tokyo Metro · mapa oficial con colores y símbolos</a></li>
+        <li><a href="https://www.keikyu.co.jp/visit/haneda-airport/" target="_blank" rel="noopener">Keikyu · Haneda</a></li>
+      </ul>
+      <p><strong>Nota:</strong> los códigos de estación y accesos son referencias estables; horarios, andenes y servicios se comprueban en la pantalla de la estación y en la web oficial el mismo día.</p>
+    </div>
+  </Seccion>
+
+  <FrasesAyuda extraTitulo="Tokyo" extra={[
+    { jp: 'アパホテル〈八丁堀 新富町〉はどこですか？', romaji: 'Apa Hoteru Hatchōbori Shintomichō wa doko desu ka?', es: '¿Dónde está el APA Hotel Hatchobori Shintomicho?' },
+    { jp: '日比谷線はどこですか？', romaji: 'Hibiya-sen wa doko desu ka?', es: '¿Dónde está la línea Hibiya?' },
+    { jp: '中目黒方面ですか？', romaji: 'Naka-meguro hōmen desu ka?', es: '¿Es dirección Naka-meguro?' },
+    { jp: '丸ノ内線に乗り換えたいです。', romaji: 'Marunouchi-sen ni norikaetai desu.', es: 'Queremos cambiar a la línea Marunouchi.' },
+    { jp: '羽田空港に行きたいです。', romaji: 'Haneda kūkō ni ikitai desu.', es: 'Queremos ir al aeropuerto de Haneda.' },
+  ]} />
+
+  <BloqueCeliaco ciudad="Tokyo" consejos={[
+    '<strong>Tsukiji</strong>: muchos puestos usan shoyu o salsas dulces (tamagoyaki, brochetas). Sashimi solo, sin salsa, y preguntando.',
+    '<strong>Monjayaki y okonomiyaki</strong> (Tsukishima, cerca del hotel): masa de harina de trigo. No aptos.',
+    '<strong>Shibuya y Shinjuku</strong>: zonas con más restaurantes que entienden “gluten free”. Revisar Find Me Gluten Free antes de salir.',
+    '<strong>Última noche</strong>: cenar antes de ir a Haneda. Llevar algo seguro para el vuelo.',
+  ]} />
+
+  <Footer slot="footer" titulo="Japón · Tokyo · Fase 4" lineas={['Guía in situ · Octubre–Noviembre 2026 · La pantalla del día manda sobre cualquier horario escrito en esta guía.']} />
+</BaseLayout>

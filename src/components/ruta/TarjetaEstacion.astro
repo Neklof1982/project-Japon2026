@@ -1,0 +1,30 @@
+---
+/** Tarjeta de un tramo: cabecera, cartel recreado (+ foto real) y pasos. */
+import CartelEstacion from './CartelEstacion.astro';
+import Foto from '../ui/Foto.astro';
+import type { LineaId } from '../../data/lineas';
+interface Props {
+  kicker?: string;
+  titulo: string;
+  texto?: string;
+  cartel?: { nombre: string; jp: string; operador: string; codigos: [LineaId, string | number][]; nota?: string };
+  foto?: string;
+  fotoTitulo?: string;
+  fotoTexto?: string;
+}
+const { kicker, titulo, texto, cartel, foto, fotoTitulo, fotoTexto } = Astro.props;
+---
+<div class="station-card">
+  <div class="station-head">
+    {kicker && <div class="kicker">{kicker}</div>}
+    <h3 set:html={titulo} />
+    {texto && <p set:html={texto} />}
+  </div>
+  {(cartel || foto) && (
+    <div class={`station-visual${cartel && foto ? ' con-foto' : ''}`}>
+      {cartel && <CartelEstacion {...cartel} />}
+      {foto && <Foto id={foto} titulo={fotoTitulo} texto={fotoTexto} h="220px" />}
+    </div>
+  )}
+  <div class="station-body"><slot /></div>
+</div>

@@ -1,0 +1,543 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import NavSecciones from '../components/marco/NavSecciones.astro';
+import Conexion from '../components/marco/Conexion.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import DiaHead from '../components/ui/DiaHead.astro';
+import Mision from '../components/ui/Mision.astro';
+import Aviso from '../components/ui/Aviso.astro';
+import Prio from '../components/ui/Prio.astro';
+import VueltaHotel from '../components/ui/VueltaHotel.astro';
+import Foto from '../components/ui/Foto.astro';
+import Galeria from '../components/ui/Galeria.astro';
+import Timeline from '../components/ruta/Timeline.astro';
+import TL from '../components/ruta/TL.astro';
+import Linea from '../components/ruta/Linea.astro';
+import Est from '../components/ruta/Est.astro';
+import MiniMapa from '../components/ruta/MiniMapa.astro';
+import MapaAndando from '../components/ruta/MapaAndando.astro';
+import TarjetaEstacion from '../components/ruta/TarjetaEstacion.astro';
+import Pasos from '../components/ruta/Pasos.astro';
+import TablaTransporte from '../components/ruta/TablaTransporte.astro';
+import TarjetaTaxi from '../components/ayuda/TarjetaTaxi.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import { HOTELES } from '../data/viaje';
+import { lin, est, dir } from '../lib/html';
+
+const H = HOTELES.osaka;
+const M = (n: number, nom?: string) => est('midosuji', n, nom);
+const C = (n: number, nom?: string) => est('chuo', n, nom);
+const T = (n: number, nom?: string) => est('tanimachi', n, nom);
+const A = (n: number, nom?: string) => est('kintetsu', n, nom);
+const midoS = `${lin('midosuji')} ${dir('Nakamozu')}`;
+const midoN = `${lin('midosuji')} ${dir('Minoh-kayano')}`;
+---
+<BaseLayout title="Japón 2026 · Fase 2 — Osaka + Nara" description="Osaka desde Hommachi: llegada, cuatro planes intercambiables (Castillo, Tennoji, Minami, Nara) y salida a Kyoto." fase="osaka">
+  <Hero
+    tag="Japón · Octubre 2026 · Fase 2"
+    titulo="<strong>Osaka</strong> + Nara<br>guía para movernos sin perdernos"
+    parrafos={['La usamos como chuleta durante el viaje. No necesitamos memorizar estaciones: en cada desplazamiento tenemos la estación, la línea con su color, la dirección, las paradas que contamos, la salida y lo que hacemos al salir.']}
+    meta={[
+      { v: '21–25 OCT', l: '4 noches en Osaka' },
+      { v: '4 PERSONAS', l: '1 viajero celíaco' },
+      { v: 'HOTEL', l: 'Far East Village Osaka Honmachi' },
+      { v: '22–24', l: '4 planes intercambiables' },
+    ]}
+  />
+  <NavSecciones items={[
+    { href: '#mapa', label: 'Mapa' },
+    { href: '#llegada', label: '21 · Llegada', clave: true },
+    { href: '#hotel', label: 'Hotel' },
+    { href: '#dia21', label: '21 · Tarde' },
+    { href: '#planes', label: '22–24 · Planes' },
+    { href: '#a', label: 'A · Castillo' },
+    { href: '#b', label: 'B · Tennoji' },
+    { href: '#c', label: 'C · Minami' },
+    { href: '#d', label: 'D · Nara' },
+    { href: '#dia25', label: '25 · Kyoto', clave: true },
+    { href: '#transporte', label: 'Transporte' },
+  ]} />
+
+  <Conexion fase="osaka" modo="desde" />
+
+  <Seccion id="mapa" kicker="Antes de salir" titulo="La idea es muy <strong>sencilla</strong>" lead="La base está en Hommachi. Cada día salimos del hotel hacia una zona concreta, la recorremos principalmente a pie y volvemos a Hommachi por la tarde-noche para cenar cerca y descansar. Los días 22, 23 y 24 son intercambiables: elegimos entre los planes según el tiempo y el cansancio. El 25 no hacemos excursión larga: maletas, como mucho un plan cercano y salida hacia Kyoto.">
+    <Mision kicker="PUNTO FIJO" main="Far East Village Hotel Osaka Honmachi" ruta={['本町', 'Hommachi']} small={`Osaka Metro: ${M(18)} ${C(16)} ${est('yotsubashi', 13)} · hotel a unos 4–5 min andando.`} />
+    <div class="route-strip">
+      <div class="route-step active"><span>H</span><strong>Hommachi</strong><small>M18 · C16 · Y13</small></div><div class="route-line"></div>
+      <div class="route-step"><span>A</span><strong>Castillo</strong><small>C18 · T23</small></div><div class="route-line"></div>
+      <div class="route-step"><span>B</span><strong>Tennoji</strong><small>T26 · M23 · M26</small></div><div class="route-line"></div>
+      <div class="route-step"><span>C</span><strong>Minami</strong><small>M19 · M20</small></div><div class="route-line"></div>
+      <div class="route-step nara"><span>D</span><strong>Nara</strong><small>A01 → A28</small></div>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>🚇 Contamos paradas</h3><div class="stat">1 · 2 · 3…</div><p>Al subir miramos nuestro destino y contamos estaciones. Ejemplo: <Est l="midosuji" n={18} /> → <Est l="midosuji" n={20} /> = 2 paradas. Si nos pasamos, bajamos en la siguiente y corregimos.</p></div>
+      <div class="card"><h3>🚶 Caminamos cuando compensa</h3><div class="stat">5–20 MIN</div><p>Si ya estamos en una zona interesante, mejor caminar que volver a bajar al metro. El día se disfruta más así.</p></div>
+      <div class="card"><h3>🌙 Volvemos a Hommachi</h3><div class="stat">19:00–20:30</div><p>Cada plan tiene su propia vuelta. La idea base es cenar cerca del hotel y dormir sin improvisar.</p></div>
+    </div>
+    <h3 class="sub-h">📸 Primero miramos la foto; después Google Maps</h3>
+    <p class="lead">No dependemos solo del punto azul. Miramos la foto de la estación, buscamos el código y comprobamos el número de salida. Si la señal real coincide, seguimos.</p>
+    <Galeria cols={4} h="170px">
+      <Foto id="shin-osaka" titulo={`Shin-Osaka · ${M(13)}`} texto="Aquí llegamos en Shinkansen y desde aquí salimos hacia Kyoto." />
+      <Foto id="hommachi" titulo={`Hommachi · ${M(18)}`} texto="Nuestra estación. Para el hotel, Exit 12; con maletas, Exit 7." />
+      <Foto id="kintetsu-namba" titulo={`Osaka-Namba · ${A(1)}`} texto="El cambio importante para Nara: buscamos <strong>Kintetsu</strong>, no JR." />
+      <Foto id="kintetsu-nara" titulo={`Kintetsu-Nara · ${A(28)}`} texto="Cuando veamos A28 hemos llegado. De aquí sale el circuito a pie." />
+    </Galeria>
+    <MiniMapa
+      titulo="Salida diaria: no todas las excursiones salen por el mismo lado"
+      paradas={[
+        { nombre: 'Hommachi', est: ['chuo', 16], tipo: 'hotel', sig: { modo: 'linea', l: 'chuo', label: 'Chuo · 2' } },
+        { nombre: 'Tanimachi 4', sub: 'Castillo · Exit 9', est: ['chuo', 18], tipo: 'destacado', sig: { modo: 'linea', l: 'tanimachi', label: 'Tanimachi · 3' } },
+        { nombre: 'Shitennoji-mae', sub: 'Exit 4', est: ['tanimachi', 26], tipo: 'destacado' },
+      ]}
+      giros={[
+        `<strong>Castillo</strong> · ${C(16)} → ${C(18)} · 2 paradas · Exit 9.`,
+        `<strong>Tennoji</strong> · ${C(16)} → ${C(18)} → ${T(23)} → ${T(26)} · 3 paradas en Tanimachi · Exit 4.`,
+        `<strong>Minami</strong> · ${M(18)} → ${M(19)} Shinsaibashi / ${M(20)} Namba · ${dir('Nakamozu')}.`,
+        `<strong>Nara</strong> · ${M(18)} → ${M(20)} → ${A(1)} Osaka-Namba → ${A(28)} Kintetsu-Nara.`,
+      ]}
+      check="<strong>👀 Comprobación rápida:</strong> antes de subir miramos <strong>línea + dirección + destino</strong>. No basta con que el tren tenga el mismo color."
+    />
+  </Seccion>
+
+  <Seccion id="llegada" fondo="alt" kicker="21 OCT · ~14:20 · desde la Fase 1" titulo="Shin-Osaka → <strong>Hommachi → hotel</strong>" lead="Al bajar del Shinkansen <strong>no buscamos el hotel todavía</strong>. Primero <strong>Osaka Metro → Midosuji Line (rojo) → M13</strong>. No seguimos JR.">
+    <MiniMapa
+      titulo={`Mini mapa 1 · llegada: ${M(13)} → ${M(18)}`}
+      nota={`${midoS} · <strong>5 paradas</strong> · ~10 min. Ojo: <strong>Nakamozu</strong> (hacia el sur), no Minoh-kayano.`}
+      paradas={[
+        { nombre: 'Shin-Osaka', est: ['midosuji', 13], tipo: 'destacado', sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Nishinakajima', est: ['midosuji', 14], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Nakatsu', est: ['midosuji', 15], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Umeda', est: ['midosuji', 16], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Yodoyabashi', est: ['midosuji', 17], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Hommachi', est: ['midosuji', 18], tipo: 'destacado', sig: { modo: 'andar', label: '🚶 4–5 min' } },
+        { nombre: 'Hotel', sub: 'Exit 12', tipo: 'hotel' },
+      ]}
+      giros={[
+        `En Shin-Osaka buscamos <strong>Osaka Metro / Midosuji Line</strong> ${lin('midosuji', true)}. No seguimos JR.`,
+        `Subimos en ${M(13)} ${dir('Nakamozu / Tennoji')}.`,
+        `Contamos <strong>5 paradas</strong>: ${M(14)} → ${M(15)} → ${M(16)} → ${M(17)} → ${M(18, 'Hommachi')}.`,
+      ]}
+      check={`<strong>🎯 Nuestro objetivo es ${M(18)}.</strong> Cuando aparezca <strong>Hommachi / 本町 / M18</strong>, bajamos. Después buscamos <strong>Exit 12</strong>; con maletas, valorar <strong>Exit 7</strong> (ascensor/escalera mecánica).`}
+    />
+    <Galeria cols={3} h="190px">
+      <Foto id="shin-osaka-metro" titulo="El cartel a buscar en Shin-Osaka" texto="Cartel de la estación de Midosuji Line: fondo blanco, franja roja y código M13." />
+      <Foto id="midosuji" titulo="El tren de Midosuji" texto="Franja roja. Si el tren es rojo y pone M, vamos bien; falta comprobar la dirección." />
+      <Foto id="hommachi" titulo="Puertas de Hommachi" texto="Al salir de las puertas, buscamos el cartel amarillo de salidas: Exit 12." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="hotel" kicker="Hotel" titulo="Hommachi: nuestro <strong>punto fijo</strong>" lead="El hotel está en 3-3-6 Kyutaromachi. La guía del hotel indica Hommachi a unos 4 min: Exit 12 para llegar andando y Exit 7 como alternativa cómoda con equipaje.">
+    <TarjetaEstacion
+      kicker="Señal que reconocemos"
+      titulo="本町 · Hommachi"
+      texto="En esta estación confluyen Midosuji (rojo), Chuo (verde) y Yotsubashi (azul)."
+      cartel={{ nombre: 'Hommachi', jp: '本町', operador: 'Osaka Metro', codigos: [['midosuji', 18], ['chuo', 16], ['yotsubashi', 13]] }}
+    >
+      <Pasos items={[
+        { t: 'Para el hotel buscamos Exit 12.', d: 'Salimos hacia Shinsaibashi-suji, caminamos hacia el sur, giramos en la primera esquina a Minami-Kyutaromachi-dori y enseguida veremos el hotel.' },
+        { t: 'Con maletas podemos usar Exit 7.', d: 'El hotel señala esta salida como alternativa por sus opciones de ascensor/escalera mecánica.' },
+        { t: 'Si dudamos, paramos.', d: 'Enseñamos la tarjeta del hotel (abajo) o usamos el botón 🆘 Ayuda.' },
+      ]} />
+    </TarjetaEstacion>
+    <MapaAndando
+      titulo="Hommachi Exit 12 → hotel"
+      sub="Unos 300 metros. Sur por Shinsaibashi-suji y primera esquina."
+      ciudad="Osaka"
+      distancia="≈ 300 m"
+      tiempo="4–5 min"
+      puntos={[
+        { n: 'Hommachi · Exit 12', lat: 34.6822, lon: 135.5012, t: 'estacion', q: 'Hommachi Station Exit 12, Osaka' },
+        { n: 'Shinsaibashi-suji', lat: 34.6818, lon: 135.5021, q: 'Shinsaibashisuji, Kyutaromachi, Osaka' },
+        { n: 'Far East Village Hotel', lat: 34.6806, lon: 135.5024, t: 'fin', q: 'Far East Village Hotel Osaka Honmachi' },
+      ]}
+    />
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Llévenos al hotel" jp={H.jp} romaji={H.nombre} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={H.direccionJp} />
+    </div>
+  </Seccion>
+
+  <Seccion id="dia21" fondo="alt">
+    <DiaHead fecha="MIÉRCOLES · 21 OCT" titulo="<strong>Llegada + Hommachi + Minami suave</strong>" zona="Día de llegada" />
+    <p class="lead">Hoy no tenemos que demostrar nada. Venimos de Tokyo: llegar, ducharnos, descansar y tener un primer contacto con Osaka. Si estamos cansados, versión corta.</p>
+    <div class="choice-grid">
+      <div class="choice"><h3><Prio t="must" /> Versión corta</h3><div class="route">HOTEL → SHINSAIBASHI-SUJI → HOTEL</div><p>Salimos del hotel y caminamos por Shinsaibashi-suji. Vemos ambiente, cenamos y volvemos. Si las piernas pesan, ni siquiera necesitamos metro.</p><div class="best">Duración orientativa: 2–3 h · muy fácil de recortar.</div></div>
+      <div class="choice"><h3><Prio t="maybe" texto="🟡 SI TENEMOS ENERGÍA" /> Versión ampliada</h3><div class="route">Shinsaibashi → America-Mura → Horie → Dotonbori → Hozenji</div><p>Todo andando, sin volver atrás. Si a mitad de camino estamos cansados, cortamos en Dotonbori y taxi a Hommachi.</p><div class="best">No convertimos esta opción en obligación.</div></div>
+    </div>
+    <MapaAndando
+      titulo="Versión ampliada a pie"
+      sub="Del hotel al sur por la galería cubierta, desvío al oeste por America-Mura y Horie, y final en Dotonbori."
+      ciudad="Osaka"
+      distancia="≈ 3,5 km"
+      tiempo="1 h andando + paradas"
+      puntos={[
+        { n: 'Hotel', lat: 34.6806, lon: 135.5024, t: 'inicio', q: 'Far East Village Hotel Osaka Honmachi' },
+        { n: 'Shinsaibashi-suji', lat: 34.6745, lon: 135.5017, q: 'Shinsaibashisuji Shopping Street' },
+        { n: 'America-Mura', lat: 34.6721, lon: 135.4983, q: 'Triangle Park, Amerikamura, Osaka' },
+        { n: 'Horie', lat: 34.6716, lon: 135.4935, q: 'Orange Street, Horie, Osaka' },
+        { n: 'Dotonbori · Ebisubashi', lat: 34.6688, lon: 135.5013, q: 'Ebisubashi Bridge, Osaka' },
+        { n: 'Hozenji', lat: 34.6681, lon: 135.5036, t: 'fin', q: 'Hozenji Temple, Osaka' },
+      ]}
+      zonas={[{ n: 'Minami', lat: 34.6700, lon: 135.5060 }]}
+      reco={{ t: '🚕 ¿CANSADOS? TAXI A HOMMACHI', d: 'Desde Dotonbori, 5–10 min al hotel' }}
+    />
+    <div class="walk-note"><strong>🚶 Por qué aquí caminar y no coger metro</strong>Shinsaibashi está a 1 parada de Hommachi ({M(18)} → {M(19)}), pero desde el hotel el paseo por la galería comercial es más agradable que bajar a la estación. Si usamos metro: <Fragment set:html={midoS} />, 1 parada.</div>
+    <VueltaHotel rutas={[{ ruta: `${M(19, 'Shinsaibashi')} → ${M(18, 'Hommachi')}`, texto: `${midoN} · Contamos <strong>1 parada</strong>. Bajamos en M18 y usamos Exit 12. Si estamos cansados, taxi directo al hotel con la tarjeta.` }]} />
+    <Aviso tipo="oro" titulo="🍽️ Cena"><p>No damos por segura una cena solo porque “parezca” sin gluten. Preguntamos por trigo, salsa de soja y contaminación cruzada. Si no podemos confirmarlo, opción segura preparada.</p></Aviso>
+    <Galeria cols={3} h="190px">
+      <Foto id="shinsaibashi" titulo="Shinsaibashi-suji" texto="Galería comercial cubierta: el paseo más fácil desde el hotel." />
+      <Foto id="dotonbori" titulo="Dotonbori" texto="El canal y los grandes carteles luminosos. Aquí podemos cortar." />
+      <Foto id="hozenji" titulo="Hozenji Yokocho" texto="Callejón empedrado y templo pequeño: el rincón tranquilo de Minami." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="planes" kicker="22–24 OCT · Intercambiable" titulo="Cuatro planes. <strong>Elegimos tres.</strong>" lead="No hay un orden correcto. Cada noche decidimos qué hacer al día siguiente. Los cuatro planes salen de Hommachi, recorren una zona concreta y tienen vuelta independiente al hotel.">
+    <div class="choice-grid">
+      <a class="choice" href="#a"><h3>PLAN A · Castillo + Nakanoshima + Tenmangu</h3><div class="route">Hommachi → Castillo → Nakanoshima → Kitahama → Tenmangu → Tenjinbashisuji → Hommachi</div><p><Prio t="must" texto="⭐" /> Castillo + paseo por Nakanoshima. <Prio t="maybe" texto="🟡" /> Umeda Sky si hay ganas.</p></a>
+      <a class="choice" href="#b"><h3>PLAN B · Shitennoji + Shinsekai + teamLab</h3><div class="route">Hommachi → Shitennoji → Tennoji → Shinsekai → Nagai → Hommachi</div><p><Prio t="must" texto="⭐" /> Shitennoji + Shinsekai. <Prio t="maybe" texto="🟡" /> teamLab si hay entrada y energía.</p></a>
+      <a class="choice" href="#c"><h3>PLAN C · Minami completo</h3><div class="route">Hommachi → Namba Yasaka → Kuromon → Den-Den → Dotonbori → Shinsaibashi → Hommachi</div><p><Prio t="must" texto="⭐" /> Dotonbori + paseo por Minami. <Prio t="maybe" texto="🟡" /> Kuromon / Den-Den según ganas.</p></a>
+      <a class="choice" href="#d"><h3>PLAN D · Nara</h3><div class="route">Hommachi → Osaka-Namba A01 → Kintetsu-Nara A28 → Nara Park → Todaiji → Kasuga → Hommachi</div><p><Prio t="must" texto="⭐" /> Nara Park + Todaiji. <Prio t="maybe" texto="🟡" /> Kasuga si seguimos con energía.</p></a>
+    </div>
+    <Aviso tipo="azul" titulo="Regla"><p>Podemos hacer A el 22, C el 23 y D el 24, o cualquier otra combinación. Ninguna excursión queda “reservada” a una fecha salvo que una entrada lo exija.</p></Aviso>
+  </Seccion>
+
+  <Seccion id="a" fondo="alt">
+    <DiaHead fecha="PLAN A · CASTILLO + NAKANOSHIMA + TENMANGU + TENJINBASHISUJI" titulo="<strong>Historia → río → Osaka tradicional</strong>" zona="Plan independiente" />
+    <p class="lead">El recorrido más progresivo de los cuatro. Primero el Castillo y después hacia el centro caminando. El núcleo del día es <strong>Castillo → Nakanoshima → Yodoyabashi/Kitahama → Osaka Tenmangu → Tenjinbashisuji</strong>. Umeda solo entra si todavía hay ganas.</p>
+    <TarjetaEstacion kicker="Ida · primer tramo" titulo={`Hommachi ${C(16)} → Tanimachi 4-chome ${C(18)}`} texto="Aquí sí usamos metro: nos deja exactamente donde empieza el recorrido del Castillo.">
+      <MiniMapa
+        titulo={`${lin('chuo')} ${dir('Nagata / Gakken-Nara-Tomigaoka')}`}
+        paradas={[
+          { nombre: 'Hommachi', est: ['chuo', 16], tipo: 'hotel', sig: { modo: 'linea', l: 'chuo' } },
+          { nombre: 'Sakaisuji-Hommachi', est: ['chuo', 17], sig: { modo: 'linea', l: 'chuo' } },
+          { nombre: 'Tanimachi 4-chome', sub: 'Exit 9', est: ['chuo', 18], tipo: 'destacado', sig: { modo: 'andar', label: '🚶 10 min' } },
+          { nombre: 'Castillo', sub: 'Osaka Castle Park', tipo: 'destacado' },
+        ]}
+      />
+      <Pasos items={[
+        { t: `En Hommachi buscamos ${C(16)} · Chuo Line (verde).`, d: 'No buscamos Midosuji. El objetivo de este plan es la <strong>Chuo Line</strong>.' },
+        { t: 'Dirección Nagata / Gakken-Nara-Tomigaoka.', d: `Subimos y contamos <strong>2 paradas</strong>: ${C(17)} Sakaisuji-Hommachi → ${C(18, 'Tanimachi 4-chome')}.` },
+        { t: `Bajamos en ${C(18)} y buscamos Exit 9.`, d: 'Es la salida de referencia para Osaka Castle Park y el Museum of History.' },
+      ]} />
+    </TarjetaEstacion>
+    <Timeline>
+      <TL hora="09:00" titulo="Osaka Castle" prio="must">Entramos al parque y seguimos las señales de <strong>Castle Tower</strong>. No intentamos recorrer todo el recinto: la prioridad es disfrutar del castillo y del parque sin convertir la mañana en una carrera.</TL>
+      <TL hora="11:30–12:15" titulo="Osaka Museum of History" prio="maybe" prioTexto="🟡">Junto a la zona del Castillo. Si apetece seguir con historia, entramos; si no, lo saltamos: <strong>no es necesario para que el Plan A funcione</strong>.</TL>
+      <TL hora="12:15–13:30" titulo="Hacia Nakanoshima" tipo="andar" etiqueta="A pie">Desde la zona del Castillo seguimos <strong>andando</strong> hacia Nakanoshima. Es el tramo de paseo del día; no vamos saltando de estación en estación. Si las piernas pesan, aquí recortamos con taxi a Nakanoshima/Yodoyabashi.</TL>
+      <TL hora="13:30–15:00" titulo="Nakanoshima Park → Central Public Hall → Yodoyabashi" tipo="andar" prio="must" prioTexto="⭐">Parque junto al río y el <strong>Osaka City Central Public Hall</strong>, edificio histórico de ladrillo rojo, a unos 5 min de Yodoyabashi. No hace falta entrar: el exterior ya es la visita.</TL>
+      <TL hora="15:00–16:00" titulo="Kitahama" tipo="andar">Edificios históricos, río y zona financiera. Buen momento para parar a tomar algo.</TL>
+      <TL hora="16:00–17:30" titulo="Osaka Tenmangu + Tenjinbashisuji" tipo="andar" prio="must" prioTexto="⭐">Un mismo bloque: el santuario y, al salir, la gran galería comercial. <strong>No intentamos recorrer sus 2,6 km</strong>: caminamos el tramo que apetezca y damos la vuelta.</TL>
+      <TL hora="17:30–19:00" titulo="Umeda / Umeda Sky Building" prio="maybe" prioTexto="🟡">Solo si queda energía. Si estamos cansados, <strong>es lo primero que eliminamos</strong>.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="El paseo del Plan A"
+      sub="Una vez dejamos el Castillo avanzamos hacia el oeste y el norte, sin volver al metro."
+      ciudad="Osaka"
+      distancia="≈ 5–6 km en todo el día"
+      tiempo="repartidos entre visitas"
+      puntos={[
+        { n: 'Tanimachi 4 · Exit 9', lat: 34.6826, lon: 135.5170, t: 'estacion', q: 'Tanimachi 4-chome Station Exit 9' },
+        { n: 'Osaka Castle', lat: 34.6873, lon: 135.5262, q: 'Osaka Castle Main Tower' },
+        { n: 'Museum of History', lat: 34.6826, lon: 135.5205, q: 'Osaka Museum of History' },
+        { n: 'Nakanoshima Park', lat: 34.6936, lon: 135.5088, q: 'Nakanoshima Park Rose Garden' },
+        { n: 'Central Public Hall', lat: 34.6922, lon: 135.5045, q: 'Osaka City Central Public Hall' },
+        { n: 'Kitahama', lat: 34.6905, lon: 135.5067, q: 'Kitahama Station, Osaka' },
+        { n: 'Osaka Tenmangu', lat: 34.6956, lon: 135.5122, q: 'Osaka Tenmangu Shrine' },
+        { n: 'Tenjinbashisuji', lat: 34.6990, lon: 135.5112, t: 'fin', q: 'Tenjinbashisuji Shopping Street' },
+      ]}
+      zonas={[{ n: 'Nakanoshima', lat: 34.6915, lon: 135.4990 }, { n: 'Castillo', lat: 34.6900, lon: 135.5240 }]}
+      reco={{ t: '🚕 RECORTE: TAXI', d: 'Castillo → Nakanoshima si pesan las piernas' }}
+    />
+    <div class="walk-note"><strong>🚶 La regla de este día</strong>Una vez dejamos el Castillo, avanzamos hacia el oeste/norte y no volvemos atrás. <strong>Nakanoshima → Yodoyabashi → Kitahama → Tenmangu → Tenjinbashisuji</strong> es el núcleo. No añadimos otro metro solo porque haya una estación cerca.</div>
+    <VueltaHotel rutas={[
+      { ruta: 'Si terminamos en Tenjinbashisuji / Minami-Morimachi', texto: 'Salimos hacia <strong>Minami-Morimachi</strong> y comprobamos en la pantalla la ruta de vuelta. Si queremos evitar más caminata, <strong>taxi directo al hotel</strong> es lo más simple para cuatro.' },
+      { ruta: `Si terminamos en Umeda ${M(16)} → Hommachi ${M(18)}`, texto: `${midoS} · Contamos <strong>2 paradas</strong>: ${M(17)} Yodoyabashi → ${M(18, 'Hommachi')}.` },
+    ]} />
+    <Galeria cols={3} h="200px">
+      <Foto id="osaka-castle" titulo="Osaka Castle" texto="La torre blanca con tejados verdes, dentro del parque." />
+      <Foto id="nakanoshima" titulo="Central Public Hall" texto="El edificio de ladrillo rojo junto al río, en Nakanoshima." />
+      <Foto id="tenmangu" titulo="Osaka Tenmangu" texto="El santuario justo antes de la galería Tenjinbashisuji." />
+      <Foto id="tenjinbashi" titulo="Tenjinbashisuji" texto="La galería comercial cubierta más larga de Japón. Hacemos solo un tramo." />
+      <Foto id="museo-historia" titulo="Museum of History" texto="Edificio curvo al lado del parque del Castillo. Opcional." />
+      <Foto id="umeda-sky" titulo="Umeda Sky Building" texto="Dos torres unidas arriba. Solo si el día sigue con buen ritmo." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="b">
+    <DiaHead fecha="PLAN B · SHITENNOJI + TENNOJI + SHINSEKAI + TEAMLAB" titulo="<strong>Templo → barrio retro → noche</strong>" zona="Plan independiente" />
+    <p class="lead">Más cambio de ambiente. El tramo largo de metro lo hacemos una sola vez y después caminamos.</p>
+    <TarjetaEstacion kicker="Primer tramo · con un cambio" titulo={`Hommachi ${C(16)} → Shitennoji-mae Yuhigaoka ${T(26)}`} texto="No hay línea directa desde Hommachi. Hacemos un cambio sencillo en Tanimachi 4-chome: de verde a morado.">
+      <MiniMapa
+        titulo="Chuo (verde) + Tanimachi (morado)"
+        paradas={[
+          { nombre: 'Hommachi', est: ['chuo', 16], tipo: 'hotel', sig: { modo: 'linea', l: 'chuo' } },
+          { nombre: 'Sakaisuji-Hom.', est: ['chuo', 17], sig: { modo: 'linea', l: 'chuo' } },
+          { nombre: 'Tanimachi 4', sub: 'cambio', est: ['chuo', 18], tipo: 'destacado', sig: { modo: 'andar', label: 'cambio' } },
+          { nombre: 'Tanimachi 4', est: ['tanimachi', 23], sig: { modo: 'linea', l: 'tanimachi' } },
+          { nombre: 'Tanimachi 6', est: ['tanimachi', 24], sig: { modo: 'linea', l: 'tanimachi' } },
+          { nombre: 'Tanimachi 9', est: ['tanimachi', 25], sig: { modo: 'linea', l: 'tanimachi' } },
+          { nombre: 'Shitennoji-mae', sub: 'Exit 4', est: ['tanimachi', 26], tipo: 'destacado' },
+        ]}
+      />
+      <Pasos items={[
+        { t: `${C(16)} → ${C(18)} Tanimachi 4-chome.`, d: `${lin('chuo')} ${dir('Nagata / Gakken-Nara-Tomigaoka')} · 2 paradas.` },
+        { t: `Cambiamos a Tanimachi Line ${T(23)}.`, d: `Seguimos las señales moradas ${lin('tanimachi', true)} ${dir('Yaominami')}.` },
+        { t: `${T(23)} → ${T(26)}.`, d: `3 paradas: ${T(24)} → ${T(25)} → ${T(26, 'Shitennoji-mae Yuhigaoka')}.` },
+        { t: 'Exit 4.', d: 'Es la salida indicada para Shitennoji.' },
+      ]} />
+    </TarjetaEstacion>
+    <Timeline>
+      <TL hora="09:30–11:00" titulo="Shitennoji" prio="must">Recorremos el recinto sin intentar verlo todo. Comprobamos el horario del día antes de salir.</TL>
+      <TL hora="11:00–12:00" titulo="Shitennoji → Isshinji → Tennoji Park / Tenshiba" tipo="andar" etiqueta="A pie">Si nos interesa más el parque que otro templo, priorizamos Tenshiba y seguimos.</TL>
+      <TL hora="12:00–14:30" titulo="Shinsekai + Janjan Yokocho" prio="must" prioTexto="⭐">Caminamos por el barrio, vemos Tsutenkaku desde abajo y nos sentamos con calma.</TL>
+      <TL hora="14:30–16:30" titulo="Tennoji / Abeno" prio="maybe" prioTexto="🟡">Solo si queremos. Si estamos cansados, vamos directamente hacia Nagai.</TL>
+      <TL hora="17:15" titulo={`Tennoji ${M(23)} → Nagai ${M(26)} · Exit 3`} tipo="metro">
+        <Fragment slot="lineas"><Linea l="midosuji" dir="Nakamozu" /></Fragment>
+        Contamos <strong>3 paradas</strong>: <Est l="midosuji" n={24} /> Showacho → <Est l="midosuji" n={25} /> Nishitanabe → <Est l="midosuji" n={26} nombre="Nagai" />. Exit 3 para Nagai Park / Botanical Garden.
+      </TL>
+      <TL hora="18:00–21:30" titulo="teamLab Botanical Garden" prio="maybe" prioTexto="🟡">Horario publicado para el 22–27 de octubre de 2026: 18:00–21:30, última entrada 20:30. Al aire libre, de noche y con caminos irregulares: zapatillas y algo para mosquitos.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="El paseo del Plan B"
+      sub="Templo, parque y barrio retro, todo a pie. Después metro solo hasta Nagai."
+      ciudad="Osaka"
+      distancia="≈ 2,5 km"
+      tiempo="~35 min andando + visitas"
+      puntos={[
+        { n: 'Shitennoji-mae · Exit 4', lat: 34.6578, lon: 135.5165, t: 'estacion', q: 'Shitennoji-mae Yuhigaoka Station' },
+        { n: 'Shitennoji', lat: 34.6536, lon: 135.5164, q: 'Shitennoji Temple, Osaka' },
+        { n: 'Isshinji', lat: 34.6510, lon: 135.5110, q: 'Isshinji Temple, Osaka' },
+        { n: 'Tenshiba', lat: 34.6482, lon: 135.5113, q: 'Tenshiba, Tennoji Park' },
+        { n: 'Shinsekai · Tsutenkaku', lat: 34.6525, lon: 135.5063, q: 'Tsutenkaku, Osaka' },
+        { n: `Tennoji M23`, lat: 34.6466, lon: 135.5138, t: 'fin', q: 'Tennoji Station, Osaka' },
+      ]}
+    />
+    <VueltaHotel rutas={[{ ruta: `Nagai ${M(26)} → Hommachi ${M(18)}`, texto: `${midoN} · Contamos <strong>8 paradas</strong>: M25 → M24 → M23 → M22 → M21 → M20 → M19 → ${M(18, 'Hommachi')}. Si teamLab termina tarde y estamos cansados, taxi directo puede ser más cómodo para cuatro.` }]} />
+    <Galeria cols={3} h="200px">
+      <Foto id="shitennoji" titulo="Shitennoji" texto="Uno de los templos budistas más antiguos de Japón. La pagoda es la referencia." />
+      <Foto id="tenshiba" titulo="Tenshiba" texto="El césped de Tennoji Park, con Abeno Harukas al fondo." />
+      <Foto id="shinsekai" titulo="Shinsekai · Tsutenkaku" texto="Barrio retro con carteles enormes y la torre Tsutenkaku." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="c" fondo="alt">
+    <DiaHead fecha="PLAN C · NAMBA + KUROMON + DEN-DEN + DOTONBORI + SHINSAIBASHI" titulo="<strong>Todo a pie</strong> una vez que llegamos a Namba" zona="Plan independiente" />
+    <p class="lead">El plan más fácil de entender: un único desplazamiento de Hommachi a Namba y desde allí prácticamente todo andando. Podemos recortar en cualquier punto sin desmontar el día.</p>
+    <TarjetaEstacion kicker="Ida · primer tramo" titulo={`Hommachi ${M(18)} → Namba ${M(20)}`} texto="Buscamos <strong>Midosuji Line (rojo)</strong>. Una vez dentro, no cambiamos de línea.">
+      <MiniMapa
+        titulo={midoS}
+        paradas={[
+          { nombre: 'Hommachi', est: ['midosuji', 18], tipo: 'hotel', sig: { modo: 'linea', l: 'midosuji' } },
+          { nombre: 'Shinsaibashi', est: ['midosuji', 19], sig: { modo: 'linea', l: 'midosuji' } },
+          { nombre: 'Namba', est: ['midosuji', 20], tipo: 'destacado' },
+        ]}
+      />
+      <Pasos items={[
+        { t: `En Hommachi buscamos ${M(18)}.`, d: `Objetivo: ${lin('midosuji')} ${dir('Nakamozu')}.` },
+        { t: 'Contamos 2 paradas.', d: `${M(19)} Shinsaibashi → ${M(20, 'Namba')}.` },
+        { t: 'Al bajar, recordamos que Namba es enorme.', d: 'Salimos hacia la zona de Namba y caminamos hacia <strong>Namba Yasaka Shrine</strong>. No seguimos señales de JR/Nankai si no las necesitamos.' },
+      ]} />
+    </TarjetaEstacion>
+    <Timeline>
+      <TL hora="09:30–10:15" titulo="Namba Yasaka Shrine" prio="must">Empezamos aquí porque queda al oeste de Namba y después avanzamos hacia Kuromon. El enorme <strong>salón con cabeza de león</strong>. Visita corta.</TL>
+      <TL hora="10:15–11:30" titulo="Kuromon Ichiba Market" tipo="andar" prio="must">Puestos y ambiente. Para el celíaco no damos por segura ninguna fritura, salsa o brocheta: preguntamos antes de comprar.</TL>
+      <TL hora="11:30–13:00" titulo="Nipponbashi / Den-Den Town" tipo="andar" prio="maybe" prioTexto="⭐ MUY RECOMENDABLE">Electrónica, manga, anime y cultura pop. Si no interesa demasiado, la atravesamos y seguimos hacia Dotonbori.</TL>
+      <TL hora="13:00–14:30" titulo="Comida + descanso" tipo="descanso">Paramos de verdad. Si no encontramos comida que podamos verificar como segura para el celíaco, usamos la opción preparada.</TL>
+      <TL hora="14:30–16:00" titulo="Dotonbori" tipo="andar" prio="must">El canal, Ebisubashi y los grandes carteles. <strong>El propio paseo es la visita.</strong></TL>
+      <TL hora="16:00–16:45" titulo="Hozenji + Hozenji Yokocho" tipo="andar" prio="maybe" prioTexto="⭐ MUY RECOMENDABLE">Un pequeño oasis tranquilo dentro de Minami, muy cerca de Dotonbori.</TL>
+      <TL hora="16:45–18:00" titulo="Shinsaibashi" tipo="andar" prio="maybe" prioTexto="⭐ MUY RECOMENDABLE">Hacia el norte por Shinsaibashi-suji. Solo el tramo que interese.</TL>
+      <TL hora="18:00–19:00" titulo="America-Mura / Horie / Orange Street" prio="maybe" prioTexto="🟡">Solo si seguimos con ganas. Si no, cortamos en Shinsaibashi y volvemos.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="El paseo del Plan C"
+      sub="Namba es la entrada y Shinsaibashi la salida. Todo andando."
+      ciudad="Osaka"
+      distancia="≈ 4 km"
+      tiempo="~55 min andando + visitas"
+      puntos={[
+        { n: 'Namba M20', lat: 34.6662, lon: 135.5005, t: 'estacion', q: 'Namba Station Midosuji Line' },
+        { n: 'Namba Yasaka', lat: 34.6618, lon: 135.4970, q: 'Namba Yasaka Shrine' },
+        { n: 'Kuromon Market', lat: 34.6655, lon: 135.5065, q: 'Kuromon Ichiba Market' },
+        { n: 'Den-Den Town', lat: 34.6598, lon: 135.5060, q: 'Den Den Town, Nipponbashi' },
+        { n: 'Dotonbori · Ebisubashi', lat: 34.6688, lon: 135.5013, q: 'Ebisubashi Bridge, Osaka' },
+        { n: 'Hozenji', lat: 34.6681, lon: 135.5036, q: 'Hozenji Temple, Osaka' },
+        { n: 'Shinsaibashi M19', lat: 34.6750, lon: 135.5007, t: 'fin', q: 'Shinsaibashi Station' },
+      ]}
+      zonas={[{ n: 'Minami', lat: 34.6700, lon: 135.4950 }]}
+    />
+    <div class="walk-note"><strong>🚶 La regla de este día</strong>Namba es el punto de entrada. <strong>Namba Yasaka → Kuromon → Den-Den → Dotonbori → Hozenji → Shinsaibashi</strong> es un recorrido lógico. America-Mura y Horie son el añadido, no la obligación.</div>
+    <VueltaHotel rutas={[
+      { ruta: `Shinsaibashi ${M(19)} → Hommachi ${M(18)}`, texto: `${midoN} · Contamos <strong>1 parada</strong>.` },
+      { ruta: `Si seguimos en Namba ${M(20)} → Hommachi ${M(18)}`, texto: `${midoN} · Contamos <strong>2 paradas</strong>: ${M(19)} → ${M(18)}. Con compras o cansados, taxi directo.` },
+    ]} />
+    <Galeria cols={3} h="200px">
+      <Foto id="namba-yasaka" titulo="Namba Yasaka" texto="El salón con forma de cabeza de león. Imposible no reconocerlo." />
+      <Foto id="kuromon" titulo="Kuromon Ichiba" texto="Mercado cubierto. Para el celíaco: preguntar antes de comprar." />
+      <Foto id="denden" titulo="Den-Den Town" texto="Nipponbashi: electrónica, anime y manga." />
+      <Foto id="dotonbori" titulo="Dotonbori" texto="El canal y el corredor de Glico desde Ebisubashi." />
+      <Foto id="hozenji" titulo="Hozenji" texto="La estatua cubierta de musgo y el callejón empedrado." />
+      <Foto id="shinsaibashi" titulo="Shinsaibashi-suji" texto="Galería cubierta para volver hacia el norte." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="d">
+    <DiaHead fecha="PLAN D · NARA" titulo="<strong>Nara · plan de día completo</strong>" zona="El 22, 23 o 24" />
+    <p class="lead">Nara no está asignada a ninguna fecha. La elegimos si hace buen tiempo, tenemos energía y apetece un día largo de caminar. Si estamos cansados, versión corta.</p>
+    <div class="choice-grid">
+      <div class="choice"><h3><Prio t="must" texto="⭐" /> Versión completa</h3><div class="route">Kintetsu-Nara → Kofukuji → Nara Park → Todaiji → Kasuga → Kintetsu-Nara</div><p>Kintetsu-Nara está a unos 8 min andando de Nara Park, y Todaiji, Kofukuji y Kasuga están integrados en la misma zona.</p></div>
+      <div class="choice"><h3><Prio t="maybe" texto="🟡" /> Versión corta</h3><div class="route">Kintetsu-Nara → Nara Park → Todaiji → Kintetsu-Nara</div><p>Quitamos Kasuga. La opción correcta si estamos cansados o el tiempo se complica.</p></div>
+    </div>
+    <TarjetaEstacion kicker="Ida · con un cambio de compañía" titulo={`Hommachi ${M(18)} → Osaka-Namba ${A(1)} → Kintetsu-Nara ${A(28)}`} texto="En Namba cambiamos de Osaka Metro a <strong>Kintetsu</strong>. Kintetsu tiene asistencia para viajeros extranjeros en ambas estaciones.">
+      <MiniMapa
+        titulo="Rojo Midosuji → Kintetsu"
+        paradas={[
+          { nombre: 'Hommachi', est: ['midosuji', 18], tipo: 'hotel', sig: { modo: 'linea', l: 'midosuji', label: '2 paradas' } },
+          { nombre: 'Namba', est: ['midosuji', 20], sig: { modo: 'andar', label: '🚶 cambio' } },
+          { nombre: 'Osaka-Namba', sub: 'Kintetsu 近鉄', est: ['kintetsu', 1], tipo: 'destacado', sig: { modo: 'linea', l: 'kintetsu', label: '~40 min' } },
+          { nombre: 'Kintetsu-Nara', est: ['kintetsu', 28], tipo: 'destacado' },
+        ]}
+        check={`<strong>⚠️ “Nara Line” hay dos:</strong> la JR Nara Line ${lin('nara', true)} es de Kyoto. Nosotros buscamos <strong>近鉄 Kintetsu</strong> y el destino <strong>近鉄奈良 Kintetsu-Nara</strong>.`}
+      />
+      <Pasos items={[
+        { t: `Hommachi ${M(18)} → Namba ${M(20)}.`, d: `${midoS} · 2 paradas.` },
+        { t: 'En Namba buscamos Kintetsu.', d: `No seguimos las señales de JR ni de Nankai. Objetivo: ${A(1, 'Osaka-Namba 大阪難波')}.` },
+        { t: `Tren a Kintetsu-Nara ${A(28)}.`, d: 'Hay servicios directos (Rapid Express, Express); el tiempo depende del tren. Los Limited Express necesitan billete especial.' },
+        { t: 'La pantalla manda.', d: 'No subimos solo porque ponga “Nara”: destino <strong>近鉄奈良 / Kintetsu-Nara</strong>.' },
+      ]} />
+    </TarjetaEstacion>
+    <Timeline>
+      <TL hora="09:00 aprox." titulo="Salida de Hommachi" tipo="metro">Para un día completo queremos llegar a Nara por la mañana; no fijamos un tren concreto en la guía.</TL>
+      <TL hora="+35–40 min" titulo={`Kintetsu-Nara ${A(28)} → Kofukuji`} tipo="andar">Kofukuji está a unos 10 min andando de la estación.</TL>
+      <TL hora="10:00–11:00" titulo="Kofukuji + Sarusawa Pond" tipo="andar" prio="must" prioTexto="⭐">Visita exterior y fotos. No entramos en todos los edificios.</TL>
+      <TL hora="11:00–12:30" titulo="Nara Park + Todaiji" tipo="andar" prio="must" prioTexto="⭐">Nara Park está abierto todo el día y tiene unos 1.300 ciervos. Todaiji abre el Daibutsuden 7:30–17:30 de abril a octubre; entrada adulta ¥800.</TL>
+      <TL hora="12:30–13:30" titulo="Comida" tipo="descanso">Algo que podamos verificar. No dependemos de un puesto al azar para la comida del celíaco.</TL>
+      <TL hora="13:30–15:00" titulo="Kasuga Taisha" tipo="andar" prio="maybe" prioTexto="🟡">Hacia el este por el parque. Recinto general 6:30–17:30 de marzo a octubre; el interior del honden tiene tarifa propia.</TL>
+      <TL hora="15:00–16:00" titulo="Vuelta hacia Kintetsu-Nara" tipo="andar">Si estamos cansados, taxi local desde Kasuga o recortamos antes.</TL>
+      <TL hora="16:00–17:00" titulo={`Kintetsu-Nara ${A(28)} → Osaka-Namba ${A(1)}`} tipo="tren"><Fragment slot="lineas"><Linea l="kintetsu" dir="Osaka-Namba 大阪難波" /></Fragment>Servicio directo a Osaka-Namba; manda la pantalla.</TL>
+      <TL hora="17:15–18:00" titulo={`Namba ${M(20)} → Hommachi ${M(18)}`} tipo="metro"><Fragment slot="lineas"><Linea l="midosuji" dir="Minoh-kayano" /></Fragment>2 paradas y al hotel.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="El circuito de Nara"
+      sub="Circular desde la estación: templos, parque con ciervos, Todaiji y Kasuga."
+      ciudad="Nara"
+      distancia="≈ 5,5 km"
+      tiempo="~1 h 15 min andando + visitas"
+      puntos={[
+        { n: 'Kintetsu-Nara A28', lat: 34.6844, lon: 135.8279, t: 'estacion', q: 'Kintetsu Nara Station' },
+        { n: 'Kofukuji', lat: 34.6832, lon: 135.8317, q: 'Kofukuji Temple, Nara' },
+        { n: 'Sarusawa Pond', lat: 34.6806, lon: 135.8306, q: 'Sarusawa Pond, Nara' },
+        { n: 'Nara Park', lat: 34.6838, lon: 135.8378, q: 'Nara Park' },
+        { n: 'Todaiji', lat: 34.6890, lon: 135.8398, q: 'Todaiji Temple, Nara' },
+        { n: 'Kasuga Taisha', lat: 34.6814, lon: 135.8484, q: 'Kasuga Taisha, Nara' },
+        { n: 'Kintetsu-Nara A28', lat: 34.6844, lon: 135.8285, t: 'fin', q: 'Kintetsu Nara Station' },
+      ]}
+      reco={{ t: '🚕 SI NO QUEDAN PIERNAS', d: 'Taxi local de Kasuga a la estación' }}
+    />
+    <VueltaHotel rutas={[{ ruta: `${A(28)} → ${A(1)} → ${M(20)} → ${M(18)}`, texto: 'En metro contamos 2 paradas M20 → M18. Si al llegar a Namba estamos agotados, taxi al hotel. La idea es estar en Hommachi con margen para cenar y descansar.' }]} />
+    <Aviso titulo="🦌 Ciervos"><p>Solo galletas <strong>shika senbei</strong> (de venta en el parque): nada de comida humana ni basura, y sin provocarlos. Son animales salvajes: en otoño, época de celo, no acercarse a los machos.</p></Aviso>
+    <Galeria cols={2}>
+      <Foto id="nara-ciervos" titulo="Nara Park" texto="Parque abierto con ciervos caminando libremente." wide />
+      <Foto id="todaiji" titulo="Todaiji · Daibutsuden" texto="La gran referencia del día: el edificio de madera del Gran Buda." />
+      <Foto id="kofukuji" titulo="Kofukuji" texto="La pagoda de cinco pisos, a 10 min de la estación." />
+      <Foto id="kasuga" titulo="Kasuga Taisha" texto="Santuario de las linternas. Si queda energía." />
+      <Foto id="kintetsu-nara" titulo="Kintetsu-Nara" texto="La estación de vuelta. Buscamos Osaka-Namba en la pantalla." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="dia25" fondo="alt">
+    <DiaHead fecha="DOMINGO · 25 OCT" titulo="<strong>Checkout + Hommachi + Kyoto</strong>" zona="Día logístico · sin excursión larga" />
+    <p class="lead">El 25 no hacemos Nara. Salimos de Osaka tranquilos, con las maletas controladas y sin alejarnos del hotel.</p>
+    <div class="luggage-box">
+      <h3>🧳 Antes de salir: maletas</h3>
+      <p>En recepción preguntamos: <strong class="jp">「荷物を預かってもらえますか？預かり証をもらえますか？」</strong><br />“¿Podéis guardar nuestras maletas? ¿Nos dais un resguardo?”</p>
+      <p style="margin-top:9px">Si las guardan, pedimos un <strong>resguardo, número o comprobante</strong>. No nos vamos sin saber dónde y cómo las recuperamos.</p>
+    </div>
+    <Timeline>
+      <TL hora="08:00–09:00" titulo="Desayuno + checkout" tipo="descanso">Checkout a las 11:00. Podemos dejar las maletas en recepción si el hotel lo confirma y nos da un resguardo.</TL>
+      <TL hora="09:30–11:30" titulo="Plan cercano a Hommachi" prio="maybe" prioTexto="🟡">Solo algo cercano: Shinsaibashi-suji, cafés o un paseo corto. Nada que obligue a coger metro.</TL>
+      <TL hora="11:30–12:00" titulo="Volvemos al hotel" tipo="descanso">Recogemos maletas. Pasaportes, móviles, cargadores y documentos antes de salir.</TL>
+      <TL hora="12:00 aprox." titulo={`Hommachi ${M(18)} → Shin-Osaka ${M(13)}`} tipo="metro">
+        <Fragment slot="lineas"><Linea l="midosuji" dir="Minoh-kayano" /></Fragment>
+        Contamos <strong>5 paradas</strong>: <Est l="midosuji" n={17} /> Yodoyabashi → <Est l="midosuji" n={16} /> Umeda → <Est l="midosuji" n={15} /> Nakatsu → <Est l="midosuji" n={14} /> Nishinakajima-Minamigata → <Est l="midosuji" n={13} nombre="Shin-Osaka" />.
+      </TL>
+      <TL hora="En Shin-Osaka" titulo="Osaka Metro → JR / Shinkansen" tipo="andar">Seguimos las señales <strong>JR Line</strong> o <strong>Shinkansen</strong> según el billete. No salimos a la calle: el cambio se hace dentro del complejo de Shin-Osaka.</TL>
+      <TL hora="Tren a Kyoto" titulo="Shin-Osaka → Kyoto" tipo="tren">
+        <Fragment slot="lineas"><Linea l="jrkyoto" dir="Kyoto 京都" /> <Linea l="shinkansen" dir="Tokyo · para en Kyoto" /></Fragment>
+        <strong>Opción sencilla:</strong> JR Kyoto Line (Special Rapid, ~25 min) y bajamos en Kyoto. <strong>Opción rápida:</strong> Shinkansen (~15 min) si tenemos billete. En pantalla: <strong>京都 / KYOTO</strong>, hora y andén antes de subir.
+      </TL>
+      <TL hora="~13:00" titulo="Llegada a Kyoto Station" tipo="descanso">La guía de Kyoto empieza aquí: estación → Hotel Hokke Club Kyoto, justo enfrente. <a href="#sigue">Sigue en Fase 3 ↓</a></TL>
+    </Timeline>
+    <MiniMapa
+      titulo="Salida de Osaka: hotel → Kyoto Station"
+      nota="Dos trenes. El cambio en Shin-Osaka es por dentro de la estación."
+      paradas={[
+        { nombre: 'Hotel', tipo: 'hotel', sig: { modo: 'andar', label: '🚶 5 min' } },
+        { nombre: 'Hommachi', est: ['midosuji', 18], sig: { modo: 'linea', l: 'midosuji', label: '5 paradas' } },
+        { nombre: 'Shin-Osaka', est: ['midosuji', 13], tipo: 'destacado', sig: { modo: 'linea', l: 'jrkyoto', label: '~25 min' } },
+        { nombre: 'Kyoto', est: ['jrkyoto', 31], tipo: 'destacado' },
+      ]}
+      check="<strong>🧭 Plan B:</strong> si llevamos maletas y no queremos metro, taxi del hotel a Shin-Osaka es lo más simple para cuatro."
+    />
+    <Aviso tipo="azul" titulo="📱 Qué mirar en la pantalla"><p>1) destino Kyoto / 京都; 2) hora; 3) número de andén; 4) tipo de tren. Si algo no coincide con el billete, preguntamos antes de subir.</p></Aviso>
+  </Seccion>
+
+  <Conexion fase="osaka" modo="hacia" />
+
+  <Seccion id="decidir" kicker="Cómo elegimos" titulo="🧭 Cómo decidimos <strong>cada noche</strong>">
+    <div class="decision">
+      <div><b>😴 Estamos cansados</b>El plan corto de la zona que más apetezca. No intentamos “recuperar” visitas.</div>
+      <div><b>☀️ Hace buen tiempo</b>Nara o cualquiera de los planes con más caminata exterior.</div>
+      <div><b>🌧️ Hace mal tiempo</b>Zonas cubiertas (Shinsaibashi, Tenjinbashisuji, Kuromon) y menos parques.</div>
+      <div><b>🌿 Queremos algo tranquilo</b>Plan A, sobre todo Nakanoshima y el paseo por Kitahama/Yodoyabashi.</div>
+      <div><b>🌃 Queremos ambiente</b>Plan C, con Dotonbori y Minami.</div>
+      <div><b>🎟️ Tenemos una reserva fija</b>Ese plan pasa a ser la referencia del día y recortamos alrededor.</div>
+      <div><b>🧳 Es 25 de octubre</b>No hay excursión larga. Equipaje, Hommachi y Kyoto.</div>
+      <div><b>🚕 Ya no quedan piernas</b>Taxi para cuatro cuando ahorre caminata, transbordos o una vuelta complicada.</div>
+    </div>
+  </Seccion>
+
+  <Seccion id="transporte" fondo="crema" kicker="Transporte resumido" titulo="Las rutas que vamos a <strong>repetir</strong>">
+    <TablaTransporte
+      cab={['Origen', 'Destino', 'Línea / dirección', 'Paradas', 'Salida']}
+      filas={[
+        [M(18, 'Hommachi'), M(19, 'Shinsaibashi'), midoS, '1', 'Según tramo'],
+        [M(18, 'Hommachi'), M(20, 'Namba'), midoS, '2', 'Según tramo'],
+        [C(16, 'Hommachi'), C(18, 'Tanimachi 4-chome'), `${lin('chuo')} ${dir('Nagata')}`, '2', 'Exit 9 · Castillo'],
+        [T(23, 'Tanimachi 4-chome'), T(26, 'Shitennoji-mae'), `${lin('tanimachi')} ${dir('Yaominami')}`, '3', 'Exit 4'],
+        [M(23, 'Tennoji'), M(26, 'Nagai'), midoS, '3', 'Exit 3'],
+        [M(26, 'Nagai'), M(18, 'Hommachi'), midoN, '8', '—'],
+        [M(18, 'Hommachi'), M(13, 'Shin-Osaka'), midoN, '5', 'JR / Shinkansen'],
+        [A(1, 'Osaka-Namba'), A(28, 'Kintetsu-Nara'), `${lin('kintetsu')} ${dir('Kintetsu-Nara')}`, 'según tren', 'A28'],
+        [est('midosuji', 13, 'Shin-Osaka'), est('jrkyoto', 31, 'Kyoto'), `${lin('jrkyoto')} o ${lin('shinkansen', true)}`, '~25 / ~15 min', 'Kyoto Station'],
+      ]}
+    />
+    <Aviso tipo="azul" titulo="🚕 Plan B"><p>Siendo cuatro, comparamos taxi cuando llevemos maletas, estemos cansados o el trayecto evite varios cambios. No hace falta taxi para todos los trayectos cortos.</p></Aviso>
+    <div class="cards">
+      <div class="card"><h3>Osaka Metro</h3><p>Códigos, líneas y salidas: <a href="https://subway.osakametro.co.jp/en/" target="_blank" rel="noopener">Osaka Metro</a>.</p></div>
+      <div class="card"><h3>Kintetsu</h3><p>Osaka-Namba A01, Kintetsu-Nara A28 y horarios: <a href="https://www.kintetsu.co.jp/foreign/english/" target="_blank" rel="noopener">Kintetsu Railway</a>.</p></div>
+      <div class="card"><h3>Nara</h3><p>Parque, ciervos, Todaiji y Kasuga: <a href="https://narashikanko.or.jp/en/" target="_blank" rel="noopener">Nara City Tourism Association</a>.</p></div>
+      <div class="card"><h3>teamLab</h3><p>Horarios y condiciones: <a href="https://www.teamlab.art/e/botanicalgarden/" target="_blank" rel="noopener">teamLab Botanical Garden Osaka</a>.</p></div>
+      <div class="card"><h3>Hotel</h3><p>Dirección, checkout y acceso: <a href="https://www.villagehotels.asia/en/hotels/far-east-village-hotel-osaka-honmachi" target="_blank" rel="noopener">Far East Village Hotel Osaka Honmachi</a>.</p></div>
+    </div>
+    <Aviso titulo="Regla de oro"><p>Si la pantalla real dice algo distinto a esta guía, manda la pantalla. La guía nos da el camino mental; la estación, la información del minuto.</p></Aviso>
+  </Seccion>
+
+  <FrasesAyuda extraTitulo="Osaka y Nara" extra={[
+    { jp: '近鉄奈良駅はどこですか？', romaji: 'Kintetsu-Nara-eki wa doko desu ka?', es: '¿Dónde está Kintetsu-Nara?' },
+    { jp: '大阪難波駅はどこですか？', romaji: 'Ōsaka-Namba-eki wa doko desu ka?', es: '¿Dónde está Osaka-Namba (Kintetsu)?' },
+    { jp: '荷物を預かってもらえますか？', romaji: 'Nimotsu o azukatte moraemasu ka?', es: '¿Pueden guardarnos las maletas?' },
+    { jp: '預かり証をもらえますか？', romaji: 'Azukarishō o moraemasu ka?', es: '¿Nos dan un resguardo?' },
+    { jp: '京都駅に行きたいです。', romaji: 'Kyōto-eki ni ikitai desu.', es: 'Queremos ir a Kyoto Station.' },
+    { jp: '本町駅の12番出口はどこですか？', romaji: 'Honmachi-eki no jūni-ban deguchi wa doko desu ka?', es: '¿Dónde está la salida 12 de Hommachi?' },
+  ]} />
+
+  <BloqueCeliaco ciudad="Osaka y Nara" consejos={[
+    '<strong>Konamon</strong>: takoyaki, okonomiyaki y kushikatsu son platos <strong>de harina de trigo o rebozados</strong>. En Dotonbori y Shinsekai casi todo lo típico es de este tipo.',
+    '<strong>Kuromon</strong>: mercado de puestos; mucha brocheta con salsa. Preguntar siempre antes de comprar.',
+    '<strong>Nara</strong>: las galletas <em>shika senbei</em> son para los ciervos (llevan harina). Comer en un sitio verificado; el parque tiene poca oferta segura.',
+  ]} />
+
+  <Footer slot="footer" titulo="JAPÓN 2026 · FASE 2 — OSAKA + NARA" lineas={['Guía in situ para 4 viajeros · diseñada para usar desde el móvil', 'Los carteles de estación recreados son ayudas visuales; las fotos son referencias reales.']} />
+</BaseLayout>

@@ -1,0 +1,8 @@
+---
+interface Props { tipo?: 'rojo' | 'oro' | 'azul' | 'verde'; titulo?: string }
+const { tipo = 'rojo', titulo } = Astro.props;
+---
+<div class={`aviso ${tipo === 'rojo' ? '' : tipo}`}>
+  {titulo && <strong set:html={titulo} />}
+  <slot />
+</div>

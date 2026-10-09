@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import Aviso from '../components/ui/Aviso.astro';
+import Foto from '../components/ui/Foto.astro';
+import TarjetaTaxi from '../components/ayuda/TarjetaTaxi.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import { FASES, ORDEN, HOTELES } from '../data/viaje';
+import { LINEAS } from '../data/lineas';
+import fotos from '../data/fotos.json';
+import { url } from '../lib/url';
+
+const F = fotos as Record<string, { file: string }>;
+
+// Esquema del viaje: posiciones aproximadas proyectadas desde lat/lon.
+const lugares = {
+  tokyo: { lat: 35.68, lon: 139.77, n: 'Tokyo', jp: '東京' },
+  haneda: { lat: 35.55, lon: 139.78, n: 'Haneda', jp: '羽田' },
+  osaka: { lat: 34.69, lon: 135.50, n: 'Osaka', jp: '大阪' },
+  kyoto: { lat: 35.00, lon: 135.76, n: 'Kyoto', jp: '京都' },
+  nara: { lat: 34.68, lon: 135.83, n: 'Nara', jp: '奈良' },
+  fuji: { lat: 35.36, lon: 138.73, n: 'Monte Fuji', jp: '富士山' },
+};
+const W = 900, Hh = 380;
+const x = (lon: number) => 70 + ((lon - 135.2) / (140.1 - 135.2)) * (W - 140);
+const y = (lat: number) => 60 + ((36.0 - lat) / (36.0 - 34.4)) * (Hh - 120);
+const P = Object.fromEntries(Object.entries(lugares).map(([k, v]) => [k, { ...v, x: x(v.lon), y: y(v.lat) }])) as Record<keyof typeof lugares, { n: string; jp: string; x: number; y: number }>;
+const sh = LINEAS.shinkansen.color;
+
+const dias = [
+  { d: '21', s: 'mié', f: 'tokyo-llegada', t: 'Haneda 00:20 · Shinkansen a Osaka', a: '' },
+  { d: '22–24', s: 'jue–sáb', f: 'osaka', t: 'Osaka: planes A, B, C y Nara', a: 'planes' },
+  { d: '25', s: 'dom', f: 'osaka', t: 'Osaka → Kyoto', a: 'dia25' },
+  { d: '26', s: 'lun', f: 'kyoto', t: 'Kiyomizu-dera → Gion', a: 'dia26' },
+  { d: '27', s: 'mar', f: 'kyoto', t: 'Arashiyama · Ryoan-ji · Kinkaku-ji', a: 'dia27' },
+  { d: '28', s: 'mié', f: 'kyoto', t: 'Fushimi Inari → Shinkansen a Tokyo', a: 'dia28' },
+  { d: '28', s: 'mié', f: 'tokyo', t: 'Tokyo Station → Ginza → teamLab', a: 'd28' },
+  { d: '29', s: 'jue', f: 'tokyo', t: 'Tsukiji · Hamarikyu · Ginza', a: 'd29' },
+  { d: '30', s: 'vie', f: 'tokyo', t: 'Meiji · Shibuya Sky · Odaiba', a: 'd30' },
+  { d: '31', s: 'sáb', f: 'tokyo', t: 'Asakusa · Ueno · Akihabara', a: 'd31' },
+  { d: '1', s: 'dom', f: 'tokyo', t: 'Shinjuku · Godzilla → Haneda', a: 'd1' },
+] as const;
+---
+<BaseLayout title="Japón 2026 · Guía de viaje" description="Guía in situ de Japón 2026: Tokyo, Osaka, Nara y Kyoto para cuatro viajeros. Funciona sin conexión.">
+  <Hero
+    tag="Octubre – Noviembre 2026 · Guía in situ"
+    titulo="Japón <strong>2026</strong>"
+    parrafos={['Doce días, cuatro fases y tres hoteles. Esta guía está pensada para usarla <strong>allí, desde el móvil</strong>: qué línea coger y de qué color, qué señal buscar, qué enseñar al taxista y qué puede comer el celíaco.']}
+    meta={[
+      { v: '21 OCT → 2 NOV', l: '12 días' },
+      { v: '4 PERSONAS', l: '1 celíaco' },
+      { v: 'TOKYO · OSAKA · NARA · KYOTO', l: 'Shinkansen entre ciudades' },
+    ]}
+  />
+
+  <Seccion id="ruta" kicker="El viaje de un vistazo" titulo="La ruta: <strong>Tokyo → Osaka → Kyoto → Tokyo</strong>" lead="Cada página termina donde empieza la siguiente. Al final de cada fase hay un enlace “Sigues en…” con la hora y el lugar exacto del relevo.">
+    <div class="map-wrap">
+      <div class="map-scroll"><svg class="viaje-svg map-svg" viewBox={`0 0 ${W} ${Hh}`} role="img" aria-label="Esquema de la ruta del viaje por Japón">
+        <rect width={W} height={Hh} fill="#f5f1e8" />
+        <path d={`M ${P.tokyo.x} ${P.tokyo.y} Q ${(P.tokyo.x + P.osaka.x) / 2} ${P.osaka.y + 70} ${P.osaka.x} ${P.osaka.y}`} fill="none" stroke={sh} stroke-width="6" stroke-linecap="round" />
+        <path d={`M ${P.kyoto.x} ${P.kyoto.y} Q ${(P.tokyo.x + P.kyoto.x) / 2} ${P.kyoto.y - 90} ${P.tokyo.x} ${P.tokyo.y}`} fill="none" stroke={sh} stroke-width="6" stroke-linecap="round" stroke-dasharray="2 0" opacity=".55" />
+        <path d={`M ${P.osaka.x} ${P.osaka.y} L ${P.kyoto.x} ${P.kyoto.y}`} fill="none" stroke={LINEAS.jrkyoto.color} stroke-width="5" stroke-linecap="round" />
+        <path d={`M ${P.osaka.x} ${P.osaka.y} L ${P.nara.x} ${P.nara.y}`} fill="none" stroke={LINEAS.kintetsu.color} stroke-width="4" stroke-dasharray="8 6" />
+        <path d={`M ${P.haneda.x} ${P.haneda.y} L ${P.tokyo.x} ${P.tokyo.y}`} fill="none" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="6 5" />
+        <g>
+          <polygon points={`${P.fuji.x - 16},${P.fuji.y + 12} ${P.fuji.x},${P.fuji.y - 14} ${P.fuji.x + 16},${P.fuji.y + 12}`} fill="#fff" stroke="#8a8578" stroke-width="2" />
+          <text x={P.fuji.x} y={P.fuji.y + 30} text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8a8578">富士山 · ventana E</text>
+        </g>
+        {(['tokyo', 'osaka', 'kyoto', 'nara', 'haneda'] as const).map((k) => (
+          <g>
+            <circle cx={P[k].x} cy={P[k].y} r={k === 'nara' || k === 'haneda' ? 9 : 14} fill={k === 'tokyo' ? '#BC002D' : k === 'nara' || k === 'haneda' ? '#fff' : '#1a1a1a'} stroke={k === 'nara' || k === 'haneda' ? '#1a1a1a' : '#fff'} stroke-width="3" />
+            <text x={P[k].x + (k === 'osaka' ? -20 : 20)} y={P[k].y + (k === 'haneda' ? 18 : k === 'nara' ? 22 : -14)} text-anchor={k === 'osaka' ? 'end' : 'start'} font-family="sans-serif" font-size="16" font-weight="700" fill="#1a1a1a">{P[k].n} <tspan font-size="13" fill="#666">{P[k].jp}</tspan></text>
+          </g>
+        ))}
+        <g font-family="sans-serif" font-size="12" font-weight="700">
+          <rect x={(P.tokyo.x + P.osaka.x) / 2 - 92} y={P.osaka.y + 30} width="184" height="24" rx="12" fill="#BC002D" />
+          <text x={(P.tokyo.x + P.osaka.x) / 2} y={P.osaka.y + 46} text-anchor="middle" fill="#fff">① 21 OCT · Nozomi 2h20</text>
+          <rect x={P.osaka.x - 60} y={P.osaka.y + 26} width="96" height="24" rx="12" fill="#1a1a1a" />
+          <text x={P.osaka.x - 12} y={P.osaka.y + 42} text-anchor="middle" fill="#fff">② 21–25</text>
+          <rect x={P.kyoto.x - 120} y={P.kyoto.y - 40} width="96" height="24" rx="12" fill="#1a1a1a" />
+          <text x={P.kyoto.x - 72} y={P.kyoto.y - 24} text-anchor="middle" fill="#fff">③ 25–28</text>
+          <rect x={(P.tokyo.x + P.kyoto.x) / 2 - 80} y={P.kyoto.y - 92} width="160" height="24" rx="12" fill="#c9a961" />
+          <text x={(P.tokyo.x + P.kyoto.x) / 2} y={P.kyoto.y - 76} text-anchor="middle" fill="#1a1a1a">④ 28 OCT → 2 NOV</text>
+        </g>
+        <g transform={`translate(30,${Hh - 30})`} font-family="sans-serif" font-size="12">
+          <line x1="0" y1="0" x2="28" y2="0" stroke={sh} stroke-width="5" /><text x="36" y="4">Shinkansen</text>
+          <line x1="130" y1="0" x2="158" y2="0" stroke={LINEAS.jrkyoto.color} stroke-width="5" /><text x="166" y="4">JR Osaka–Kyoto</text>
+          <line x1="290" y1="0" x2="318" y2="0" stroke={LINEAS.kintetsu.color} stroke-width="4" stroke-dasharray="8 6" /><text x="326" y="4">Kintetsu a Nara (excursión)</text>
+          <line x1="510" y1="0" x2="538" y2="0" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="6 5" /><text x="546" y="4">Taxi al aeropuerto</text>
+        </g>
+      </svg></div>
+      <div class="map-scroll-hint">↔ Desliza para ver la ruta completa</div>
+    </div>
+
+    <div class="fase-grid">
+      {ORDEN.map((id) => {
+        const f = FASES[id];
+        const foto = F[f.foto];
+        return (
+          <a class="fase-card" href={url(f.ruta)}>
+            {foto ? <img src={url(foto.file)} alt={f.titulo} loading="lazy" /> : <div class="ph-fallback" style="height:200px">📷 {f.titulo}</div>}
+            <div class="fc-body">
+              <div class="fc-num">FASE {f.n} · {f.fechas}</div>
+              <h3>{f.titulo}</h3>
+              <p>{f.resumen}</p>
+              <div class="fc-hotel">🏨 {HOTELES[f.hotel].nombre}</div>
+              <div class="fc-go">Abrir la guía →</div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </Seccion>
+
+  <Seccion id="dias" fondo="alt" kicker="Día a día" titulo="Cada día, <strong>a un toque</strong>">
+    <div class="tabla-wrap">
+      <table class="transport-table" style="min-width:0">
+        <tbody>
+          {dias.map((x) => (
+            <tr>
+              <td style="white-space:nowrap"><strong style="font-family:var(--mono);color:var(--red)">{x.d}</strong> <small>{x.s}</small></td>
+              <td><a href={url(`${FASES[x.f].ruta}${x.a ? '#' + x.a : ''}`)}><strong>{x.t}</strong></a></td>
+              <td style="white-space:nowrap"><small>Fase {FASES[x.f].n} · {FASES[x.f].corto}</small></td>
+            </tr>
+          ))}
+          <tr><td><strong style="font-family:var(--mono);color:var(--red)">2 NOV</strong> <small>lun</small></td><td><strong>00:20 · Vuelo desde Haneda</strong></td><td><small>Fin</small></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </Seccion>
+
+  <Seccion id="kit" kicker="Kit de emergencia" titulo="Si nos perdemos: <strong>los tres hoteles</strong>" lead="Tarjetas para enseñar al taxista (⤢ las pone a pantalla completa). El botón rojo <strong>🆘 Ayuda</strong> de abajo a la derecha las tiene siempre a mano en todas las páginas.">
+    <div class="taxi-grid">
+      {(['tokyo', 'osaka', 'kyoto'] as const).map((h) => (
+        <TarjetaTaxi etiqueta={HOTELES[h].nombre} jp={HOTELES[h].jp} romaji={HOTELES[h].direccion} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={HOTELES[h].direccionJp} />
+      ))}
+    </div>
+    <Aviso tipo="azul" titulo="🗾 La regla de los 4 datos (vale para todo el viaje)">
+      <p><strong>COLOR → LÍNEA → DESTINO/DIRECCIÓN → PANTALLA.</strong> Si uno no coincide, no subimos todavía. Y si la pantalla dice algo distinto a esta guía, manda la pantalla.</p>
+    </Aviso>
+  </Seccion>
+
+  <Seccion id="sin-conexion" fondo="crema" kicker="Sin conexión" titulo="Guardar la guía <strong>en el móvil</strong>" lead="La guía funciona sin datos una vez guardada: páginas, mapas, tarjetas y fotos. Conviene hacerlo en casa o en el hotel con wifi, y añadirla a la pantalla de inicio (Compartir → Añadir a pantalla de inicio).">
+    <div class="offline-box">
+      <div style="flex:1;min-width:240px">
+        <p id="off-estado">Comprobando…</p>
+        <div class="barra-prog"><i id="off-bar"></i></div>
+      </div>
+      <button class="btn" id="off-btn" type="button">💾 Guardar todo para usar sin conexión</button>
+    </div>
+  </Seccion>
+
+  <FrasesAyuda />
+  <BloqueCeliaco ciudad="todo el viaje" />
+
+  <Footer slot="footer" titulo="JAPÓN 2026 · GUÍA DE VIAJE" lineas={['Tokyo · Osaka · Nara · Kyoto · 21 de octubre – 2 de noviembre', 'Horarios, andenes y servicios: comprobar siempre en la pantalla de la estación el mismo día.']} />
+
+  <script is:inline>
+    (() => {
+      const est = document.getElementById('off-estado');
+      const btn = document.getElementById('off-btn');
+      const bar = document.getElementById('off-bar');
+      if (!('serviceWorker' in navigator)) {
+        est.textContent = 'Este navegador no permite guardar la guía sin conexión.';
+        btn.disabled = true;
+        return;
+      }
+      navigator.serviceWorker.addEventListener('message', (e) => {
+        const m = e.data || {};
+        if (m.tipo === 'progreso') {
+          bar.style.width = (100 * m.hechas / m.total) + '%';
+          est.textContent = 'Guardando fotos: ' + m.hechas + ' de ' + m.total + '…';
+        }
+        if (m.tipo === 'estado') {
+          const ok = m.fotos >= m.total;
+          bar.style.width = (100 * m.fotos / Math.max(1, m.total)) + '%';
+          est.textContent = ok
+            ? '✅ Lista para usar sin conexión (' + m.totalPaginas + ' páginas y ' + m.total + ' fotos guardadas).'
+            : 'Guardadas ' + m.fotos + ' de ' + m.total + ' fotos. Pulsa el botón para completar.';
+          btn.disabled = ok;
+        }
+      });
+      setTimeout(() => {
+        if (est.textContent === 'Comprobando…') {
+          est.textContent = 'El modo sin conexión se activa en la web publicada (https). Si acabas de abrirla, recarga la página una vez.';
+        }
+      }, 5000);
+      navigator.serviceWorker.ready.then((r) => {
+        r.active && r.active.postMessage('estado');
+        btn.addEventListener('click', () => {
+          btn.disabled = true;
+          est.textContent = 'Guardando…';
+          r.active && r.active.postMessage('guardar-todo');
+        });
+      });
+    })();
+  </script>
+</BaseLayout>

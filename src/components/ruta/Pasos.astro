@@ -1,0 +1,13 @@
+---
+/** Lista numerada de pasos. Admite HTML (lin/est/dir) en `t` y `d`. */
+interface Props { items: { t: string; d?: string }[] }
+const { items } = Astro.props;
+---
+<div class="steps">
+  {items.map((p, i) => (
+    <div class="step">
+      <div class="stepnum">{i + 1}</div>
+      <div><strong set:html={p.t} />{p.d && <span class="d" set:html={p.d} />}</div>
+    </div>
+  ))}
+</div>

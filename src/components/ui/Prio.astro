@@ -1,0 +1,6 @@
+---
+interface Props { t: 'must' | 'maybe' | 'opt'; texto?: string }
+const { t, texto } = Astro.props;
+const def = { must: '⭐ IMPRESCINDIBLE', maybe: '🟡 SI HAY GANAS', opt: 'OPCIONAL' }[t];
+---
+<span class={`prio ${t}`}>{texto ?? def}</span>

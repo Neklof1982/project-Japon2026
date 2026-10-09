@@ -1,0 +1,132 @@
+---
+/**
+ * Mini mapa SVG de un recorrido a pie (o en taxi), al estilo del plano de la Fase 1.
+ * Los puntos se colocan a partir de su latitud/longitud aproximada, así que las
+ * distancias y la orientación (norte arriba) son proporcionales a la realidad.
+ * Es un esquema: para el detalle calle a calle está el botón de Google Maps.
+ */
+import { mapsRuta } from '../../lib/html';
+export type Punto = { n: string; lat: number; lon: number; t?: 'inicio' | 'fin' | 'paso' | 'estacion'; q?: string };
+interface Props {
+  titulo: string;
+  sub?: string;
+  puntos: Punto[];
+  distancia: string;
+  tiempo: string;
+  ciudad: string;
+  modo?: 'walking' | 'driving';
+  reco?: { t: string; d: string };
+  zonas?: { n: string; lat: number; lon: number }[];
+}
+const { titulo, sub, puntos, distancia, tiempo, ciudad, modo = 'walking', reco, zonas = [] } = Astro.props;
+
+const W = 900, H = 520, PX = 110, PY = 96;
+const lat0 = puntos.reduce((s, p) => s + p.lat, 0) / puntos.length;
+const k = Math.cos((lat0 * Math.PI) / 180);
+const toX = (lon: number) => lon * 111320 * k;
+const toY = (lat: number) => -lat * 110574;
+const xs = puntos.map((p) => toX(p.lon));
+const ys = puntos.map((p) => toY(p.lat));
+const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+const rx = Math.max(maxX - minX, 60), ry = Math.max(maxY - minY, 60);
+const esc = Math.min((W - 2 * PX) / rx, (H - 2 * PY) / ry); // px por metro
+const ox = (W - (maxX - minX) * esc) / 2, oy = (H - (maxY - minY) * esc) / 2;
+const px = (lon: number) => ox + (toX(lon) - minX) * esc;
+const py = (lat: number) => oy + (toY(lat) - minY) * esc;
+
+const P = puntos.map((p, i) => ({
+  ...p,
+  x: px(p.lon),
+  y: py(p.lat),
+  t: p.t ?? (i === 0 ? 'inicio' : i === puntos.length - 1 ? 'fin' : 'paso'),
+}));
+const ruta = 'M ' + P.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' L ');
+
+const nice = [50, 100, 200, 250, 500, 1000, 2000, 5000, 10000, 20000];
+const objetivo = 140 / esc;
+const m = nice.reduce((a, b) => (Math.abs(b - objetivo) < Math.abs(a - objetivo) ? b : a));
+const barPx = m * esc;
+const barTxt = m >= 1000 ? `${m / 1000} km` : `${m} m`;
+
+let pasoN = 0;
+const marcas = P.map((p, i) => {
+  const w = Math.min(320, p.n.length * 8.2 + 22);
+  let lx = Math.max(8, Math.min(W - w - 8, p.x - w / 2));
+  let ly = i % 2 === 0 ? p.y - 54 : p.y + 26;
+  if (ly < 8) ly = p.y + 26;
+  if (ly > H - 38) ly = p.y - 54;
+  // Esquivar la caja de distancia (arriba izquierda) y la brújula (arriba derecha).
+  const tapaCaja = lx < 290 && ly < 90;
+  const tapaNorte = lx + w > W - 84 && ly < 86;
+  if (tapaCaja || tapaNorte) ly = p.y + 26;
+  const letra = p.t === 'inicio' ? 'A' : p.t === 'fin' ? 'B' : p.t === 'estacion' ? '駅' : String(++pasoN);
+  return { ...p, w, lx, ly, letra };
+});
+const taxi = modo === 'driving';
+const maps = mapsRuta(puntos.map((p) => p.q ?? `${p.n}, ${ciudad}`), modo);
+---
+<figure class="map-wrap">
+  <div class="map-head">
+    <div>
+      <h3>{taxi ? '🚕' : '🚶'} <span set:html={titulo} /></h3>
+      {sub && <p set:html={sub} />}
+    </div>
+    <a class="btn-maps" href={maps} target="_blank" rel="noopener">Abrir ruta en Google Maps ↗</a>
+  </div>
+  <div class="map-scroll"><svg class="map-svg" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Esquema del recorrido: ${puntos.map((p) => p.n).join(' → ')}`}>
+    <rect width={W} height={H} fill="#f5f1e8" />
+    <g stroke="#e6e1d4" stroke-width="1">
+      {Array.from({ length: 10 }, (_, i) => <line x1={(i + 1) * 90} y1="0" x2={(i + 1) * 90} y2={H} />)}
+      {Array.from({ length: 6 }, (_, i) => <line x1="0" y1={(i + 1) * 80} x2={W} y2={(i + 1) * 80} />)}
+    </g>
+    {zonas.map((z) => (
+      <text x={px(z.lon)} y={py(z.lat)} fill="#b2ab9c" font-family="sans-serif" font-size="15" font-weight="300" letter-spacing="4" text-anchor="middle">{z.n.toUpperCase()}</text>
+    ))}
+    <path d={ruta} fill="none" stroke={taxi ? '#1a1a1a' : '#BC002D'} stroke-opacity="0.15" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+    <path d={ruta} fill="none" stroke={taxi ? '#1a1a1a' : '#BC002D'} stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray={taxi ? '14 10' : undefined} />
+    {marcas.map((p) => (
+      <g>
+        <line x1={p.x} y1={p.y} x2={p.lx + p.w / 2} y2={p.ly < p.y ? p.ly + 30 : p.ly} stroke="#8a8578" stroke-width="1" stroke-dasharray="2 3" />
+        {p.t === 'estacion' ? (
+          <rect x={p.x - 16} y={p.y - 16} width="32" height="32" rx="6" fill="#1a1a1a" stroke="#fff" stroke-width="3" />
+        ) : (
+          <circle cx={p.x} cy={p.y} r={p.t === 'paso' ? 13 : 20} fill={p.t === 'inicio' ? '#1a1a1a' : p.t === 'fin' ? '#c9a961' : '#fff'} stroke={p.t === 'paso' ? '#BC002D' : '#fff'} stroke-width="3" />
+        )}
+        <text x={p.x} y={p.y + (p.t === 'paso' ? 4.5 : 6)} text-anchor="middle" font-family="sans-serif" font-weight="700" font-size={p.t === 'paso' ? 13 : 17} fill={p.t === 'paso' ? '#BC002D' : p.t === 'fin' ? '#1a1a1a' : '#fff'}>{p.letra}</text>
+        <rect x={p.lx} y={p.ly} width={p.w} height="30" rx="5" fill={p.t === 'inicio' ? '#1a1a1a' : p.t === 'fin' ? '#c9a961' : '#fff'} stroke={p.t === 'paso' || p.t === 'estacion' ? '#d9d3c6' : 'none'} />
+        <text x={p.lx + p.w / 2} y={p.ly + 20} text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="600" fill={p.t === 'inicio' ? '#fff' : '#1a1a1a'}>{p.n}</text>
+      </g>
+    ))}
+    <g>
+      <rect x="20" y="20" width="260" height="62" rx="5" fill="#fff" stroke={taxi ? '#1a1a1a' : '#BC002D'} stroke-width="2" />
+      <text x="34" y="44" font-family="sans-serif" font-size="14" font-weight="700" fill={taxi ? '#1a1a1a' : '#BC002D'}>{taxi ? 'RUTA EN TAXI' : 'RUTA ANDANDO'}</text>
+      <text x="34" y="67" font-family="sans-serif" font-size="14" fill="#1a1a1a">{distancia} · {tiempo}</text>
+    </g>
+    <g transform={`translate(${W - 48},52)`}>
+      <circle r="24" fill="#fff" stroke="#1a1a1a" stroke-width="2" />
+      <path d="M 0,-17 L 5,-3 L 0,0 L -5,-3 Z" fill="#BC002D" />
+      <path d="M 0,17 L 5,3 L 0,0 L -5,3 Z" fill="#1a1a1a" />
+      <text y="-29" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#1a1a1a">N</text>
+    </g>
+    <g transform={`translate(24,${H - 26})`}>
+      <line x1="0" y1="0" x2={barPx} y2="0" stroke="#1a1a1a" stroke-width="2" />
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#1a1a1a" stroke-width="2" />
+      <line x1={barPx} y1="-5" x2={barPx} y2="5" stroke="#1a1a1a" stroke-width="2" />
+      <text x={barPx / 2} y="16" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#1a1a1a">≈ {barTxt}</text>
+    </g>
+    {reco && (
+      <g>
+        <rect x={W - 300} y={H - 66} width="280" height="50" rx="5" fill="#BC002D" />
+        <text x={W - 286} y={H - 44} font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">{reco.t}</text>
+        <text x={W - 286} y={H - 26} font-family="sans-serif" font-size="11" fill="#fff">{reco.d}</text>
+      </g>
+    )}
+  </svg></div>
+  <div class="map-scroll-hint">↔ Desliza para ver el mapa completo · o ábrelo en Google Maps</div>
+  <figcaption class="map-legend">
+    <span class="legend-item"><span class="legend-dot start" /> A · {puntos[0].n}</span>
+    <span class="legend-item"><span class="legend-line" style={taxi ? 'background:#1a1a1a' : undefined} /> {distancia} · {tiempo}</span>
+    <span class="legend-item"><span class="legend-dot end" /> B · {puntos[puntos.length - 1].n}</span>
+  </figcaption>
+  <div class="map-nota">Esquema orientativo con norte arriba y distancias proporcionales. Para seguir la calle exacta, usar el botón de Google Maps.</div>
+</figure>

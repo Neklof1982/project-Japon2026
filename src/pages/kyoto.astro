@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import NavSecciones from '../components/marco/NavSecciones.astro';
+import Conexion from '../components/marco/Conexion.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import DiaHead from '../components/ui/DiaHead.astro';
+import Mision from '../components/ui/Mision.astro';
+import Aviso from '../components/ui/Aviso.astro';
+import Prio from '../components/ui/Prio.astro';
+import VueltaHotel from '../components/ui/VueltaHotel.astro';
+import Foto from '../components/ui/Foto.astro';
+import Galeria from '../components/ui/Galeria.astro';
+import Timeline from '../components/ruta/Timeline.astro';
+import TL from '../components/ruta/TL.astro';
+import Linea from '../components/ruta/Linea.astro';
+import Est from '../components/ruta/Est.astro';
+import MiniMapa from '../components/ruta/MiniMapa.astro';
+import MapaAndando from '../components/ruta/MapaAndando.astro';
+import TarjetaEstacion from '../components/ruta/TarjetaEstacion.astro';
+import Pasos from '../components/ruta/Pasos.astro';
+import TablaTransporte from '../components/ruta/TablaTransporte.astro';
+import TarjetaTaxi from '../components/ayuda/TarjetaTaxi.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import { HOTELES } from '../data/viaje';
+import { lin, est, dir } from '../lib/html';
+
+const H = HOTELES.kyoto;
+const D = (n: number, nom?: string) => est('nara', n, nom);
+const E = (n: number, nom?: string) => est('sagano', n, nom);
+---
+<BaseLayout title="Japón 2026 · Fase 3 — Kyoto" description="Kyoto del 25 al 28 de octubre: Higashiyama y Gion, Arashiyama, Ryoan-ji y Kinkaku-ji, Fushimi Inari y Shinkansen a Tokyo." fase="kyoto">
+  <Hero
+    tag="Japón · Octubre 2026 · Fase 3"
+    titulo="Kyoto · <strong>templos, bambú y torii</strong>"
+    parrafos={[
+      'La usamos como chuleta durante el viaje. No necesitamos memorizar Kyoto: en cada desplazamiento tenemos dónde ir, cómo llegar, qué señal buscar, qué merece la pena y cuándo cortar el plan.',
+      '<strong>Los imprescindibles están protegidos:</strong> Pabellón Dorado, Bosque de Bambú, torii de Fushimi Inari, Kiyomizu-dera y jardín zen de Ryoan-ji.',
+    ]}
+    meta={[
+      { v: '25–28 OCT', l: '3 noches en Kyoto' },
+      { v: '4 PERSONAS', l: '1 viajero celíaco' },
+      { v: 'HOTEL', l: 'Hotel Hokke Club Kyoto' },
+      { v: 'BASE', l: 'Kyoto Station' },
+    ]}
+  />
+  <NavSecciones items={[
+    { href: '#mapa', label: 'Mapa' },
+    { href: '#hotel', label: 'Hotel' },
+    { href: '#dia25', label: '25 · Llegada', clave: true },
+    { href: '#dia26', label: '26 · Higashiyama' },
+    { href: '#dia27', label: '27 · Arashiyama' },
+    { href: '#dia28', label: '28 · Torii + Tokyo', clave: true },
+    { href: '#estaciones', label: 'Estaciones' },
+    { href: '#taxi', label: 'Taxi' },
+    { href: '#decision', label: 'Decisión' },
+    { href: '#transporte', label: 'Transporte' },
+  ]} />
+
+  <Conexion fase="kyoto" modo="desde" />
+
+  <Seccion id="mapa" kicker="Cómo vamos a entender Kyoto" titulo="Por <strong>zonas</strong>, no por puntos" lead="Kyoto no la planteamos como una colección de puntos: la dividimos por zonas para no cruzar la ciudad sin necesidad. Los desplazamientos largos, en tren; y siendo cuatro, el taxi tiene mucho sentido.">
+    <Mision kicker="🎯 NUESTRA MISIÓN EN KYOTO" main="Ver lo que hemos venido a ver sin convertir cada día en una carrera." small="Los MUST son Kiyomizu-dera, Bosque de Bambú, Kinkaku-ji, Fushimi Inari y Ryoan-ji. Si un día se complica, recortamos primero lo opcional." />
+    <div class="cards">
+      <a class="card" href="#dia26" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🏯 Higashiyama + Gion · 26</h3><p>Kiyomizu-dera, Sannenzaka, Ninenzaka, Yasaka Pagoda, Nene-no-Michi, Yasaka Shrine, Maruyama y Gion.</p></a>
+      <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🎋 Arashiyama · 27</h3><p>Bosque de Bambú + Tenryu-ji + Togetsukyo. Llegamos temprano.</p></a>
+      <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🟨 Kinkaku-ji · 27</h3><p>Pabellón Dorado y jardines. Ventana de visita: 09:00–17:00.</p></a>
+      <a class="card" href="#dia28" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">⛩️ Fushimi Inari · 28</h3><p>Los famosos torii. Muy temprano para aprovechar la tranquilidad.</p></a>
+      <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🪨 Ryoan-ji · 27</h3><p>El jardín zen de rocas. Complementa muy bien Arashiyama + Kinkaku-ji.</p></a>
+      <div class="card"><Prio t="maybe" texto="MAYBE" /><h3 style="margin-top:8px">🏯 Nijo-jo</h3><p>Interesante, pero no sacrificamos ningún MUST para meterlo a la fuerza.</p></div>
+    </div>
+  </Seccion>
+
+  <Seccion id="hotel" fondo="alt" kicker="Base" titulo="🏨 Hotel <strong>Hokke Club Kyoto</strong>" lead="Nuestra referencia es Kyoto Station. El hotel está justo enfrente de la salida norte (Karasuma), junto a Kyoto Tower: para los días de tren no añadimos ningún desplazamiento urbano.">
+    <Mision kicker="📍 REGLA SENCILLA" main="Hotel → Kyoto Station, a pie." small="Para trenes no buscamos otra estación: entramos en Kyoto Station y seguimos las señales de JR. Kyoto Tower (blanca y roja) es la referencia visual del hotel." />
+    <TarjetaEstacion
+      kicker="Las tres líneas que salen de aquí"
+      titulo="京都 · Kyoto Station"
+      texto="JR Kyoto Line (azul) para Osaka, JR Nara Line (marrón) para Inari, JR Sagano Line (morado) para Arashiyama y el Shinkansen para Tokyo."
+      cartel={{ nombre: 'Kyoto', jp: '京都', operador: 'JR West', codigos: [['jrkyoto', 31], ['nara', 1], ['sagano', 1]] }}
+      foto="kyoto-tower"
+      fotoTitulo="Kyoto Tower"
+      fotoTexto="Al salir por el lado norte (Karasuma) la vemos enfrente: el hotel está al lado."
+    >
+      <Pasos items={[
+        { t: 'Salida norte: 烏丸口 · Karasuma.', d: 'Es el lado del hotel y de Kyoto Tower. Si salimos por el sur (八条口 · Hachijo) estamos al otro lado de la estación.' },
+        { t: 'El Shinkansen está en el lado sur.', d: 'Para coger el Shinkansen cruzamos la estación siguiendo las señales azules <strong class="jp">新幹線</strong>. Con maletas, 10 minutos de margen solo para eso.' },
+        { t: 'Sagano Line: andenes 31–33, al fondo (oeste).', d: 'Están lejos dentro de la estación. Andar mucho no significa que nos hayamos perdido.' },
+      ]} />
+    </TarjetaEstacion>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Llévenos al hotel" jp={H.jp} romaji={H.nombre} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={H.direccionJp} />
+      <Foto id="kyoto-station" titulo="Dentro de Kyoto Station" texto="El gran vestíbulo de cristal. Señales JR en azul/blanco; Shinkansen en azul." h="220px" />
+    </div>
+  </Seccion>
+
+  <Seccion id="dia25">
+    <DiaHead fecha="DOMINGO · 25 OCT · desde la Fase 2" titulo="🧳 Osaka → Kyoto → <strong>tarde suave</strong>" zona="Día de llegada" />
+    <p class="lead">Salimos de Hommachi sobre las 12:00 y llegamos a Kyoto hacia las 13:00. Dejamos equipaje y no convertimos el primer contacto con Kyoto en una maratón.</p>
+    <Timeline>
+      <TL hora="~13:00" titulo="Llegada a Kyoto Station" tipo="tren">
+        <Fragment slot="lineas"><Linea l="jrkyoto" /> <Linea l="shinkansen" corta /></Fragment>
+        Si venimos en JR Kyoto Line, bajamos en <Est l="jrkyoto" n={31} nombre="Kyoto 京都" />. Si venimos en Shinkansen, estaremos en el lado sur: cruzamos la estación hacia <strong>烏丸口 · Karasuma</strong> (norte).
+      </TL>
+      <TL hora="13:15" titulo="Hotel Hokke Club Kyoto" tipo="andar" etiqueta="A pie · 3 min">Si aún no es la hora del check-in, dejamos las maletas en recepción y pedimos resguardo. Baño y descanso corto.</TL>
+      <TL hora="13:30–15:00" titulo="Comida cerca de la estación" tipo="descanso">Kyoto Station tiene muchísima oferta. Para el celíaco, mejor un sitio verificado de antemano que improvisar.</TL>
+      <TL hora="15:00" titulo="Check-in + descanso" tipo="descanso">Subimos a la habitación con calma.</TL>
+      <TL hora="17:00+" titulo="Kyoto Station + alrededores" tipo="andar" prio="maybe" prioTexto="🟡">Si hay energía, paseo tranquilo por la zona de la estación (Kyoto Tower, el gran vestíbulo y su escalera). No ponemos ningún templo obligatorio.</TL>
+      <TL hora="Noche" titulo="🍜 Cena y descanso" tipo="descanso">Preparamos el 26, que empieza muy temprano.</TL>
+    </Timeline>
+  </Seccion>
+
+  <Seccion id="dia26" fondo="alt">
+    <DiaHead fecha="LUNES · 26 OCT · HIGASHIYAMA + GION" titulo="🏯 Kiyomizu → calles históricas → <strong>Gion</strong>" zona="Este de Kyoto" />
+    <p class="lead">Empezamos muy temprano arriba, en Kiyomizu, y bajamos andando por las calles históricas. La tarde queda abierta para disfrutar Gion sin prisas.</p>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Salida del hotel · 06:30" jp="清水寺" romaji="Kiyomizu-dera" frase="清水寺の近くまでお願いします。" fraseEs="Por favor, llévenos cerca de Kiyomizu-dera." />
+      <MiniMapa
+        titulo="Taxi para subir, a pie para bajar"
+        paradas={[
+          { nombre: 'Hotel', tipo: 'hotel', sig: { modo: 'taxi', label: '🚕 ~15 min' } },
+          { nombre: 'Kiyomizu-dera', tipo: 'destacado', sig: { modo: 'andar', label: '🚶 bajada' } },
+          { nombre: 'Gion', tipo: 'destacado' },
+        ]}
+        check="Empezar arriba nos ahorra la cuesta y depender del autobús a primera hora."
+      />
+    </div>
+    <Timeline>
+      <TL hora="06:30" titulo="Hotel → Kiyomizu-dera" tipo="taxi" etiqueta="Taxi">Para cuatro compensa: empezamos directamente en la zona alta y evitamos el autobús a primera hora.</TL>
+      <TL hora="07:00–08:15" titulo="Kiyomizu-dera" prio="must" prioTexto="MUST">Visita tranquila del templo y del famoso escenario de madera.</TL>
+      <TL hora="08:15–08:45" titulo="Sannenzaka" tipo="andar">Empezamos la bajada por las calles históricas (escalones de piedra: cuidado).</TL>
+      <TL hora="08:45–09:30" titulo="Ninenzaka + Yasaka Pagoda" tipo="andar">Una de las zonas que queremos disfrutar sin convertirla en una simple foto.</TL>
+      <TL hora="09:30–10:15" titulo="Nene-no-Michi / exterior de Kodai-ji" tipo="andar">Paseo por calles tradicionales empedradas.</TL>
+      <TL hora="10:15–11:00" titulo="Maruyama Park + Yasaka Shrine" tipo="andar">Seguimos caminando hacia Gion.</TL>
+      <TL hora="11:00–12:30" titulo="🍜 Gion · comida" tipo="descanso">Comemos y hacemos una pausa. No buscamos otra visita inmediatamente después.</TL>
+      <TL hora="12:30–16:00" titulo="Gion · paseo sin prisas" tipo="andar">Hanamikoji, Shirakawa/Shimbashi, Tatsumi Bridge, calles tradicionales, tiendas y cafés. Parte abierta: sin perseguir una hora concreta.</TL>
+      <TL hora="16:00+" titulo="🌙 Tarde libre" tipo="descanso">Si Gion sigue apeteciendo, continuamos. Si estamos cansados, taxi al hotel. Ninguna visita más obligatoria.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="La bajada de Higashiyama a Gion"
+      sub="Todo cuesta abajo o llano desde Kiyomizu. Calles empedradas y escalones."
+      ciudad="Kyoto"
+      distancia="≈ 3,5 km"
+      tiempo="~50 min andando + visitas"
+      puntos={[
+        { n: 'Kiyomizu-dera', lat: 34.9949, lon: 135.7850, q: 'Kiyomizu-dera' },
+        { n: 'Sannenzaka', lat: 34.9963, lon: 135.7817, q: 'Sannenzaka, Kyoto' },
+        { n: 'Ninenzaka', lat: 34.9980, lon: 135.7806, q: 'Ninenzaka, Kyoto' },
+        { n: 'Yasaka Pagoda', lat: 34.9986, lon: 135.7793, q: 'Hokan-ji Yasaka Pagoda' },
+        { n: 'Nene-no-Michi', lat: 35.0005, lon: 135.7808, q: 'Nene-no-michi, Kyoto' },
+        { n: 'Maruyama Park', lat: 35.0033, lon: 135.7810, q: 'Maruyama Park, Kyoto' },
+        { n: 'Yasaka Shrine', lat: 35.0036, lon: 135.7785, q: 'Yasaka Shrine, Kyoto' },
+        { n: 'Hanamikoji', lat: 35.0025, lon: 135.7752, q: 'Hanamikoji Street, Kyoto' },
+        { n: 'Shirakawa · Tatsumi', lat: 35.0057, lon: 135.7746, t: 'fin', q: 'Tatsumi Bridge, Gion, Kyoto' },
+      ]}
+      zonas={[{ n: 'Higashiyama', lat: 34.9965, lon: 135.7870 }, { n: 'Gion', lat: 35.0050, lon: 135.7725 }]}
+      reco={{ t: '🚕 VUELTA: TAXI AL HOTEL', d: 'Desde Gion, ~15 min a Kyoto Station' }}
+    />
+    <Galeria cols={3} h="200px">
+      <Foto id="kiyomizu" titulo="Kiyomizu-dera" texto="El escenario de madera sobre la ladera." />
+      <Foto id="sannenzaka" titulo="Sannenzaka" texto="Escalones de piedra y tiendas tradicionales." />
+      <Foto id="yasaka-pagoda" titulo="Yasaka Pagoda" texto="La pagoda de Hokan-ji entre las casas de madera." />
+      <Foto id="yasaka-shrine" titulo="Yasaka Shrine" texto="La puerta roja al final de Shijo-dori, entrada a Gion." />
+      <Foto id="hanamikoji" titulo="Hanamikoji" texto="La calle de las casas de té de Gion." />
+      <Foto id="shirakawa" titulo="Shirakawa · Tatsumi Bridge" texto="El canal y el puente pequeño de Gion." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="dia27">
+    <DiaHead fecha="MARTES · 27 OCT · ARASHIYAMA + ZEN + DORADO" titulo="🎋 Bambú → Tenryu-ji → Ryoan-ji → <strong>Kinkaku-ji</strong>" zona="Oeste y noroeste" />
+    <p class="lead">El día de los dos grandes objetivos visuales: Bosque de Bambú y Pabellón Dorado, con el jardín zen en medio.</p>
+    <TarjetaEstacion
+      kicker="Ida · JR Sagano Line (morado)"
+      titulo={`Kyoto ${E(1)} → Saga-Arashiyama ${E(8)}`}
+      texto="Una sola línea, sin cambios. Andenes 31–33, al fondo de la estación (lado oeste)."
+      cartel={{ nombre: 'Saga-Arashiyama', jp: '嵯峨嵐山', operador: 'JR West · Sagano Line', codigos: [['sagano', 8]] }}
+      foto="saga-arashiyama"
+      fotoTitulo="Estación de Saga-Arashiyama"
+      fotoTexto="Aquí bajamos. Desde la salida, señales a Arashiyama / Bamboo Grove."
+    >
+      <MiniMapa
+        titulo={`${lin('sagano')} ${dir('Saga-Arashiyama / Kameoka / Sonobe')}`}
+        nota="7 paradas, unos 15–17 min. Cualquier tren de la Sagano Line hacia el oeste para en Saga-Arashiyama."
+        paradas={[
+          { nombre: 'Kyoto', sub: 'andenes 31–33', est: ['sagano', 1], tipo: 'hotel', sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Umekoji', est: ['sagano', 2], sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Tambaguchi', est: ['sagano', 3], sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Nijo', est: ['sagano', 4], sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Emmachi', est: ['sagano', 5], sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Hanazono', est: ['sagano', 6], sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Uzumasa', est: ['sagano', 7], sig: { modo: 'linea', l: 'sagano' } },
+          { nombre: 'Saga-Arashiyama', est: ['sagano', 8], tipo: 'destacado' },
+        ]}
+      />
+      <Pasos items={[
+        { t: 'Buscamos JR Lines y después 嵯峨野線 · Sagano Line.', d: `La señal es morada con la letra ${lin('sagano', true)}.` },
+        { t: 'Ojo con la distancia.', d: 'Los andenes de Sagano están más alejados dentro de Kyoto Station. No significa que nos hayamos perdido.' },
+        { t: 'Comprobamos destino.', d: 'En la pantalla: <strong class="jp">嵯峨嵐山</strong> / Saga-Arashiyama, o un destino más allá (Kameoka, Sonobe).' },
+        { t: `Bajamos en ${E(8, 'Saga-Arashiyama')}.`, d: 'Desde allí, señales hacia Arashiyama y Bamboo Grove.' },
+      ]} />
+      <Aviso tipo="oro" titulo="🎋 Importante"><p>No cogemos “cualquier tren hacia el oeste”. Buscamos <strong>JR Sagano Line → Saga-Arashiyama</strong>. El “Sagano Romantic Train” turístico es otra cosa.</p></Aviso>
+    </TarjetaEstacion>
+    <Timeline>
+      <TL hora="07:15" titulo="Hotel → Kyoto Station" tipo="andar" etiqueta="A pie">No necesitamos taxi.</TL>
+      <TL hora="07:30 aprox." titulo={`Kyoto ${E(1)} → Saga-Arashiyama ${E(8)}`} tipo="tren"><Fragment slot="lineas"><Linea l="sagano" dir="Saga-Arashiyama" /></Fragment>Buscamos <strong class="jp">嵯峨野線</strong> y comprobamos <strong class="jp">嵯峨嵐山</strong> en la pantalla.</TL>
+      <TL hora="08:00+" titulo="🎋 Bosque de Bambú" prio="must" prioTexto="MUST">Directos al Bamboo Grove antes de que aumente la gente.</TL>
+      <TL hora="08:30–10:00" titulo="Tenryu-ji" prio="maybe" prioTexto="⭐">Jardín y recinto. El jardín abre a las 08:30.</TL>
+      <TL hora="10:00–11:00" titulo="🌉 Togetsukyo" tipo="andar">Paseo y fotos junto al río. Sin correr.</TL>
+      <TL hora="11:00–11:30" titulo="Arashiyama → Ryoan-ji" tipo="taxi" etiqueta="Taxi">Para cuatro, el taxi ahorra tiempo y evita el autobús turístico.</TL>
+      <TL hora="11:30–12:30" titulo="🪨 Ryoan-ji" prio="must" prioTexto="MUST">Jardín zen de rocas. Aquí bajamos el ritmo.</TL>
+      <TL hora="12:30–13:00" titulo="Ryoan-ji → Kinkaku-ji" tipo="taxi" etiqueta="Taxi">Trayecto corto para proteger el tiempo del Pabellón Dorado.</TL>
+      <TL hora="13:00–14:00" titulo="✨ Kinkaku-ji · Pabellón Dorado" prio="must" prioTexto="MUST">Con calma y recorriendo el jardín. No es una visita de cinco minutos.</TL>
+      <TL hora="14:00+" titulo="🍜 Comida + regreso" tipo="descanso">Comemos y decidimos según la energía. Nijo-jo solo si vamos muy bien de tiempo y ganas. Vuelta en taxi al hotel.</TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Arashiyama a pie"
+      sub="De la estación al bosque, Tenryu-ji y el puente. Todo llano."
+      ciudad="Kyoto"
+      distancia="≈ 2,5 km"
+      tiempo="~35 min andando + visitas"
+      puntos={[
+        { n: 'Saga-Arashiyama JR-E08', lat: 35.0186, lon: 135.6812, t: 'estacion', q: 'Saga-Arashiyama Station' },
+        { n: 'Nonomiya', lat: 35.0177, lon: 135.6745, q: 'Nonomiya Shrine, Kyoto' },
+        { n: 'Bosque de Bambú', lat: 35.0170, lon: 135.6722, q: 'Arashiyama Bamboo Grove' },
+        { n: 'Tenryu-ji', lat: 35.0157, lon: 135.6740, q: 'Tenryu-ji, Kyoto' },
+        { n: 'Togetsukyo', lat: 35.0129, lon: 135.6777, t: 'fin', q: 'Togetsukyo Bridge' },
+      ]}
+      zonas={[{ n: 'Arashiyama', lat: 35.0145, lon: 135.6705 }]}
+    />
+    <MapaAndando
+      titulo="Taxi: Togetsukyo → Ryoan-ji → Kinkaku-ji"
+      sub="Dos saltos cortos en taxi para proteger el tiempo de los dos MUST."
+      ciudad="Kyoto"
+      modo="driving"
+      distancia="≈ 6 km + 1,5 km"
+      tiempo="~20 min + ~5 min"
+      puntos={[
+        { n: 'Togetsukyo', lat: 35.0129, lon: 135.6777, t: 'inicio', q: 'Togetsukyo Bridge' },
+        { n: 'Ryoan-ji', lat: 35.0345, lon: 135.7183, q: 'Ryoan-ji, Kyoto' },
+        { n: 'Kinkaku-ji', lat: 35.0394, lon: 135.7292, t: 'fin', q: 'Kinkaku-ji, Kyoto' },
+      ]}
+    />
+    <Aviso tipo="oro" titulo="⚠️ No sobrecargar el 27"><p>Arashiyama + Ryoan-ji + Kinkaku-ji ya es un día potente. Nijo-jo es opcional, no una obligación.</p></Aviso>
+    <Galeria cols={3} h="200px">
+      <Foto id="bambu" titulo="Bosque de Bambú" texto="El sendero entre bambúes. Temprano hay mucha menos gente." />
+      <Foto id="tenryuji" titulo="Tenryu-ji" texto="Jardín con estanque frente a las montañas." />
+      <Foto id="togetsukyo" titulo="Togetsukyo" texto="El puente largo de madera sobre el río Katsura." />
+      <Foto id="ryoanji" titulo="Ryoan-ji" texto="Quince rocas sobre grava rastrillada." />
+      <Foto id="kinkakuji" titulo="Kinkaku-ji" texto="El Pabellón Dorado reflejado en el estanque." />
+      <Foto id="nijo" titulo="Nijo-jo (opcional)" texto="Solo si sobra tiempo y energía." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="dia28" fondo="alt">
+    <DiaHead fecha="MIÉRCOLES · 28 OCT · TORII + REGRESO A TOKYO" titulo="⛩️ Fushimi Inari <strong>por la mañana</strong>" zona="Sur + Shinkansen" />
+    <p class="lead">Solo lo hacemos si el horario real del Shinkansen deja margen amplio. <strong>El tren a Tokyo es prioritario.</strong></p>
+    <Aviso titulo="🚄 REGLA DE SEGURIDAD"><p>No fijamos la hora de salida de Fushimi Inari hasta tener comprado el Shinkansen Kyoto → Tokyo. Margen holgado para volver al hotel, recoger maletas y cruzar Kyoto Station hasta el Shinkansen (lado sur).</p></Aviso>
+    <TarjetaEstacion
+      kicker="Ida · JR Nara Line (marrón)"
+      titulo={`Kyoto ${D(1)} → Inari ${D(3)}`}
+      texto="Solo 2 paradas. Andenes 8–10. Para Inari necesitamos un tren <strong>Local (普通)</strong>: los rápidos no paran."
+      cartel={{ nombre: 'Inari', jp: '稲荷', operador: 'JR West · Nara Line', codigos: [['nara', 3]] }}
+      foto="inari-station"
+      fotoTitulo="Estación JR Inari"
+      fotoTexto="Pequeña, roja y blanca. El gran torii está justo enfrente."
+    >
+      <MiniMapa
+        titulo={`${lin('nara')} ${dir('Nara 奈良 / Uji')} · tren LOCAL 普通`}
+        paradas={[
+          { nombre: 'Kyoto', sub: 'andenes 8–10', est: ['nara', 1], tipo: 'hotel', sig: { modo: 'linea', l: 'nara' } },
+          { nombre: 'Tofukuji', est: ['nara', 2], sig: { modo: 'linea', l: 'nara' } },
+          { nombre: 'Inari', est: ['nara', 3], tipo: 'destacado', sig: { modo: 'andar', label: '🚶 1 min' } },
+          { nombre: 'Fushimi Inari', sub: 'gran torii', tipo: 'destacado' },
+        ]}
+      />
+      <Pasos items={[
+        { t: 'Buscamos JR Lines.', d: 'Dentro de Kyoto Station seguimos primero las señales de <strong>JR</strong>.' },
+        { t: 'Buscamos 奈良線 · Nara Line.', d: `La letra ${lin('nara', true)} en marrón. Ojo: no es el Kintetsu de Osaka.` },
+        { t: 'Andenes 8, 9 o 10.', d: 'La pantalla dice cuál. Comprobamos siempre.' },
+        { t: 'Para Inari: LOCAL 普通.', d: 'Los rápidos (快速) pueden no parar en Inari. Si en las paradas aparece <strong class="jp">稲荷</strong> / Inari, perfecto.' },
+        { t: `Bajamos en ${D(3, 'Inari 稲荷')}.`, d: 'Tras el torno, Fushimi Inari está prácticamente delante.' },
+      ]} />
+    </TarjetaEstacion>
+    <Timeline>
+      <TL hora="Muy temprano" titulo={`Kyoto ${D(1)} → Inari ${D(3)}`} tipo="tren"><Fragment slot="lineas"><Linea l="nara" dir="Nara · LOCAL" /></Fragment>Desde Kyoto Station, <strong class="jp">奈良線</strong>, tren <strong>Local</strong>.</TL>
+      <TL hora="≈ 1–2 h" titulo="⛩️ Fushimi Inari" prio="must" prioTexto="MUST">Entramos por el gran torii y recorremos el tramo de Senbon Torii que decidamos. <strong>No hace falta subir a la cima</strong> para que la visita tenga sentido.</TL>
+      <TL hora="Después" titulo={`Inari ${D(3)} → Kyoto ${D(1)}`} tipo="tren"><Fragment slot="lineas"><Linea l="nara" dir="Kyoto 京都" /></Fragment>Andén del lado contrario. 2 paradas.</TL>
+      <TL hora="Antes del tren" titulo="Hotel → equipaje → Kyoto Station" tipo="andar">Recogemos las maletas y cruzamos hacia el Shinkansen (lado sur). No improvisamos con el margen.</TL>
+      <TL hora="🚄" titulo="Kyoto → Tokyo" tipo="tren"><Fragment slot="lineas"><Linea l="shinkansen" dir="Tokyo 東京" /></Fragment>Señales <strong class="jp">東海道・山陽新幹線</strong>; en pantalla destino <strong class="jp">東京</strong> / Tokyo, hora y andén. <a href="#sigue">Sigue en Fase 4 ↓</a></TL>
+    </Timeline>
+    <MapaAndando
+      titulo="Fushimi Inari: subir hasta donde queramos"
+      sub="Ida y vuelta por el mismo camino. El tramo de Senbon Torii es el imprescindible."
+      ciudad="Kyoto"
+      distancia="≈ 1,5 km ida y vuelta"
+      tiempo="1–2 h con fotos"
+      puntos={[
+        { n: 'Inari JR-D03', lat: 34.9670, lon: 135.7699, t: 'estacion', q: 'Inari Station, Kyoto' },
+        { n: 'Gran torii + Romon', lat: 34.9671, lon: 135.7727, q: 'Fushimi Inari Taisha Romon Gate' },
+        { n: 'Senbon Torii', lat: 34.9677, lon: 135.7752, q: 'Senbon Torii, Fushimi Inari' },
+        { n: 'Okusha (vuelta aquí)', lat: 34.9672, lon: 135.7770, t: 'fin', q: 'Okusha Hohaisho, Fushimi Inari' },
+      ]}
+      reco={{ t: '⏱️ SI VAMOS JUSTOS', d: 'Media vuelta en Okusha y a la estación' }}
+    />
+    <TarjetaEstacion
+      kicker="Salida a Tokyo · Shinkansen"
+      titulo="🚄 Kyoto → Tokyo"
+      texto="El Shinkansen está en el lado sur de Kyoto Station (八条口 · Hachijo). Desde el hotel hay que cruzar la estación."
+    >
+      <Pasos items={[
+        { t: 'Buscamos 東海道・山陽新幹線 / 新幹線.', d: 'No seguimos JR local: seguimos las señales azules de Shinkansen hacia el lado sur.' },
+        { t: 'Miramos la pantalla.', d: 'Destino <strong class="jp">東京</strong> / Tokyo + hora + nombre y número de tren (Nozomi, Hikari…).' },
+        { t: 'Comprobamos el andén antes de subir.', d: 'Kyoto tiene andenes 11–14 de Shinkansen; la pantalla manda.' },
+        { t: 'Comida segura comprada antes de subir.', d: 'Son unas 2 h 15 min hasta Tokyo.' },
+      ]} />
+    </TarjetaEstacion>
+    <Galeria cols={3} h="210px">
+      <Foto id="inari-romon" titulo="Gran torii + Romon" texto="La puerta de entrada al santuario, a un minuto de la estación." />
+      <Foto id="senbon-torii" titulo="Senbon Torii" texto="Los túneles de torii rojos. Imprescindible." />
+      <Foto id="nara-line" titulo="JR Nara Line" texto="El tren que nos lleva a Inari. Buscamos LOCAL 普通." />
+    </Galeria>
+  </Seccion>
+
+  <Conexion fase="kyoto" modo="hacia" />
+
+  <Seccion id="estaciones" fondo="crema" kicker="Cómo no perdernos" titulo="🚉 Kyoto Station · <strong>qué cartel buscamos</strong>" lead="No memorizamos Kyoto Station. Para cada trayecto tenemos cuatro referencias: <strong>color de línea + nombre japonés + letra + destino</strong>.">
+    <div class="cards">
+      <div class="card"><Linea l="nara" /><h3 style="margin-top:10px">🟤 奈良線 · D</h3><p>Nuestra línea para <strong>Fushimi Inari</strong>.</p><p>{'Kyoto '}<Est l="nara" n={1} /> → <Est l="nara" n={3} nombre="Inari 稲荷" /></p><p>Dirección <strong>Nara / 奈良</strong>. Para Inari, <strong>Local</strong>.</p></div>
+      <div class="card"><Linea l="sagano" /><h3 style="margin-top:10px">🟣 嵯峨野線 · E</h3><p>Nuestra línea para <strong>Arashiyama</strong>.</p><p>{'Kyoto '}<Est l="sagano" n={1} /> → <Est l="sagano" n={8} nombre="Saga-Arashiyama 嵯峨嵐山" /></p><p>Andenes 31–33.</p></div>
+      <div class="card"><Linea l="shinkansen" /><h3 style="margin-top:10px">🚄 東海道新幹線</h3><p>Para el regreso: <strong>Kyoto → Tokyo</strong>.</p><p>Lado sur de la estación. Seguimos las señales grandes de <strong>Shinkansen</strong>.</p></div>
+    </div>
+    <Mision kicker="👀 LA REGLA DE LOS 4 DATOS" main="Color · Línea · Destino · Pantalla" small="<strong>Si uno de los cuatro datos no coincide, no subimos todavía.</strong>">
+      <div class="route-strip" style="background:#252525;border-color:#333;color:#fff">
+        <div class="route-step active"><span>1</span><strong>COLOR</strong><small>🟤 / 🟣</small></div><div class="route-line"></div>
+        <div class="route-step active"><span>2</span><strong>LÍNEA</strong><small>奈良線 / 嵯峨野線</small></div><div class="route-line"></div>
+        <div class="route-step active"><span>3</span><strong>DESTINO</strong><small>稲荷 / 嵯峨嵐山</small></div><div class="route-line"></div>
+        <div class="route-step active"><span>4</span><strong>PANTALLA</strong><small>hora + andén</small></div>
+      </div>
+    </Mision>
+    <Galeria cols={3} h="200px">
+      <Foto id="inari-station" titulo="稲荷 · INARI" texto="Si reconocemos este nombre, hemos llegado al punto correcto para Fushimi Inari." />
+      <Foto id="sagano-line" titulo="嵯峨野線 · E" texto="El tren de la Sagano Line hacia Saga-Arashiyama." />
+      <Foto id="saga-arashiyama" titulo="嵯峨嵐山 · SAGA-ARASHIYAMA" texto="La estación de bajada para el Bosque de Bambú." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="taxi" kicker="Mostrar al taxista" titulo="🚕 Tarjetas para <strong>enseñar al taxista</strong>" lead="Pensadas para girar el móvil y enseñarlas directamente (⤢ a pantalla completa). No hace falta pronunciar el destino.">
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="26 · Hotel → inicio" jp="清水寺" romaji="Kiyomizu-dera" frase="清水寺の近くまでお願いします。" fraseEs="Cerca de Kiyomizu-dera, por favor." />
+      <TarjetaTaxi etiqueta="27 · Arashiyama → Ryoan-ji" jp="龍安寺" romaji="Ryoan-ji" frase="龍安寺までお願いします。" fraseEs="A Ryoan-ji, por favor." />
+      <TarjetaTaxi etiqueta="27 · Ryoan-ji → Kinkaku-ji" jp="金閣寺" romaji="Kinkaku-ji" frase="金閣寺までお願いします。" fraseEs="A Kinkaku-ji, por favor." />
+      <TarjetaTaxi etiqueta="Vuelta al hotel" jp={H.jp} romaji={H.nombre} frase="京都駅の烏丸口までお願いします。" fraseEs="A la salida Karasuma de Kyoto Station, por favor." dire={H.direccionJp} />
+    </div>
+    <Aviso tipo="azul" titulo="💡 Regla para cuatro personas"><p>El taxi tiene sentido cuando evita un transbordo, un autobús lleno o una caminata larga. Para Kyoto Station ↔ Fushimi Inari y Kyoto Station ↔ Saga-Arashiyama, mejor el tren.</p></Aviso>
+  </Seccion>
+
+  <Seccion id="decision" fondo="alt" kicker="Durante el viaje" titulo="🧭 Cómo <strong>decidimos</strong>" lead="No hay que cumplir una lista a cualquier precio. La guía está pensada para poder recortar.">
+    <div class="choice-grid">
+      <div class="choice"><h3>🟢 Día perfecto</h3><p>Recorrido previsto, comida con calma y vuelta al hotel sin prisas.</p></div>
+      <div class="choice"><h3>🟡 Mucha gente</h3><p>Templos y zonas exteriores; no perdemos tiempo esperando autobuses.</p></div>
+      <div class="choice"><h3>🟠 Cansancio</h3><p>Taxi cuando tenga sentido y fuera las visitas MAYBE.</p></div>
+      <div class="choice"><h3>🔴 Día complicado</h3><p>Protegemos los MUST y eliminamos todo lo demás.</p></div>
+    </div>
+    <Mision kicker="🏆 IMPRESCINDIBLES REALES" main="1 Bambú · 2 Kinkaku-ji · 3 Fushimi Inari · 4 Kiyomizu-dera · 5 Ryoan-ji" small="Después: 6 Gion / Higashiyama / Togetsukyo · 7 Nijo-jo" />
+  </Seccion>
+
+  <Seccion id="transporte" kicker="Resumen rápido" titulo="🚆 Transporte <strong>en Kyoto</strong>">
+    <TablaTransporte
+      cab={['Trayecto', 'Transporte', 'Referencia que buscamos', 'Regla']}
+      filas={[
+        [`Kyoto → Inari`, lin('nara'), `${D(1)} → ${D(3)} · <strong class="jp">稲荷</strong>`, 'Local 普通. Andenes 8–10.'],
+        [`Kyoto → Saga-Arashiyama`, lin('sagano'), `${E(1)} → ${E(8)} · <strong class="jp">嵯峨嵐山</strong>`, 'Andenes 31–33, al fondo.'],
+        ['Hotel → Kiyomizu', '🚕 Taxi', '<strong class="jp">清水寺</strong>', 'Inicio del día 26.'],
+        ['Arashiyama → Ryoan-ji', '🚕 Taxi', '<strong class="jp">龍安寺</strong>', 'Ahorra tiempo a 4.'],
+        ['Ryoan-ji → Kinkaku-ji', '🚕 Taxi', '<strong class="jp">金閣寺</strong>', 'Protegemos el MUST.'],
+        ['Kyoto → Tokyo', lin('shinkansen'), '<strong class="jp">東海道・山陽新幹線</strong> · 東京', 'Lado sur. La pantalla manda.'],
+      ]}
+    />
+    <div class="mission-card">
+      <div class="mission-kicker">🏆 REGLA DE ORO</div>
+      <div class="mission-main">No necesitamos saber japonés ni memorizar Kyoto.</div>
+      <p>Buscamos el <strong>color</strong>, el <strong>nombre japonés</strong>, la <strong>letra</strong> y el <strong>destino</strong>. Si coinciden, seguimos. Si no, paramos y comprobamos la pantalla. Y si un día vamos cansados: <strong>los MUST primero, lo demás después.</strong></p>
+    </div>
+  </Seccion>
+
+  <FrasesAyuda extraTitulo="Kyoto" extra={[
+    { jp: '京都駅はどこですか？', romaji: 'Kyōto-eki wa doko desu ka?', es: '¿Dónde está Kyoto Station?' },
+    { jp: '奈良線ですか？', romaji: 'Nara-sen desu ka?', es: '¿Esta es la línea Nara?' },
+    { jp: 'この電車は稲荷に止まりますか？', romaji: 'Kono densha wa Inari ni tomarimasu ka?', es: '¿Este tren para en Inari?' },
+    { jp: '嵯峨野線ですか？', romaji: 'Sagano-sen desu ka?', es: '¿Esta es la línea Sagano?' },
+    { jp: '新幹線の乗り場はどこですか？', romaji: 'Shinkansen no noriba wa doko desu ka?', es: '¿Dónde se coge el Shinkansen?' },
+    { jp: '伏見稲荷大社へ行きたいです。', romaji: 'Fushimi Inari Taisha e ikitai desu.', es: 'Queremos ir a Fushimi Inari.' },
+  ]} />
+
+  <BloqueCeliaco ciudad="Kyoto" consejos={[
+    '<strong>Yudofu</strong> (tofu hervido, típico de Arashiyama y templos): el tofu suele ser seguro, pero la salsa para mojar es de shoyu. Pedir sin salsa o con sal.',
+    '<strong>Dulces de Kyoto</strong>: muchos llevan harina de trigo o salsa (mitarashi dango lleva shoyu). Mirar etiqueta.',
+    '<strong>Soba</strong> (fideos de alforfón): casi siempre llevan también trigo. No dar por seguro.',
+    '<strong>Kyoto Station</strong> tiene konbini y supermercados para preparar el plan B antes de los días largos.',
+  ]} />
+
+  <Footer slot="footer" titulo="VIAJE JAPÓN 2026 · FASE 3 · KYOTO" lineas={['Guía práctica personal. Horarios de trenes y andén concreto: reconfirmar poco antes del viaje.', 'Referencias de transporte: JR West / Kyoto Station.']} />
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+/** Tarjeta negra de objetivo. `ruta`: tramos separados con flecha roja. */
+interface Props { kicker?: string; main: string; ruta?: string[]; small?: string }
+const { kicker = '🎯 OBJETIVO', main, ruta, small } = Astro.props;
+---
+<div class="mission-card">
+  <div class="mission-kicker">{kicker}</div>
+  <div class="mission-main" set:html={main} />
+  {ruta && (
+    <div class="mission-route">
+      {ruta.map((r, i) => (<>{i > 0 && <b>→</b>}<span class="jp" set:html={r} /></>))}
+    </div>
+  )}
+  {small && <div class="mission-small" set:html={small} />}
+  <slot />
+</div>

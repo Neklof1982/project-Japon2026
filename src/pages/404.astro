@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import { FASES, ORDEN } from '../data/viaje';
+import { url } from '../lib/url';
+---
+<BaseLayout title="Japón 2026 · Página no encontrada" description="Esta página no existe. Vuelve a la guía.">
+  <Hero tag="Japón 2026" titulo="Esta página <strong>no existe</strong>" parrafos={['Puede que el enlace esté mal escrito. Elige la fase del viaje:']} />
+  <Seccion>
+    <div class="choice-grid">
+      <a class="choice" href={url('')}><h3>🏠 Inicio</h3><p>Ruta, día a día y kit de emergencia.</p></a>
+      {ORDEN.map((id) => (
+        <a class="choice" href={url(FASES[id].ruta)}><h3>Fase {FASES[id].n} · {FASES[id].titulo}</h3><p>{FASES[id].fechas}</p></a>
+      ))}
+    </div>
+  </Seccion>
+  <FrasesAyuda />
+  <BloqueCeliaco ciudad="todo el viaje" />
+  <Footer slot="footer" titulo="JAPÓN 2026" />
+</BaseLayout>

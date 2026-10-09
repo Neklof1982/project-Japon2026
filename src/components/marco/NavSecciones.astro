@@ -1,0 +1,11 @@
+---
+interface Props { items: { href: string; label: string; clave?: boolean }[] }
+const { items } = Astro.props;
+---
+<nav class="secnav" aria-label="Secciones de esta página">
+  <div class="secnav-inner">
+    {items.map((i) => <a href={i.href} class={i.clave ? 'clave' : undefined}>{i.label}</a>)}
+    <a href="#frases" class="clave">🗣️ Frases</a>
+    <a href="#celiaco" class="clave">🌾 Sin gluten</a>
+  </div>
+</nav>

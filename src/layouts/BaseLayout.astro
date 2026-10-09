@@ -1,0 +1,120 @@
+---
+import '../styles/global.css';
+import { FASES, ORDEN, HOTELES, type FaseId } from '../data/viaje';
+import { TARJETA } from '../data/celiaco';
+import { url } from '../lib/url';
+import TarjetaTaxi from '../components/ayuda/TarjetaTaxi.astro';
+import Frase from '../components/ayuda/Frase.astro';
+
+interface Props { title: string; description: string; fase?: FaseId }
+const { title, description, fase } = Astro.props;
+const hotel = HOTELES[fase ? FASES[fase].hotel : 'tokyo'];
+const BASE = url('');
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1a1a1a" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('icons/icon-192.png')} />
+    <link rel="manifest" href={url('manifest.webmanifest')} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Japón 2026" />
+  </head>
+  <body>
+    <nav class="topbar" aria-label="Fases del viaje">
+      <div class="topbar-inner">
+        <a class="brand" href={url('')}><i aria-hidden="true"></i>Japón 2026</a>
+        {ORDEN.map((id) => (
+          <a class={`fase${id === fase ? ' activa' : ''}`} href={url(FASES[id].ruta)} aria-current={id === fase ? 'page' : undefined}>
+            <span>{FASES[id].n}</span>{FASES[id].corto} <small>{FASES[id].fechas}</small>
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <slot name="footer" />
+
+    <button class="fab-ayuda" type="button" data-kit aria-haspopup="dialog">🆘 Ayuda</button>
+
+    <dialog class="ayuda" id="kit" aria-label="Ayuda rápida">
+      <div class="a-head"><strong>🆘 Ayuda rápida</strong><button type="button" data-cerrar>Cerrar ✕</button></div>
+      <div class="a-body">
+        <TarjetaTaxi etiqueta="Llévenos al hotel" jp={hotel.jp} romaji={hotel.nombre} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={hotel.direccionJp} />
+        <div class="phrase-grid">
+          <Frase jp="駅員さんを呼んでもらえますか？" romaji="Ekiin-san o yonde moraemasu ka?" es="¿Puede llamar a un empleado de la estación?" />
+          <Frase jp="これはどこですか？" romaji="Kore wa doko desu ka?" es="¿Dónde está esto? (señalando el móvil)" />
+          <Frase jp="小麦アレルギーがあります。" romaji="Komugi arerugī ga arimasu." es="Tengo alergia al trigo." />
+        </div>
+        <div class="tarjeta-celiaca">
+          <div class="kicker">🪪 TARJETA CELÍACA</div>
+          <div class="jp" style="font-size:16px">{TARJETA.jp}</div>
+          <button class="btn-grande" type="button" data-grande data-largo data-jp={TARJETA.jp} data-sub={TARJETA.es} aria-label="Mostrar a pantalla completa">⤢</button>
+        </div>
+        <p style="font-size:13px;color:#555">Más frases en la sección <a href="#frases" data-cerrar>Frases</a> y el protocolo completo en <a href="#celiaco" data-cerrar>Sin gluten</a>.</p>
+      </div>
+    </dialog>
+
+    <dialog class="visor" id="visor" aria-label="Vista ampliada">
+      <button class="v-cerrar" type="button" data-cerrar>Cerrar ✕</button>
+      <div id="visor-contenido"></div>
+    </dialog>
+
+    <script is:inline define:vars={{ BASE }}>
+      (() => {
+        const visor = document.getElementById('visor');
+        const cont = document.getElementById('visor-contenido');
+        const kit = document.getElementById('kit');
+        const abrir = (nodo) => { cont.replaceChildren(nodo); visor.showModal(); };
+
+        document.addEventListener('click', (e) => {
+          const t = e.target;
+          if (!(t instanceof Element)) return;
+          const z = t.closest('[data-zoom]');
+          if (z) {
+            const img = document.createElement('img');
+            img.className = 'v-img';
+            img.src = z.getAttribute('data-zoom');
+            img.alt = z.getAttribute('data-alt') || '';
+            abrir(img);
+            return;
+          }
+          const g = t.closest('[data-grande]');
+          if (g) {
+            const d = document.createElement('div');
+            d.className = 'v-texto' + (g.hasAttribute('data-largo') ? ' largo' : '');
+            for (const [clase, attr] of [['jp', 'data-jp'], ['sub', 'data-sub'], ['peq', 'data-peq']]) {
+              const v = g.getAttribute(attr);
+              if (!v) continue;
+              const el = document.createElement('div');
+              el.className = clase;
+              el.textContent = v;
+              d.append(el);
+            }
+            abrir(d);
+            return;
+          }
+          if (t.closest('[data-kit]')) { kit.showModal(); return; }
+          if (t.closest('[data-cerrar]')) t.closest('dialog')?.close();
+        });
+        for (const dlg of [visor, kit]) {
+          dlg.addEventListener('click', (e) => { if (e.target === dlg || (e.target instanceof Element && e.target.classList.contains('v-img'))) dlg.close(); });
+        }
+
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register(BASE + 'sw.js', { scope: BASE }).catch(() => {});
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

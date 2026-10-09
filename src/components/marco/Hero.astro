@@ -1,0 +1,14 @@
+---
+interface Props { tag: string; titulo: string; parrafos?: string[]; meta?: { v: string; l: string }[] }
+const { tag, titulo, parrafos = [], meta = [] } = Astro.props;
+---
+<header class="hero">
+  <div class="container">
+    <div class="tag">{tag}</div>
+    <h1 set:html={titulo} />
+    {parrafos.map((p) => <p set:html={p} />)}
+    {meta.length > 0 && (
+      <div class="hero-meta">{meta.map((m) => <span><strong>{m.v}</strong>{m.l}</span>)}</div>
+    )}
+  </div>
+</header>

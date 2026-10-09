@@ -1,0 +1,51 @@
+---
+/**
+ * Mini mapa de un trayecto, parada a parada.
+ * Cada parada puede llevar el tramo que sale de ella (`sig`): línea con su color,
+ * a pie (verde discontinuo) o taxi (negro discontinuo).
+ */
+import { LINEAS, type LineaId } from '../../data/lineas';
+import { est } from '../../lib/html';
+export type Parada = {
+  nombre: string;
+  sub?: string;
+  est?: [LineaId, string | number];
+  tipo?: 'destacado' | 'hotel';
+  sig?: { modo: 'linea' | 'andar' | 'taxi'; l?: LineaId; label?: string };
+};
+interface Props { titulo: string; nota?: string; paradas: Parada[]; giros?: string[]; check?: string }
+const { titulo, nota, paradas, giros, check } = Astro.props;
+const color = (p: Parada) => (p.est ? LINEAS[p.est[0]].color : p.sig?.l ? LINEAS[p.sig.l].color : '#181818');
+---
+<div class="mini-map">
+  <div class="mini-map-title">🗺️ <span set:html={titulo} /></div>
+  {nota && <div class="mini-map-note" set:html={nota} />}
+  <div class="mm-scroll">
+    <div class="map-track">
+      {paradas.map((p) => (
+        <>
+          <div class={`map-stop ${p.tipo ?? ''}`} style={`--sc:${color(p)}`}>
+            <div class="dot" />
+            <strong>{p.nombre}</strong>
+            {p.sub && <small set:html={p.sub} />}
+            {p.est && <Fragment set:html={est(p.est[0], p.est[1])} />}
+          </div>
+          {p.sig && (
+            <div
+              class={`map-seg ${p.sig.modo === 'linea' ? 'tren' : p.sig.modo}`}
+              style={p.sig.l ? `--lc:${LINEAS[p.sig.l].color}` : undefined}
+            >
+              {p.sig.label && <span class="seg-label">{p.sig.label}</span>}
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+  {giros && (
+    <div class="map-turns">
+      {giros.map((g, i) => <div class="map-turn"><b>{i + 1}</b><div set:html={g} /></div>)}
+    </div>
+  )}
+  {check && <div class="visual-check" set:html={check} />}
+</div>

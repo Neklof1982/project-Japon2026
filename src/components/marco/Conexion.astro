@@ -1,0 +1,60 @@
+---
+/**
+ * Relevo entre páginas: "Vienes de…" arriba y "Sigues en…" abajo.
+ * Los datos salen de CONEXIONES, así ambos lados cuentan lo mismo.
+ */
+import { CONEXIONES, FASES, VUELO_IDA, VUELO_VUELTA, type FaseId } from '../../data/viaje';
+import { url } from '../../lib/url';
+interface Props { fase: FaseId; modo: 'desde' | 'hacia' }
+const { fase, modo } = Astro.props;
+
+let k = '', t = '', d = '', go = '', href = url(''), icon = '';
+if (modo === 'desde') {
+  const c = CONEXIONES.find((x) => x.hacia === fase);
+  if (c) {
+    const f = FASES[c.desde];
+    icon = '⬅️';
+    k = `Vienes de la Fase ${f.n} · ${c.cuando}`;
+    t = `${f.titulo} → ${c.donde}`;
+    d = c.texto;
+    go = `Ver Fase ${f.n}`;
+    href = url(`${f.ruta}#sigue`);
+  } else {
+    icon = '✈️';
+    k = `Inicio del viaje · ${VUELO_IDA.llegada}`;
+    t = `${VUELO_IDA.origen} → ${VUELO_IDA.aeropuerto}`;
+    d = 'Primer contacto con Japón: inmigración, maletas y taxi al hotel.';
+    go = 'Ver el viaje completo';
+  }
+} else {
+  const c = CONEXIONES.find((x) => x.desde === fase);
+  if (c) {
+    const f = FASES[c.hacia];
+    icon = '➡️';
+    k = `Sigues en la Fase ${f.n} · ${c.cuando}`;
+    t = `${c.donde} · ${f.titulo}`;
+    d = c.texto;
+    go = `Ir a Fase ${f.n} →`;
+    href = url(`${f.ruta}#${c.ancla}`);
+  } else {
+    icon = '🛫';
+    k = `Fin del viaje · ${VUELO_VUELTA.salida}`;
+    t = `Hotel → ${VUELO_VUELTA.aeropuerto} → vuelta a casa`;
+    d = 'Taxi directo con maletas sobre las 21:00. Confirmar la terminal en el billete antes de salir.';
+    go = 'Volver al inicio';
+  }
+}
+---
+<div class={`conexion-wrap ${modo === 'desde' ? 'arriba' : ''}`} id={modo === 'hacia' ? 'sigue' : undefined}>
+  <div class="container">
+    <a class="conexion" href={href}>
+      <span class="c-icon">{icon}</span>
+      <span>
+        <span class="c-k">{k}</span>
+        <span class="c-t" style="display:block">{t}</span>
+        <span class="c-d" style="display:block">{d}</span>
+      </span>
+      <span class="c-go">{go}</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+---
+/** Tabla resumen. Las celdas admiten HTML (lin/est/dir). */
+interface Props { cab: string[]; filas: string[][] }
+const { cab, filas } = Astro.props;
+---
+<div class="tabla-wrap">
+  <table class="transport-table">
+    <thead><tr>{cab.map((c) => <th>{c}</th>)}</tr></thead>
+    <tbody>{filas.map((f) => <tr>{f.map((c) => <td set:html={c} />)}</tr>)}</tbody>
+  </table>
+</div>

@@ -1,0 +1,5 @@
+---
+interface Props { cols?: 2 | 3 | 4; h?: string }
+const { cols = 2, h } = Astro.props;
+---
+<div class="photo-grid" style={`--cols:${cols}${h ? `;--h:${h}` : ''}`}><slot /></div>

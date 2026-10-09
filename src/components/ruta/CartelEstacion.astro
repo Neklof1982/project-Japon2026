@@ -1,0 +1,14 @@
+---
+/** Cartel de estación recreado: nombre, japonés y códigos con su color. */
+import { LINEAS, type LineaId } from '../../data/lineas';
+import { est } from '../../lib/html';
+interface Props { nombre: string; jp: string; operador: string; codigos: [LineaId, string | number][]; nota?: string }
+const { nombre, jp, operador, codigos, nota } = Astro.props;
+const color = LINEAS[codigos[0][0]].color;
+---
+<div class="station-sign" style={`--lc:${color}`}>
+  <div class="top"><span>{operador}</span><span>{nota ?? 'Station'}</span></div>
+  <div class="name">{nombre} <span class="jp">{jp}</span></div>
+  <div class="codes">{codigos.map(([l, n]) => <Fragment set:html={est(l, n)} />)}</div>
+  <div class="barra" />
+</div>

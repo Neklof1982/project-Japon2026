@@ -1,0 +1,15 @@
+---
+import { url } from '../../lib/url';
+interface Props { titulo: string; lineas?: string[] }
+const { titulo, lineas = [] } = Astro.props;
+---
+<footer>
+  <div class="container">
+    <p><strong>{titulo}</strong></p>
+    {lineas.map((l) => <p set:html={l} />)}
+    <p style="font-size:11px;color:#666;margin-top:16px">
+      Regla final: <strong>color + línea + destino + pantalla</strong>. Si la pantalla dice otra cosa, gana la pantalla.
+      · <a href={url('creditos/')}>Créditos de las fotos</a>
+    </p>
+  </div>
+</footer>

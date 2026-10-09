@@ -1,0 +1,295 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/marco/Hero.astro';
+import NavSecciones from '../components/marco/NavSecciones.astro';
+import Conexion from '../components/marco/Conexion.astro';
+import Footer from '../components/marco/Footer.astro';
+import Seccion from '../components/ui/Seccion.astro';
+import Mision from '../components/ui/Mision.astro';
+import Aviso from '../components/ui/Aviso.astro';
+import Foto from '../components/ui/Foto.astro';
+import Galeria from '../components/ui/Galeria.astro';
+import Timeline from '../components/ruta/Timeline.astro';
+import TL from '../components/ruta/TL.astro';
+import Linea from '../components/ruta/Linea.astro';
+import Est from '../components/ruta/Est.astro';
+import MiniMapa from '../components/ruta/MiniMapa.astro';
+import MapaAndando from '../components/ruta/MapaAndando.astro';
+import TarjetaEstacion from '../components/ruta/TarjetaEstacion.astro';
+import Pasos from '../components/ruta/Pasos.astro';
+import Billete from '../components/ruta/Billete.astro';
+import TarjetaTaxi from '../components/ayuda/TarjetaTaxi.astro';
+import Frase from '../components/ayuda/Frase.astro';
+import FrasesAyuda from '../components/ayuda/FrasesAyuda.astro';
+import BloqueCeliaco from '../components/ayuda/BloqueCeliaco.astro';
+import { HOTELES } from '../data/viaje';
+import { lin, est, dir } from '../lib/html';
+
+const H = HOTELES.tokyo;
+---
+<BaseLayout title="Japón 2026 · Fase 1 — Tokyo → Osaka" description="Llegada nocturna a Haneda, hotel en Hatchobori y Shinkansen Nozomi de Tokyo Station a Shin-Osaka." fase="tokyo-llegada">
+  <Hero
+    tag="Japón · Octubre 2026 · Fase 1"
+    titulo="Fase 1 — <strong>Tokyo → Osaka</strong>"
+    parrafos={['Llegada nocturna a Haneda, traslado al hotel, paseo matutino opcional y Shinkansen a Osaka.']}
+    meta={[
+      { v: '21 OCT 2026', l: 'Miércoles' },
+      { v: '4 PERSONAS', l: '1 celíaco' },
+      { v: 'HND → SHIN-OSAKA', l: 'Haneda T3 · Tokyo Station · Shin-Osaka' },
+    ]}
+  />
+  <NavSecciones items={[
+    { href: '#itinerario', label: 'Itinerario' },
+    { href: '#haneda', label: 'Haneda → hotel' },
+    { href: '#a-la-estacion', label: 'Hotel → estación' },
+    { href: '#tokyo-station', label: '🚄 Tokyo Station', clave: true },
+    { href: '#billete', label: 'Billete' },
+    { href: '#shin-osaka', label: 'Shin-Osaka' },
+  ]} />
+
+  <Conexion fase="tokyo-llegada" modo="desde" />
+
+  <Seccion id="itinerario" kicker="Itinerario" titulo="Un día <strong>minuto a minuto</strong>" lead="Compensar el jet-lag del vuelo Doha–Haneda. Prioridad: descanso, seguridad alimentaria y traslados sin estrés.">
+    <Timeline>
+      <TL hora="00:20" titulo="Aterrizaje en Haneda T3" tipo="vuelo" etiqueta="Vuelo">Inmigración, recogida de equipaje y aduana. Pueden ser 60–75 min hasta completar los trámites.</TL>
+      <TL hora="01:45" titulo="Taxi oficial → APA Hotel Hatchobori Shintomicho" tipo="taxi" etiqueta="25 min">Cola oficial de taxis en la T3. Sin transbordos, puerta a puerta. Coste aproximado 6.000–8.000 ¥ (recargo nocturno incluido). <a href="#haneda">Tarjeta para el taxista ↓</a></TL>
+      <TL hora="02:30" titulo="Descanso en el hotel" tipo="descanso">Check-in exprés. Objetivo: dormir al menos 5 horas antes del traslado largo.</TL>
+      <TL hora="08:30" titulo="Despertar flexible + desayuno seguro" tipo="descanso">Desayuno controlado (hotel o compra con etiqueta revisada en un konbini cercano). Paseo corto opcional por Ginza.</TL>
+      <TL hora="11:00" titulo="Checkout + taxi a Tokyo Station" tipo="taxi" etiqueta="10–12 min">Destino: <strong>Yaesu South Exit · 八重洲南口</strong>, el lado del Shinkansen. Evitamos el metro con 4 maletas. <a href="#a-la-estacion">Tarjeta y mapa ↓</a></TL>
+      <TL hora="11:30 – 12:00" titulo="Shinkansen Nozomi → Shin-Osaka" tipo="tren" etiqueta="2h 20m">
+        <Fragment slot="lineas"><Linea l="shinkansen" dir="Shin-Osaka / Hakata" /></Fragment>
+        Tokaido Shinkansen. 4 asientos reservados en Ordinary Car. Comida segura comprada en la estación <strong>antes</strong> de subir. <a href="#tokyo-station">Cómo encontrar el tren ↓</a>
+      </TL>
+      <TL hora="~14:20" titulo="Llegada a Shin-Osaka" tipo="tren">
+        <Fragment slot="lineas"><Linea l="midosuji" dir="Nakamozu" /></Fragment>
+        Metro <strong>Midosuji Line</strong> directo a Hommachi (<Est l="midosuji" n={13} /> → <Est l="midosuji" n={18} />, 5 paradas, unos 10 min) o taxi si hay cansancio acumulado.
+      </TL>
+      <TL hora="15:00" titulo="Check-in Far East Village Hotel Osaka Honmachi" tipo="descanso">Hommachi, a 4–5 min andando. Descanso de verdad antes de la primera cena. <a href="#sigue">Sigue en la guía de Osaka ↓</a></TL>
+    </Timeline>
+  </Seccion>
+
+  <Seccion id="haneda" fondo="alt" kicker="00:20 · Llegada" titulo="Haneda T3 → <strong>hotel en taxi</strong>" lead="A estas horas no queremos trenes ni transbordos. Un taxi para cuatro con maletas es lo más sencillo y seguro.">
+    <MiniMapa
+      titulo="Haneda T3 → APA Hotel Hatchobori Shintomicho"
+      nota="Un solo tramo, puerta a puerta por autopista. Unos 25 min de madrugada."
+      paradas={[
+        { nombre: 'Haneda T3', sub: 'Llegadas', tipo: 'destacado', sig: { modo: 'taxi', label: '🚕 ~25 min · 6.000–8.000 ¥' } },
+        { nombre: 'Hotel', sub: 'Shintomi 1-17-8', tipo: 'hotel' },
+      ]}
+      giros={[
+        'Inmigración → maletas → aduana. Al salir al vestíbulo de llegadas seguimos el pictograma <strong>🚕 Taxi / タクシー</strong>.',
+        'En la cola oficial decimos que somos cuatro con maletas: si hace falta, nos asignan un taxi grande.',
+        'Enseñamos la tarjeta de abajo. Pago con tarjeta en la mayoría de taxis (preguntar antes de subir).',
+      ]}
+    />
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Haneda → hotel" jp={H.jp} romaji={H.nombre} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={H.direccionJp} />
+      <div>
+        <Aviso tipo="oro" titulo="⚠️ Hay varios APA en Hatchobori">
+          <p>Enseñamos siempre el nombre completo <strong>APA Hotel Hatchobori Shintomicho</strong> y la dirección <strong class="jp">{H.direccionJp}</strong>.</p>
+        </Aviso>
+        <Aviso tipo="azul" titulo="💴 Yenes al llegar">
+          <p>Conviene llevar algo de efectivo para la primera noche. En el aeropuerto hay cajeros que aceptan tarjetas extranjeras.</p>
+        </Aviso>
+      </div>
+    </div>
+    <Galeria cols={2}>
+      <Foto id="haneda-t3" titulo="Haneda · Terminal 3" texto="Vestíbulo de llegadas internacionales. Desde aquí, el pictograma de taxi." />
+      <Foto id="haneda-taxi" titulo="Así es el taxi de Tokyo" texto="El modelo más habitual (JPN Taxi). Con 4 maletas grandes, pedir en la cola un taxi grande o ir en dos." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="a-la-estacion" kicker="11:00 · Ruta" titulo="Hotel → <strong>Tokyo Station</strong>" lead="Andando, sin maletas, es un paseo corto. <strong>Con 4 maletas, taxi.</strong> En los dos casos el destino es el lado <strong>Yaesu</strong>: es donde está la entrada del Tokaido Shinkansen.">
+    <MapaAndando
+      titulo="Andando: hotel → Tokyo Station (Yaesu South)"
+      sub="Recorrido por calles amplias de Chuo-ku. No recomendado con maletas."
+      ciudad="Tokyo"
+      distancia="≈ 1,3 km"
+      tiempo="~17 min sin maletas"
+      puntos={[
+        { n: 'APA Hatchobori Shintomicho', lat: 35.6718, lon: 139.7745, q: 'APA Hotel Hatchobori Shintomicho' },
+        { n: 'Hatchobori H12', lat: 35.6747, lon: 139.7776, t: 'estacion', q: 'Hatchobori Station, Tokyo' },
+        { n: 'Kyobashi', lat: 35.6766, lon: 139.7701, q: 'Kyobashi Station, Tokyo' },
+        { n: 'Tokyo Station · Yaesu South', lat: 35.6795, lon: 139.7693, q: 'Tokyo Station Yaesu South Exit' },
+      ]}
+      zonas={[{ n: 'Hatchobori', lat: 35.6735, lon: 139.7800 }, { n: 'Kyobashi', lat: 35.6752, lon: 139.7675 }, { n: 'Yaesu', lat: 35.6810, lon: 139.7720 }]}
+      reco={{ t: '🚕 RECOMENDACIÓN: TAXI', d: '~1.000–1.800 ¥ · 10–12 min · 4 personas + maletas' }}
+    />
+    <div class="cards">
+      <div class="card"><div class="card-icon">📏</div><h3>Distancia</h3><div class="stat">≈ 1,3 km</div><p>Camino llano, por aceras amplias de Chuo-ku.</p></div>
+      <div class="card"><div class="card-icon">⏱️</div><h3>Tiempo andando</h3><div class="stat">~17 min</div><p>Sin maletas. Con equipaje: bastante más y muy incómodo.</p></div>
+      <div class="card"><div class="card-icon">🚕</div><h3>Recomendación</h3><div class="stat">Taxi</div><p>4 personas + maletas: merece la pena. Nos deja en la puerta correcta.</p></div>
+    </div>
+    <div class="arrival-card">
+      <div class="arrival-icon">🚕</div>
+      <div><div class="arrival-label">Qué decir al taxista</div><div class="arrival-title jp">東京駅 八重洲南口</div><div class="arrival-sub">Tokyo Station · Yaesu South Exit</div></div>
+      <div class="arrival-reason"><strong>Frase corta:</strong><br /><span class="jp">「東京駅の八重洲南口までお願いします。」</span><br /><span style="font-size:12px;color:#666">Tōkyō-eki no Yaesu-minamiguchi made onegai shimasu.</span></div>
+    </div>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Hotel → Tokyo Station" jp="東京駅 八重洲南口" romaji="Tokyo Station · Yaesu South Exit" frase="東京駅の八重洲南口までお願いします。" fraseEs="A la salida Yaesu Sur de Tokyo Station, por favor." />
+      <Foto id="tokyo-yaesu" titulo="Así se ve el lado Yaesu" texto="Aquí nos deja el taxi. Entramos y buscamos las señales azules del Shinkansen." h="200px" />
+    </div>
+  </Seccion>
+
+  <section class="crema" id="tokyo-station">
+    <div class="container">
+      <div class="section-title">La parte crítica del día</div>
+      <h2>Tokyo Station → <strong>Shin-Osaka</strong></h2>
+      <p class="lead">Tokyo Station es enorme y tiene varias plantas. <strong>No hace falta conocerla: basta con seguir las señales y hacer exactamente estos pasos.</strong></p>
+
+      <Mision main="Tokaido / Sanyo Shinkansen" ruta={['東京', '新大阪']} small="Tokyo → Shin-Osaka · Nozomi · Ordinary Car · 4 asientos juntos" />
+
+      <div class="station-map-card">
+        <div class="map-heading">
+          <div>
+            <div class="kicker oro">Esquema · Tokyo Station</div>
+            <h3>Dos plantas: entrar abajo, subir al andén</h3>
+            <p>Los accesos del Tokaido/Sanyo Shinkansen están en el <strong>lado Yaesu, planta 1F</strong>. Los andenes 14–19 están arriba.</p>
+          </div>
+          <a class="map-source" href="https://www.tokyostationcity.com/en/information/pdf/stationyard_1fb1.pdf" target="_blank" rel="noopener">Abrir plano oficial ↗</a>
+        </div>
+        <div class="map-scroll"><svg class="map-svg" viewBox="0 0 900 360" role="img" aria-label="Esquema de Tokyo Station: entrada Yaesu en 1F, puertas del Shinkansen, escaleras y andenes 14 a 19 en la planta superior">
+          <rect width="900" height="360" fill="#f7f7f7" />
+          <rect x="40" y="40" width="820" height="110" rx="8" fill="#eef3fb" stroke="#1E50A2" stroke-width="2" />
+          <text x="60" y="68" font-family="sans-serif" font-size="13" font-weight="700" fill="#1E50A2">PLANTA SUPERIOR · ANDENES 14–19 · 東海道新幹線</text>
+          {[14, 15, 16, 17, 18, 19].map((n, i) => (
+            <g>
+              <rect x={130 + i * 115} y="86" width="96" height="46" rx="5" fill="#fff" stroke="#1E50A2" stroke-width="2" />
+              <text x={178 + i * 115} y="117" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="800" fill="#1a1a1a">{n}</text>
+            </g>
+          ))}
+          <rect x="40" y="200" width="820" height="120" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="2" />
+          <text x="60" y="228" font-family="sans-serif" font-size="13" font-weight="700" fill="#1a1a1a">1F · ENTRADA LADO YAESU</text>
+          <rect x="70" y="250" width="170" height="50" rx="6" fill="#1a1a1a" />
+          <text x="155" y="272" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#fff">① Taxi · Yaesu South</text>
+          <text x="155" y="290" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#c9a961">八重洲南口</text>
+          <rect x="300" y="250" width="200" height="50" rx="6" fill="#eef5ff" stroke="#4d8bd6" stroke-width="2" />
+          <text x="400" y="272" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#1a1a1a">② Señal 東海道・山陽新幹線</text>
+          <text x="400" y="290" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#555">seguir las señales azules</text>
+          <rect x="560" y="250" width="170" height="50" rx="6" fill="#BC002D" />
+          <text x="645" y="272" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#fff">③ Puertas Shinkansen</text>
+          <text x="645" y="290" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#fff">billete / QR</text>
+          <path d="M240 275 H300 M500 275 H560" stroke="#1a1a1a" stroke-width="3" marker-end="url(#fl)" />
+          <path d="M760 275 C 800 275, 800 200, 800 150" stroke="#BC002D" stroke-width="4" fill="none" marker-end="url(#fl2)" />
+          <text x="780" y="190" text-anchor="end" font-family="sans-serif" font-size="12" font-weight="700" fill="#BC002D">④ subir</text>
+          <text x="470" y="175" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#1a1a1a">⑤ arriba: la pantalla dice el andén exacto</text>
+          <defs>
+            <marker id="fl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a" /></marker>
+            <marker id="fl2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#BC002D" /></marker>
+          </defs>
+        </svg></div>
+        <div class="map-scroll-hint">↔ Desliza para ver el esquema completo</div>
+        <div class="map-note">Esquema simplificado para entender el orden. En la estación real mandan las señales y las pantallas del día.</div>
+      </div>
+
+      <div class="follow-sign">
+        <div class="kicker">La señal a reconocer</div>
+        <div class="jp">東海道・山陽新幹線</div>
+        <div class="en">Tokaido · Sanyo Shinkansen · <Linea l="shinkansen" /></div>
+        <div class="do">👉 Si vemos esta señal, vamos en la dirección correcta.</div>
+      </div>
+
+      <div class="station-flow">
+        <div class="big-step"><span class="step-num">1</span><h3>El taxi nos deja en Yaesu South</h3><p>Pedimos exactamente <strong class="jp">東京駅 八重洲南口</strong>. Al bajar estamos en el nivel de calle, a la entrada de la estación.</p><span class="floor-badge">📍 1F · ENTRADA</span></div>
+        <div class="floor-arrow">↓</div>
+        <div class="big-step"><span class="step-num">2</span><h3>Entramos y NO buscamos “Tokaido Line”</h3><p>Buscamos los carteles <strong class="jp">東海道・山陽新幹線</strong>. La <strong>Tokaido Line (andenes 9–10)</strong> es otra línea JR convencional: <strong>no es nuestro tren</strong>.</p><span class="floor-badge">📍 1F · SEGUIR SEÑALES AZULES DEL SHINKANSEN</span></div>
+        <div class="floor-arrow">↓</div>
+        <div class="big-step"><span class="step-num">3</span><h3>Pasamos por la puerta del Tokaido/Sanyo Shinkansen</h3><p>Con el billete o el QR, usamos la puerta indicada para el <strong>Tokaido/Sanyo Shinkansen</strong>. Todavía no hace falta buscar el andén.</p><span class="floor-badge">📍 1F · PUERTA SHINKANSEN</span></div>
+        <div class="floor-arrow">⬆</div>
+        <div class="big-step"><span class="step-num">4</span><h3>Ahora subimos a los andenes</h3><p>Dentro de la zona Shinkansen seguimos <strong>Platforms 14–19</strong>. Escaleras, escaleras mecánicas o ascensor (con maletas, ascensor). <strong>Los andenes están arriba.</strong></p><span class="floor-badge">📍 PLANTA SUPERIOR · ANDENES 14–19</span></div>
+        <div class="floor-arrow">↓</div>
+        <div class="big-step"><span class="step-num">5</span><h3>Arriba: miramos la pantalla</h3><p>Ahora sí. Buscamos <strong>NOZOMI のぞみ + nuestra hora + SHIN-OSAKA 新大阪</strong>. El número de andén concreto lo dice la pantalla ese día.</p><span class="floor-badge">📍 PANTALLA → ANDÉN</span></div>
+      </div>
+
+      <Galeria cols={4} h="180px">
+        <Foto id="shinkansen-sign" titulo="1 · Esto es lo que buscamos" texto="La combinación <b>東海道・山陽新幹線</b> y “Tokaido · Sanyo Shinkansen”. Si la vemos, la seguimos." />
+        <Foto id="shinkansen-gates" titulo="2 · Las puertas del Shinkansen" texto="Puertas propias del Shinkansen, distintas de las de JR normal." />
+        <Foto id="shinkansen-board" titulo="3 · Aquí comprobamos el tren" texto="Hora, tren, destino y andén. <b>La pantalla manda</b> (como las pantallas de salidas del aeropuerto)." />
+        <Foto id="shinkansen-platform" titulo="4 · Esto es un andén" texto="Arriba veremos el número grande del andén y las pantallas sobre la vía." />
+      </Galeria>
+
+      <div class="show-card">
+        <div class="kicker oro">🆘 Si nos perdemos</div>
+        <h3>Enseñar esto a un empleado</h3>
+        <div class="phrase-grid">
+          <Frase jp="東海道・山陽新幹線のりばはどこですか？" romaji="Tōkaidō / San'yō Shinkansen noriba wa doko desu ka?" es="¿Dónde están los andenes del Tokaido/Sanyo Shinkansen?" />
+          <Frase jp="新大阪行きのぞみは何番線ですか？" romaji="Shin-Ōsaka-yuki Nozomi wa nan-ban-sen desu ka?" es="¿De qué andén sale el Nozomi a Shin-Osaka?" />
+          <Frase jp="この列車は新大阪に行きますか？" romaji="Kono ressha wa Shin-Ōsaka ni ikimasu ka?" es="¿Este tren va a Shin-Osaka?" />
+          <Frase jp="この切符で大丈夫ですか？" romaji="Kono kippu de daijōbu desu ka?" es="¿Este billete es correcto?" />
+        </div>
+      </div>
+
+      <div class="dont-card">
+        <strong>⚠️ NO COMPLICARNOS</strong>
+        <p style="margin:8px 0 0">No hace falta encontrar una “línea” concreta de metro ni memorizar un pasillo: <strong>1F → señal 東海道・山陽新幹線 → puerta Shinkansen → subir → 14–19 → pantalla.</strong></p>
+      </div>
+      <div class="mistakes">
+        <div class="mistakes-title">⚠️ TRES ERRORES A EVITAR</div>
+        <div class="mistake-grid">
+          <div><strong>❌ No buscar “Osaka”</strong><span>El destino del tren es <strong>Shin-Osaka / 新大阪</strong>.</span></div>
+          <div><strong>❌ No seguir “Tokaido Line 9–10”</strong><span>Es la línea JR convencional. Necesitamos <strong>Tokaido/Sanyo Shinkansen</strong>.</span></div>
+          <div><strong>❌ No dar por hecho un andén</strong><span>El rango es <strong>14–19</strong>. El número exacto sale en la pantalla del día.</span></div>
+        </div>
+      </div>
+      <div class="walk-note">
+        <strong>🧳 Maletas grandes</strong>
+        Si una maleta suma <strong>más de 160 cm y hasta 250 cm</strong> (alto + ancho + fondo), hay que reservar un asiento con espacio para equipaje voluminoso. Hasta 160 cm no hace falta: van en el portaequipajes o a los pies.
+      </div>
+      <div class="regla-oro"><strong>Regla de oro:</strong> si dudamos, no seguimos caminando al azar. Paramos, buscamos <strong class="jp">東海道・山陽新幹線</strong> o enseñamos una de las frases de arriba a un empleado.</div>
+      <p class="map-note" style="background:none;border:0;text-align:left;padding:14px 0 0">
+        Orientación: <a href="https://www.jreast.co.jp/estation/stations/1039.html" target="_blank" rel="noopener">JR East · Tokyo Station</a> · <a href="https://www.tokyostationcity.com/en/information/pdf/stationyard_1fb1.pdf" target="_blank" rel="noopener">Tokyo Station City · plano 1F</a>.
+      </p>
+    </div>
+  </section>
+
+  <Seccion id="billete" fondo="alt" kicker="Billete" titulo="Shinkansen <strong>Nozomi</strong>">
+    <Billete linea="Tokaido Shinkansen" tren="NOZOMI のぞみ" clase="Ordinary Car · Reserved" asientos="4 asientos juntos" origen="Tokyo" origenJp="東京駅" destino="Shin-Osaka" destinoJp="新大阪駅" duracion="2h 20m" direccion="Shin-Osaka" direccionNota="/ Hakata" />
+    <div class="cards">
+      <div class="card"><h3>¿Cómo identificar el tren?</h3><p>En las pantallas buscamos <strong style="color:var(--red)">のぞみ (Nozomi)</strong> + destino <strong class="jp">新大阪</strong> o <strong class="jp">博多</strong> + nuestra hora. Andenes <strong>14–19</strong>, el exacto según pantalla. No confundir con <strong>Hikari ひかり</strong> ni <strong>Kodama こだま</strong>.</p></div>
+      <div class="card"><h3>Asientos</h3><p>Pedir <strong>2+2</strong> en filas seguidas o 3+2 en la misma fila. Si sobra: el lado <strong>E (ventana derecha)</strong> es el del <strong>monte Fuji</strong>, unos 40–45 min después de salir si el día está despejado.</p><p>Maletas de 160–250 cm: asiento con espacio para equipaje voluminoso (es la <strong>última fila</strong> de cada coche).</p></div>
+      <div class="card"><h3>Comida a bordo</h3><p>Comprar en konbini o tiendas de la estación <strong>ANTES</strong> de subir. Para el celíaco, evitar ekiben tradicionales (llevan shoyu). Opciones más seguras leyendo etiqueta: onigiri simple, fruta, yogur, snacks etiquetados.</p></div>
+    </div>
+    <Galeria cols={2}>
+      <Foto id="nozomi" titulo="Así es el tren" texto="Shinkansen de la serie N700. Morro alargado blanco con franja azul." />
+      <Foto id="ekiben" titulo="Tiendas de la estación" texto="Ekiben y tiendas antes de las puertas. Leer siempre etiquetas para el celíaco." />
+    </Galeria>
+  </Seccion>
+
+  <Seccion id="shin-osaka" kicker="~14:20 · Llegada" titulo="Shin-Osaka → <strong>Hommachi</strong>" lead="Al bajar del Shinkansen no buscamos el hotel todavía. Primero <strong>Osaka Metro → Midosuji Line (rojo) → M13</strong>. El detalle completo está en la guía de Osaka.">
+    <MiniMapa
+      titulo={`Shin-Osaka ${est('midosuji', 13)} → Hommachi ${est('midosuji', 18)}`}
+      nota={`${lin('midosuji')} ${dir('Nakamozu')} · 5 paradas · ~10 min`}
+      paradas={[
+        { nombre: 'Shin-Osaka', est: ['midosuji', 13], tipo: 'destacado', sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Nishinakajima', est: ['midosuji', 14], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Nakatsu', est: ['midosuji', 15], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Umeda', est: ['midosuji', 16], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Yodoyabashi', est: ['midosuji', 17], sig: { modo: 'linea', l: 'midosuji' } },
+        { nombre: 'Hommachi', est: ['midosuji', 18], tipo: 'destacado', sig: { modo: 'andar', label: '🚶 4–5 min' } },
+        { nombre: 'Hotel', sub: 'Exit 12 · Exit 7 con maletas', tipo: 'hotel' },
+      ]}
+      check={`<strong>🎯 Bajamos en ${est('midosuji', 18, 'Hommachi 本町')}.</strong> Si estamos muy cansados: taxi desde la salida de Shin-Osaka directo al hotel.`}
+    />
+    <Galeria cols={2}>
+      <Foto id="shin-osaka" titulo="Shin-Osaka" texto="Aquí termina el Shinkansen. Dentro de la estación seguimos Osaka Metro / Midosuji Line." />
+      <Foto id="midosuji" titulo="Midosuji Line" texto="El metro rojo de Osaka. Código M." />
+    </Galeria>
+  </Seccion>
+
+  <Conexion fase="tokyo-llegada" modo="hacia" />
+
+  <FrasesAyuda extraTitulo="Tokyo Station y Shinkansen" extra={[
+    { jp: '東京駅の八重洲南口までお願いします。', romaji: 'Tōkyō-eki no Yaesu-minamiguchi made onegai shimasu.', es: 'A la salida Yaesu Sur de Tokyo Station, por favor (taxi).' },
+    { jp: '新幹線の改札はどこですか？', romaji: 'Shinkansen no kaisatsu wa doko desu ka?', es: '¿Dónde están las puertas del Shinkansen?' },
+    { jp: '大きい荷物があります。', romaji: 'Ōkii nimotsu ga arimasu.', es: 'Llevamos maletas grandes.' },
+    { jp: '御堂筋線はどこですか？', romaji: 'Midōsuji-sen wa doko desu ka?', es: '¿Dónde está la línea Midosuji? (en Shin-Osaka)' },
+  ]} />
+
+  <BloqueCeliaco ciudad="Tokyo y el Shinkansen" consejos={[
+    '<strong>Madrugada en Haneda</strong>: los konbini 24 h son el plan B si llegamos con hambre. Leer la etiqueta.',
+    '<strong>Shinkansen</strong>: comprar comida segura en la estación <strong>antes</strong> de subir. Los ekiben tradicionales casi siempre llevan shoyu.',
+    '<strong>Onigiri</strong>: los de sal o salmón suelen ser los más simples, pero algunos llevan salsas o algas sazonadas. Mirar 小麦 en la etiqueta.',
+  ]} />
+
+  <Footer slot="footer" titulo="JAPÓN 2026 · FASE 1 — Tokyo → Osaka" lineas={['Guía práctica in situ · mapas, esquemas y fotografías reales', 'Confirmar horarios de trenes una semana antes del viaje en SmartEX o JR Central.']} />
+</BaseLayout>
