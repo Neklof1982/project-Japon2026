@@ -233,6 +233,33 @@
   "fuente": "https://commons.wikimedia.org/wiki/File:Hozenji_(Osaka_Chuo-ku)_Temple_hdsr_S5_24.jpg",
   "titulo": "Hozenji (Osaka Chuo-ku) Temple hdsr S5 24.jpg"
  },
+ "katsuoji-darumas": {
+  "file": "img/osaka/katsuoji-darumas.jpg",
+  "w": 1280,
+  "h": 961,
+  "autor": "Hyppolyte de Saint-Rambert",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Katsu%C5%8D-ji_(Minoh_Osaka)_Temple_hdsr_S5_da08.jpg",
+  "titulo": "Katsuō-ji (Minoh Osaka) Temple hdsr S5 da08.jpg"
+ },
+ "katsuoji-vista": {
+  "file": "img/osaka/katsuoji-vista.jpg",
+  "w": 1280,
+  "h": 961,
+  "autor": "Hyppolyte de Saint-Rambert",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Katsu%C5%8D-ji_(Minoh_Osaka)_Temple_hdsr_S5_sw04.jpg",
+  "titulo": "Katsuō-ji (Minoh Osaka) Temple hdsr S5 sw04.jpg"
+ },
+ "katsuoji-daruma": {
+  "file": "img/osaka/katsuoji-daruma.jpg",
+  "w": 1280,
+  "h": 961,
+  "autor": "Hyppolyte de Saint-Rambert",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Katsu%C5%8D-ji_(Minoh_Osaka)_Temple_hdsr_S5_da22.jpg",
+  "titulo": "Katsuō-ji (Minoh Osaka) Temple hdsr S5 da22.jpg"
+ },
  "shinsaibashi": {
   "file": "img/osaka/shinsaibashi.jpg",
   "w": 1280,
@@ -341,6 +368,33 @@
   "fuente": "https://commons.wikimedia.org/wiki/File:JR-West_223_Sagano_Sanin_Line_at_Kyoto_Station.jpg",
   "titulo": "JR-West 223 Sagano Sanin Line at Kyoto Station.jpg"
  },
+ "ginkakuji": {
+  "file": "img/kyoto/ginkakuji.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "そらみみ",
+  "licencia": "CC BY-SA 3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kannonden_of_Jishoji_(Ginkakuji)_Temple_1.JPG",
+  "titulo": "Kannonden of Jishoji (Ginkakuji) Temple 1.JPG"
+ },
+ "filosofos": {
+  "file": "img/kyoto/filosofos.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "Gzzz",
+  "licencia": "CC BY 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tetsugaku-no-michi_-_Philosopher%27s_Walk_-_Kyoto.jpg",
+  "titulo": "Tetsugaku-no-michi - Philosopher's Walk - Kyoto.jpg"
+ },
+ "nanzenji-suirokaku": {
+  "file": "img/kyoto/nanzenji-suirokaku.jpg",
+  "w": 1280,
+  "h": 853,
+  "autor": "663highland",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:251213_Nanzen-ji_Suirokaku_Kyoto_Japan01s3.jpg",
+  "titulo": "251213 Nanzen-ji Suirokaku Kyoto Japan01s3.jpg"
+ },
  "kiyomizu": {
   "file": "img/kyoto/kiyomizu.jpg",
   "w": 1280,
@@ -394,6 +448,15 @@
   "licencia": "CC BY 4.0",
   "fuente": "https://commons.wikimedia.org/wiki/File:Sand_garden_at_Tenry%C5%AB-ji_(2020)_-_img_01.jpg",
   "titulo": "Sand garden at Tenryū-ji (2020) - img 01.jpg"
+ },
+ "otagi": {
+  "file": "img/kyoto/otagi.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Dudva",
+  "licencia": "CC0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pilgrim_statues_of_Otagi-nenbutsuji_1.jpg",
+  "titulo": "Pilgrim statues of Otagi-nenbutsuji 1.jpg"
  },
  "togetsukyo": {
   "file": "img/kyoto/togetsukyo.jpg",
@@ -745,6 +808,15 @@
   "licencia": "CC BY 2.5",
   "fuente": "https://commons.wikimedia.org/wiki/File:TokyoMetro-hatchobori-A1-entrance.jpg",
   "titulo": "TokyoMetro-hatchobori-A1-entrance.jpg"
+ },
+ "gotokuji": {
+  "file": "img/tokyo/gotokuji.jpg",
+  "w": 1280,
+  "h": 960,
+  "autor": "Nesnad",
+  "licencia": "CC BY-SA 4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Gotokuji-manekineko-c-october2015.jpg",
+  "titulo": "Gotokuji-manekineko-c-october2015.jpg"
  },
  "godzilla": {
   "file": "img/tokyo/godzilla.jpg",

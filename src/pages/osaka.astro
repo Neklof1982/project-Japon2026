@@ -12,6 +12,7 @@ import Prio from '../components/ui/Prio.astro';
 import VueltaHotel from '../components/ui/VueltaHotel.astro';
 import Foto from '../components/ui/Foto.astro';
 import Galeria from '../components/ui/Galeria.astro';
+import Desplegable from '../components/ui/Desplegable.astro';
 import Timeline from '../components/ruta/Timeline.astro';
 import TL from '../components/ruta/TL.astro';
 import Linea from '../components/ruta/Linea.astro';
@@ -162,6 +163,7 @@ const midoN = `${lin('midosuji')} ${dir('Minoh-kayano')}`;
   <Seccion id="dia21" fondo="alt">
     <DiaHead fecha="MIÉRCOLES · 21 OCT" titulo="<strong>Llegada + Hommachi + Minami suave</strong>" zona="Día de llegada" />
     <p class="lead">Hoy no tenemos que demostrar nada. Venimos de Tokyo: llegar, ducharnos, descansar y tener un primer contacto con Osaka. Si estamos cansados, versión corta.</p>
+    <Desplegable titulo="⭐ PLAN A · Versión Minami suave (recomendado si estamos cansados)" abierto>
     <div class="choice-grid">
       <div class="choice"><h3><Prio t="must" /> Versión corta</h3><div class="route">HOTEL → SHINSAIBASHI-SUJI → HOTEL</div><p>Salimos del hotel y caminamos por Shinsaibashi-suji. Vemos ambiente, cenamos y volvemos. Si las piernas pesan, ni siquiera necesitamos metro.</p><div class="best">Duración orientativa: 2–3 h · muy fácil de recortar.</div></div>
       <div class="choice"><h3><Prio t="maybe" texto="🟡 SI TENEMOS ENERGÍA" /> Versión ampliada</h3><div class="route">Shinsaibashi → America-Mura → Horie → Dotonbori → Hozenji</div><p>Todo andando, sin volver atrás. Si a mitad de camino estamos cansados, cortamos en Dotonbori y taxi a Hommachi.</p><div class="best">No convertimos esta opción en obligación.</div></div>
@@ -191,6 +193,55 @@ const midoN = `${lin('midosuji')} ${dir('Minoh-kayano')}`;
       <Foto id="dotonbori" titulo="Dotonbori" texto="El canal y los grandes carteles luminosos. Aquí podemos cortar." />
       <Foto id="hozenji" titulo="Hozenji Yokocho" texto="Callejón empedrado y templo pequeño: el rincón tranquilo de Minami." />
     </Galeria>
+    </Desplegable>
+
+    <Desplegable titulo="🎯 PLAN B · Excursión especial a Katsuo-ji (si llegamos con energía)">
+    <p class="lead"><strong>Katsuo-ji (勝尾寺)</strong> es el famoso “templo de los Darumas”, al noroeste de Osaka, en plena zona de montaña. Miles de muñecos Daruma rojos dejados como ofrenda por todo el recinto: de las fotos más espectaculares del viaje.</p>
+    <Galeria cols={3} h="190px">
+      <Foto id="katsuoji-darumas" titulo="Darumas sobre la roca" texto="Los Daruma se dejan como ofrenda para pedir suerte y que se cumplan los deseos." />
+      <Foto id="katsuoji-vista" titulo="Katsuo-ji" texto="Templo de montaña, rodeado de bosque. Darumas hasta en los muros." />
+      <Foto id="katsuoji-daruma" titulo="Darumas por todas partes" texto="En tocones, linternas y rincones del jardín: hay que ir mirando." />
+    </Galeria>
+    <Aviso tipo="oro" titulo="⚠️ Solo si salimos antes de Tokyo">
+      <p>Con el Nozomi previsto llegamos a Shin-Osaka sobre las 14:20 y al hotel hacia las 15:00: <strong>así no da tiempo</strong>. Katsuo-ji cierra temprano (contamos con las <strong>16:00</strong>) y el taxi tarda 45–60 min. Si queremos este plan, hay que coger un Shinkansen anterior en Tokyo.</p>
+    </Aviso>
+    <Aviso tipo="azul" titulo="🧳 Check-in sobre las 15:00: antes, maletas en recepción">
+      <p>Si llegamos antes del check-in, pedimos en recepción que nos guarden las maletas en la consigna del hotel (<em>nimotsu azukari</em>) y vamos ligeros al templo. En los hoteles de Japón es lo habitual. Frase: <span class="jp">荷物を預かってもらえますか？</span> y pedimos el resguardo (más en <a href="#frases">Frases</a>).</p>
+    </Aviso>
+    <div class="walk-note"><strong>🚕 Por qué taxi y no metro + bus</strong>Somos cuatro. El taxi nos evita transbordos (metro hasta Minoh-kayano y bus de montaña), nos da flexibilidad con un templo que cierra pronto y, dividido entre cuatro, sale razonable.</div>
+    <Timeline>
+      <TL hora="13:30" titulo="Llegada al hotel en Hommachi" tipo="descanso">Solo si hemos salido antes de Tokyo.</TL>
+      <TL hora="13:45" titulo="Maletas en recepción" tipo="descanso">Nimotsu azukari · guardaequipaje. Pasaportes y lo de valor, con nosotros.</TL>
+      <TL hora="14:00" titulo="🚕 Taxi a Katsuo-ji" tipo="taxi" etiqueta="45–60 min">Enseñamos la tarjeta del taxista de abajo.</TL>
+      <TL hora="15:00–15:50" titulo="⛩️ Visita a Katsuo-ji">Darumas, jardín y santuario. Sin apurar el cierre: a las 16:00 queremos estar fuera.</TL>
+      <TL hora="~16:00" titulo="🚕 Vuelta en taxi al hotel" tipo="taxi" etiqueta="45–60 min">Enseñamos la tarjeta del hotel.</TL>
+      <TL hora="~17:00" titulo="Check-in, ducha y descanso" tipo="descanso">Recogemos las maletas y subimos. Cena cerca del hotel.</TL>
+    </Timeline>
+    <div class="cards">
+      <div class="card"><h3>📏 Distancia</h3><div class="stat">≈ 25 KM</div><p>Hotel Hommachi ↔ Katsuo-ji, cada trayecto.</p></div>
+      <div class="card"><h3>⏱️ Tiempo</h3><div class="stat">45–60 MIN</div><p>Según el tráfico. Por eso salimos con margen.</p></div>
+      <div class="card"><h3>💴 Coste</h3><div class="stat">8.000–10.000 ¥</div><p>Por trayecto, <strong>~2.000–2.500 ¥ por persona</strong>. Estimación: confirmar con la app GO o preguntar antes de salir. Peajes aparte.</p></div>
+    </div>
+    <MapaAndando
+      titulo="Hotel → Katsuo-ji en taxi"
+      sub="Hacia el norte, a las montañas de Minoh. Esquema orientativo."
+      ciudad="Osaka"
+      distancia="≈ 25 km"
+      tiempo="45–60 min"
+      modo="driving"
+      puntos={[
+        { n: 'Hotel', lat: 34.6806, lon: 135.5024, t: 'inicio', q: 'Far East Village Hotel Osaka Honmachi' },
+        { n: 'Katsuo-ji', lat: 34.8658, lon: 135.4911, t: 'fin', q: 'Katsuoji Temple, Minoh' },
+      ]}
+    />
+    <Aviso titulo="⚠️ Atención celíaco">
+      <p>Zona rural: opciones de comida limitadas cerca del templo. Llevamos <strong>comida segura en la mochila</strong> (onigiri sin salsa, fruta, barritas verificadas). La cena segura, al volver al hotel.</p>
+    </Aviso>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Hotel → Katsuo-ji" jp="勝尾寺" romaji="Katsuo-ji" frase="勝尾寺までお願いします。" fraseEs="A Katsuo-ji, por favor." dire="大阪府箕面市粟生間谷2914-1" />
+      <TarjetaTaxi etiqueta="Katsuo-ji → Hotel" jp={H.jp} romaji={H.nombre} frase="このホテルまでお願いします。" fraseEs="A este hotel, por favor." dire={H.direccionJp} />
+    </div>
+    </Desplegable>
   </Seccion>
 
   <Seccion id="planes" kicker="22–24 OCT · Intercambiable" titulo="Cuatro planes. <strong>Elegimos tres.</strong>" lead="No hay un orden correcto. Cada noche decidimos qué hacer al día siguiente. Los cuatro planes salen de Hommachi, recorren una zona concreta y tienen vuelta independiente al hotel.">

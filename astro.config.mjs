@@ -1,8 +1,9 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-const base = process.env.BASE_PATH ?? '/project-Japon2026';
-const site = process.env.SITE_URL ?? process.env.URL ?? 'https://Neklof1982.github.io';
+// Netlify pasa URL (dominio de la web) y netlify.toml fija BASE_PATH=/.
+const base = process.env.BASE_PATH ?? '/';
+const site = process.env.SITE_URL ?? process.env.URL;
 
 export default defineConfig({
   site,

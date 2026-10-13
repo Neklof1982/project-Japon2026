@@ -372,7 +372,7 @@ const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, 
   </Seccion>
 
   <Seccion id="d1">
-    <DiaHead fecha="DOMINGO · 1 NOV" titulo="Shinjuku → Godzilla → cena → hotel → <strong>Haneda</strong>" zona="Oeste → Haneda" />
+    <DiaHead fecha="DOMINGO · 1 NOV" titulo="Gotokuji (Maneki-neko) → Shinjuku → Godzilla → cena → hotel → <strong>Haneda</strong>" zona="Oeste → Haneda" />
     <Aviso titulo="Último día: nada de correr."><p>El vuelo sale sobre las <strong>00:20 del 2 de noviembre</strong>. Margen amplio para volver al hotel, recoger maletas y llegar a Haneda.</p></Aviso>
     <MiniMapa
       titulo="Hotel → Shinjuku: dos líneas, un cambio en Ginza"
@@ -388,9 +388,30 @@ const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, 
         `${Mm(16)} → ${Mm(8, 'Shinjuku')} · ${dir('Ogikubo')}.`,
       ]}
     />
+    <div class="taxi-grid">
+      <MiniMapa
+        titulo="Shinjuku → Gotokuji: Odakyu, solo el local"
+        paradas={[
+          { nombre: 'Shinjuku', sub: 'Odakyu', tipo: 'destacado', sig: { modo: 'linea', label: '~15 min' } },
+          { nombre: 'Gotokuji', sub: '豪徳寺 · estación', sig: { modo: 'andar', label: '🚶 ~10 min' } },
+          { nombre: 'Templo Gotokuji', tipo: 'destacado' },
+        ]}
+        giros={[
+          'En Shinjuku seguimos las señales de <strong>Odakyu Line</strong> (<span class="jp">小田急線</span>).',
+          'Subimos solo al <strong>local</strong> (<span class="jp">各駅停車</span>): los rápidos y exprés no paran en Gotokuji.',
+          'Bajamos en <strong class="jp">豪徳寺</strong> Gotokuji (~15 min) y caminamos unos 10 min hasta el templo.',
+        ]}
+        check="<strong>Vuelta igual:</strong> Odakyu local hasta Shinjuku. Si estamos cansados, taxi con la tarjeta de al lado."
+      />
+      <TarjetaTaxi etiqueta="Si estamos cansados · Gotokuji → Shinjuku" jp="新宿駅 南口" romaji="Shinjuku Station · South Exit" frase="新宿駅の南口までお願いします。" fraseEs="A la salida sur de la estación de Shinjuku, por favor." />
+    </div>
     <Timeline>
-      <TL hora="Mañana" titulo="Hotel → Shinjuku" tipo="metro"><Fragment slot="lineas"><Linea l="hibiya" dir="Naka-meguro" /> <Linea l="marunouchi" dir="Ogikubo" /></Fragment>Cambio en Ginza.</TL>
-      <TL hora="10:00–13:00" titulo="Tokyo Metropolitan Government Building + Shinjuku" prio="must" prioTexto="MUST">Mirador si está abierto y hay visibilidad. Después Hanazono Shrine y compras.</TL>
+      <TL hora="09:30" titulo="Hotel → Shinjuku" tipo="metro"><Fragment slot="lineas"><Linea l="hibiya" dir="Naka-meguro" /> <Linea l="marunouchi" dir="Ogikubo" /></Fragment>Cambio en Ginza. Unos 30–35 min · ~210 ¥ por persona.</TL>
+      <TL hora="~10:05" titulo="Shinjuku → Gotokuji" tipo="tren" etiqueta="Odakyu">Tren <strong>local</strong> directo, ~15 min · unos 170 ¥ por persona (confirmar en la máquina). Bajamos en Gotokuji y caminamos ~10 min.</TL>
+      <TL hora="10:35–11:35" titulo="⛩️ Templo Gotokuji" prio="must" prioTexto="MUST">Famoso por sus miles de maneki-neko (gatos de la suerte). Entrada gratuita. Por la mañana está tranquilo y la luz es buena para las fotos.</TL>
+      <TL hora="~11:50" titulo="Gotokuji → Shinjuku" tipo="tren" etiqueta="Odakyu">El mismo tren local de vuelta, ~15 min. Si estamos cansados, taxi: unos 8–9 km · 20–30 min · ~3.700–4.300 ¥ (~1.000 ¥ por persona).</TL>
+      <TL hora="12:15" titulo="🍜 Comida en Shinjuku" tipo="descanso">Shinjuku tiene sitios que entienden “gluten free”: mirar Find Me Gluten Free antes.</TL>
+      <TL hora="13:30–16:00" titulo="Tokyo Metropolitan Government Building + Shinjuku" prio="must" prioTexto="MUST">Mirador gratuito si está abierto y hay visibilidad. Después Hanazono Shrine y compras tranquilas.</TL>
       <TL hora="17:00" titulo="Kabukicho → Godzilla Head" prio="must" prioTexto="MUST">Con ambiente de tarde-noche.</TL>
       <TL hora="18:00–20:00" titulo="Golden Gai / Omoide Yokocho + cena" tipo="descanso">No llenamos la noche de más visitas.</TL>
       <TL hora="20:15–20:45" titulo="Regreso al hotel + maletas" tipo="taxi">Si hay cansancio, taxi Shinjuku → hotel. El último día no experimentamos con rutas.</TL>
@@ -421,6 +442,7 @@ const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, 
       check="<strong>Regla final:</strong> no fijamos de memoria un “último tren”. Con vuelo a las 00:20, el taxi directo es la opción que menos riesgo tiene. Confirmar terminal en el billete."
     />
     <Galeria cols={3} h="200px">
+      <Foto id="gotokuji" titulo="Gotokuji" texto="Estanterías llenas de maneki-neko, los gatos de la suerte." />
       <Foto id="tmg" titulo="Tokyo Metropolitan Government" texto="Las dos torres con mirador gratuito." />
       <Foto id="godzilla" titulo="Godzilla Head" texto="Asoma sobre el edificio Toho en Kabukicho." />
       <Foto id="omoide" titulo="Omoide Yokocho" texto="Callejones de puestos junto a la estación." />
@@ -437,6 +459,7 @@ const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, 
       <TarjetaTaxi etiqueta="Hotel → Meiji Jingu (30/10)" jp="明治神宮 原宿口" romaji="Meiji Jingu · Harajuku entrance" frase="明治神宮の原宿口までお願いします。" />
       <TarjetaTaxi etiqueta="Shibuya → Odaiba (30/10)" jp="お台場海浜公園" romaji="Odaiba Marine Park" frase="お台場海浜公園までお願いします。" />
       <TarjetaTaxi etiqueta="Hotel → Kaminarimon (31/10)" jp="浅草 雷門" romaji="Asakusa · Kaminarimon" frase="浅草の雷門までお願いします。" />
+      <TarjetaTaxi etiqueta="Gotokuji → Shinjuku (1/11)" jp="新宿駅 南口" romaji="Shinjuku Station · South Exit" frase="新宿駅の南口までお願いします。" fraseEs="A la salida sur de la estación de Shinjuku, por favor." />
       <TarjetaTaxi etiqueta="Odaiba / Shinjuku → hotel" jp={Ht.jp} romaji={Ht.nombre} frase="このホテルまでお願いします。" dire={Ht.direccionJp} />
       <TarjetaTaxi etiqueta="Hotel → Haneda (1/11)" jp="羽田空港 第3ターミナル" romaji="Haneda Airport Terminal 3" frase="羽田空港の第3ターミナルまでお願いします。" fraseEs="Confirmar la terminal en el billete antes de salir." />
     </div>
@@ -462,6 +485,7 @@ const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, 
         ['Ueno', 'Akihabara', `${JY(5)} → ${JY(3)}`, `${lin('yamanote', true)} · 2 paradas`],
         ['Akihabara', '🏨 Hotel', `${Hh(16)} → ${Hh(12)}`, `${lin('hibiya', true)} ${dir('Naka-meguro')} · 4 paradas`],
         ['Ginza', 'Shinjuku', `${Mm(16)} → ${Mm(8)}`, `${lin('marunouchi', true)} ${dir('Ogikubo')} · 8 paradas`],
+        ['Shinjuku', 'Gotokuji', 'Odakyu Line · <span class="jp">小田急線</span>', 'Solo el local (<span class="jp">各駅停車</span>) · ~15 min'],
         ['Tokyo Station', '🏨 Hotel', '🚕 Taxi', 'Yaesu South · 10–12 min'],
         ['Shibuya', 'Odaiba', '🚕 Taxi', 'Odaiba Marine Park · recomendado para 4'],
         ['🏨 Hotel', 'Haneda', '🚕 Taxi', 'Confirmar terminal antes de salir'],
@@ -500,6 +524,7 @@ const lineasTokyo: { l: LineaId; foto: string; pista: string; codigos: [number, 
     '<strong>Tsukiji</strong>: muchos puestos usan shoyu o salsas dulces (tamagoyaki, brochetas). Sashimi solo, sin salsa, y preguntando.',
     '<strong>Monjayaki y okonomiyaki</strong> (Tsukishima, cerca del hotel): masa de harina de trigo. No aptos.',
     '<strong>Shibuya y Shinjuku</strong>: zonas con más restaurantes que entienden “gluten free”. Revisar Find Me Gluten Free antes de salir.',
+    '<strong>Gotokuji</strong>: los dulces y galletas con forma de gato de los souvenirs suelen llevar trigo. Mirar <strong>小麦</strong> en la etiqueta.',
     '<strong>Última noche</strong>: cenar antes de ir a Haneda. Llevar algo seguro para el vuelo.',
   ]} />
 
