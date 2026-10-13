@@ -3,7 +3,6 @@
 ![Astro](https://img.shields.io/badge/Astro-7.3.5-BC52EE?style=flat&logo=astro&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=flat&logo=github&logoColor=white)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)
 
 Guía interactiva para organizar y disfrutar de un viaje por Japón en octubre y noviembre de 2026. Incluye itinerarios por Tokyo, Osaka y Kyoto, información sobre transportes, desplazamientos, visitas y recomendaciones prácticas para consultar durante el viaje desde el móvil.
