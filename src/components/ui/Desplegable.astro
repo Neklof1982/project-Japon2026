@@ -1,0 +1,9 @@
+---
+/** Bloque que se abre y se cierra (<details> nativo: sin JavaScript, funciona sin conexión). */
+interface Props { titulo: string; abierto?: boolean; id?: string }
+const { titulo, abierto = false, id } = Astro.props;
+---
+<details class="desplegable" open={abierto} id={id}>
+  <summary set:html={titulo} />
+  <div class="d-body"><slot /></div>
+</details>

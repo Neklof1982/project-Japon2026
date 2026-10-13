@@ -26,33 +26,21 @@ Guía interactiva para organizar y disfrutar de un viaje por Japón en octubre y
 
 ## Vista Previa 👀
 
-**Guía publicada:** [Pendiente de publicar]
+Abre la dirección que indique la consola (por defecto `http://localhost:4321/`).
 
-**Capturas de pantalla:** [Pendiente de añadir]
+## Publicar
 
---- 
+La web está en Netlify, enlazada al repositorio de GitHub: cada `push` a `main` la publica.
 
-## Construido con 🛠️
-
-- [Astro](https://astro.build/) - Framework utilizado para desarrollar la guía.
-- HTML5 - Estructura de las páginas.
-- CSS3 - Diseño y adaptación a diferentes dispositivos.
-- JavaScript y TypeScript - Interactividad y funcionalidades del proyecto.
-- Service Worker - Soporte para la consulta sin conexión.
-- Git y GitHub - Control de versiones y alojamiento del código.
-- Netlify - Plataforma prevista para el despliegue.
-
---- 
+No hay que configurar nada: `netlify.toml` ya indica el comando (`npm run build`), la carpeta (`dist`), Node 22 y que la web va en la raíz (`BASE_PATH=/`).
 
 ## Funcionalidades principales 🧩
 
-- Organización del viaje por ciudades, días y zonas.
-- Información sobre rutas y desplazamientos en transporte público.
-- Referencias visuales de estaciones, señales y accesos.
-- Tarjetas de información para facilitar la comunicación con los taxistas.
-- Recomendaciones para reducir los riesgos relacionados con el gluten durante el viaje.
-- Diseño responsive para consultar la guía desde el móvil.
-- Acceso a páginas y fotografías sin conexión, según las pruebas realizadas.
+1. Abrir la web publicada con wifi y entrar en la portada.
+2. Bajar a **Guardar la guía en el móvil** y esperar a que ponga ✅ (92 fotos).
+3. Añadirla a la pantalla de inicio (Safari: Compartir → Añadir a pantalla de inicio · Chrome: menú → Instalar app).
+4. Poner el móvil en **modo avión** y abrir las cuatro fases: todo debe verse, fotos incluidas.
+5. Si se cambia algo de la web después, abrirla una vez con conexión para que se actualice.
 
 --- 
 

@@ -12,6 +12,7 @@ import Prio from '../components/ui/Prio.astro';
 import VueltaHotel from '../components/ui/VueltaHotel.astro';
 import Foto from '../components/ui/Foto.astro';
 import Galeria from '../components/ui/Galeria.astro';
+import Desplegable from '../components/ui/Desplegable.astro';
 import Timeline from '../components/ruta/Timeline.astro';
 import TL from '../components/ruta/TL.astro';
 import Linea from '../components/ruta/Linea.astro';
@@ -64,8 +65,8 @@ const E = (n: number, nom?: string) => est('sagano', n, nom);
   <Seccion id="mapa" kicker="Cómo vamos a entender Kyoto" titulo="Por <strong>zonas</strong>, no por puntos" lead="Kyoto no la planteamos como una colección de puntos: la dividimos por zonas para no cruzar la ciudad sin necesidad. Los desplazamientos largos, en tren; y siendo cuatro, el taxi tiene mucho sentido.">
     <Mision kicker="🎯 NUESTRA MISIÓN EN KYOTO" main="Ver lo que hemos venido a ver sin convertir cada día en una carrera." small="Los MUST son Kiyomizu-dera, Bosque de Bambú, Kinkaku-ji, Fushimi Inari y Ryoan-ji. Si un día se complica, recortamos primero lo opcional." />
     <div class="cards">
-      <a class="card" href="#dia26" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🏯 Higashiyama + Gion · 26</h3><p>Kiyomizu-dera, Sannenzaka, Ninenzaka, Yasaka Pagoda, Nene-no-Michi, Yasaka Shrine, Maruyama y Gion.</p></a>
-      <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🎋 Arashiyama · 27</h3><p>Bosque de Bambú + Tenryu-ji + Togetsukyo. Llegamos temprano.</p></a>
+      <a class="card" href="#dia26" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🏯 Higashiyama + Gion · 26</h3><p>Ginkaku-ji, ruta de los filósofos, Nanzen-ji, Kiyomizu-dera, Sannenzaka, Ninenzaka, Yasaka Pagoda, Nene-no-Michi, Yasaka Shrine, Maruyama y Gion.</p></a>
+      <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🎋 Arashiyama · 27</h3><p>Bosque de Bambú + Tenryu-ji + Otagi Nenbutsu-ji + Togetsukyo. Llegamos temprano.</p></a>
       <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🟨 Kinkaku-ji · 27</h3><p>Pabellón Dorado y jardines. Ventana de visita: 09:00–17:00.</p></a>
       <a class="card" href="#dia28" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">⛩️ Fushimi Inari · 28</h3><p>Los famosos torii. Muy temprano para aprovechar la tranquilidad.</p></a>
       <a class="card" href="#dia27" style="text-decoration:none"><Prio t="must" texto="MUST" /><h3 style="margin-top:8px">🪨 Ryoan-ji · 27</h3><p>El jardín zen de rocas. Complementa muy bien Arashiyama + Kinkaku-ji.</p></a>
@@ -113,10 +114,67 @@ const E = (n: number, nom?: string) => est('sagano', n, nom);
   </Seccion>
 
   <Seccion id="dia26" fondo="alt">
-    <DiaHead fecha="LUNES · 26 OCT · HIGASHIYAMA + GION" titulo="🏯 Kiyomizu → calles históricas → <strong>Gion</strong>" zona="Este de Kyoto" />
-    <p class="lead">Empezamos muy temprano arriba, en Kiyomizu, y bajamos andando por las calles históricas. La tarde queda abierta para disfrutar Gion sin prisas.</p>
+    <DiaHead fecha="LUNES · 26 OCT · HIGASHIYAMA + RUTA DE LOS FILÓSOFOS + GION" titulo="🏯 Del Pabellón de Plata a las <strong>calles históricas de Kyoto</strong>" zona="Este de Kyoto" />
+    <p class="lead">Empezamos la mañana en el norte de Higashiyama, visitando Ginkaku-ji y recorriendo la ruta de los filósofos hasta Nanzen-ji. Después nos trasladamos en taxi a Kiyomizu-dera y bajamos andando por las calles históricas hasta terminar la jornada en Gion, sin prisas y con la comida más tarde de lo habitual. Si estamos cansados o llueve, Plan B: directamente Kiyomizu → Gion.</p>
+
+    <Desplegable titulo="⭐ PLAN A · Pabellón de Plata + ruta de los filósofos + Higashiyama + Gion" abierto>
     <div class="taxi-grid">
-      <TarjetaTaxi etiqueta="Salida del hotel · 06:30" jp="清水寺" romaji="Kiyomizu-dera" frase="清水寺の近くまでお願いします。" fraseEs="Por favor, llévenos cerca de Kiyomizu-dera." />
+      <TarjetaTaxi etiqueta="Salida del hotel · 08:00" jp="銀閣寺" romaji="Ginkaku-ji" frase="銀閣寺までお願いします。" fraseEs="Por favor, llévenos a Ginkaku-ji." />
+      <MiniMapa
+        titulo="Taxi al norte, a pie hacia el sur"
+        paradas={[
+          { nombre: 'Hotel', tipo: 'hotel', sig: { modo: 'taxi', label: '🚕 ~25–35 min' } },
+          { nombre: 'Ginkaku-ji', tipo: 'destacado', sig: { modo: 'andar', label: '🚶 filósofos' } },
+          { nombre: 'Nanzen-ji', tipo: 'destacado', sig: { modo: 'taxi', label: '🚕 ~15–20 min' } },
+          { nombre: 'Kiyomizu-dera', tipo: 'destacado', sig: { modo: 'andar', label: '🚶 bajada' } },
+          { nombre: 'Gion', tipo: 'destacado' },
+        ]}
+        check="Los tiempos de taxi son estimados: dependen del tráfico de la mañana."
+      />
+    </div>
+    <Timeline>
+      <TL hora="08:00" titulo="Hotel → Ginkaku-ji" tipo="taxi" etiqueta="Taxi">Empezamos directamente en el norte de Higashiyama, sin transbordos a primera hora. Unos 25–35 min estimados, según el tráfico.</TL>
+      <TL hora="08:30–09:15" titulo="Ginkaku-ji · Pabellón de Plata" prio="must" prioTexto="MUST">Primera visita del día: el templo, sus jardines y el paisaje. Abre a las 8:30 (de marzo a noviembre).</TL>
+      <TL hora="09:15–10:15" titulo="Ruta de los filósofos" tipo="andar" prio="must" prioTexto="MUST">Del templo bajamos unos minutos hasta el canal y seguimos hacia el sur. Unos 2 km: 30–45 min sin paradas, así que da para hacerla entera con fotos.</TL>
+      <TL hora="10:15–11:15" titulo="Nanzen-ji + acueducto" prio="must" prioTexto="MUST">El recinto y el acueducto de ladrillo (Suirokaku) son gratis. El Sanmon y el Hojo son de pago, de 8:40 a 17:00: entramos solo si vamos bien de tiempo.</TL>
+      <TL hora="11:15–11:45" titulo="Nanzen-ji → Kiyomizu-dera" tipo="taxi" etiqueta="Taxi">Unos 15–20 min estimados. El taxi nos deja cerca: el último tramo, a pie y cuesta arriba.</TL>
+      <TL hora="11:45–12:45" titulo="Kiyomizu-dera" prio="must" prioTexto="MUST">El templo y su famoso escenario de madera. A esta hora habrá mucha más gente que a primera hora.</TL>
+      <TL hora="12:45–13:15" titulo="Sannenzaka" tipo="andar">Empezamos la bajada por las calles históricas (escalones de piedra y pavimento irregular: cuidado).</TL>
+      <TL hora="13:15–14:00" titulo="Ninenzaka + Yasaka Pagoda" tipo="andar">Arquitectura tradicional y fotos, sin convertirlo en una simple foto.</TL>
+      <TL hora="14:00–14:30" titulo="Nene-no-Michi / exterior de Kodai-ji" tipo="andar">Paseo por calles tradicionales empedradas.</TL>
+      <TL hora="14:30–15:00" titulo="Maruyama Park + Yasaka Shrine" tipo="andar">Seguimos caminando hacia Gion.</TL>
+      <TL hora="~15:00" titulo="🍜 Gion · comida" tipo="descanso">Hora orientativa: depende de cómo estemos. Si antes surge un sitio seguro para el celíaco, comemos antes.</TL>
+      <TL hora="Después" titulo="Gion · paseo sin prisas" tipo="andar">Hanamikoji, Shirakawa/Shimbashi, Tatsumi Bridge, calles tradicionales, tiendas y cafés. Sin hora de fin: si estamos cansados, taxi al hotel.</TL>
+    </Timeline>
+    <Aviso tipo="oro" titulo="⏱️ Si vamos justos">
+      <p>Recortamos por arriba: menos tiempo en la ruta de los filósofos y Nanzen-ji solo por fuera. <strong>Kiyomizu-dera no se quita.</strong> La comida va tarde: llevamos algo seguro para picar a media mañana.</p>
+    </Aviso>
+    <MapaAndando
+      titulo="Ginkaku-ji → ruta de los filósofos → Nanzen-ji"
+      sub="Hacia el sur siguiendo el canal. Llano y a la sombra de los árboles."
+      ciudad="Kyoto"
+      distancia="≈ 2,5–3 km"
+      tiempo="~45 min andando + visitas"
+      puntos={[
+        { n: 'Ginkaku-ji', lat: 35.0269, lon: 135.7983, q: 'Ginkaku-ji, Kyoto' },
+        { n: 'Inicio de la ruta', lat: 35.0270, lon: 135.7943, q: "Philosopher's Path, Ginkakuji, Kyoto" },
+        { n: 'Final de la ruta', lat: 35.0163, lon: 135.7963, q: 'Nyakuoji Bridge, Kyoto' },
+        { n: 'Nanzen-ji', lat: 35.0120, lon: 135.7944, t: 'fin', q: 'Nanzen-ji, Kyoto' },
+      ]}
+      zonas={[{ n: 'Higashiyama norte', lat: 35.0200, lon: 135.8000 }]}
+      reco={{ t: '🚕 SIGUIENTE: TAXI A KIYOMIZU', d: 'Desde Nanzen-ji, ~15–20 min estimados' }}
+    />
+    <Galeria cols={3} h="200px">
+      <Foto id="ginkakuji" titulo="Ginkaku-ji" texto="El Pabellón de Plata entre los jardines." />
+      <Foto id="filosofos" titulo="Ruta de los filósofos" texto="El paseo junto al canal, bajo los árboles." />
+      <Foto id="nanzenji-suirokaku" titulo="Nanzen-ji · Suirokaku" texto="El acueducto de ladrillo, dentro del recinto." />
+    </Galeria>
+    </Desplegable>
+
+    <Desplegable titulo="🎯 PLAN B · Versión corta: Kiyomizu → calles históricas → Gion">
+    <p class="lead">Empezamos arriba, en Kiyomizu, y bajamos andando por las calles históricas. La tarde queda abierta para disfrutar Gion sin prisas.</p>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Salida del hotel · 08:00" jp="清水寺" romaji="Kiyomizu-dera" frase="清水寺の近くまでお願いします。" fraseEs="Por favor, llévenos cerca de Kiyomizu-dera." />
       <MiniMapa
         titulo="Taxi para subir, a pie para bajar"
         paradas={[
@@ -124,20 +182,22 @@ const E = (n: number, nom?: string) => est('sagano', n, nom);
           { nombre: 'Kiyomizu-dera', tipo: 'destacado', sig: { modo: 'andar', label: '🚶 bajada' } },
           { nombre: 'Gion', tipo: 'destacado' },
         ]}
-        check="Empezar arriba nos ahorra la cuesta y depender del autobús a primera hora."
+        check="Empezar arriba nos ahorra la cuesta y depender del autobús."
       />
     </div>
     <Timeline>
-      <TL hora="06:30" titulo="Hotel → Kiyomizu-dera" tipo="taxi" etiqueta="Taxi">Para cuatro compensa: empezamos directamente en la zona alta y evitamos el autobús a primera hora.</TL>
-      <TL hora="07:00–08:15" titulo="Kiyomizu-dera" prio="must" prioTexto="MUST">Visita tranquila del templo y del famoso escenario de madera.</TL>
-      <TL hora="08:15–08:45" titulo="Sannenzaka" tipo="andar">Empezamos la bajada por las calles históricas (escalones de piedra: cuidado).</TL>
-      <TL hora="08:45–09:30" titulo="Ninenzaka + Yasaka Pagoda" tipo="andar">Una de las zonas que queremos disfrutar sin convertirla en una simple foto.</TL>
-      <TL hora="09:30–10:15" titulo="Nene-no-Michi / exterior de Kodai-ji" tipo="andar">Paseo por calles tradicionales empedradas.</TL>
-      <TL hora="10:15–11:00" titulo="Maruyama Park + Yasaka Shrine" tipo="andar">Seguimos caminando hacia Gion.</TL>
-      <TL hora="11:00–12:30" titulo="🍜 Gion · comida" tipo="descanso">Comemos y hacemos una pausa. No buscamos otra visita inmediatamente después.</TL>
-      <TL hora="12:30–16:00" titulo="Gion · paseo sin prisas" tipo="andar">Hanamikoji, Shirakawa/Shimbashi, Tatsumi Bridge, calles tradicionales, tiendas y cafés. Parte abierta: sin perseguir una hora concreta.</TL>
-      <TL hora="16:00+" titulo="🌙 Tarde libre" tipo="descanso">Si Gion sigue apeteciendo, continuamos. Si estamos cansados, taxi al hotel. Ninguna visita más obligatoria.</TL>
+      <TL hora="08:00" titulo="Hotel → Kiyomizu-dera" tipo="taxi" etiqueta="Taxi">Para cuatro compensa: empezamos directamente en la zona alta y evitamos el autobús.</TL>
+      <TL hora="08:30–09:45" titulo="Kiyomizu-dera" prio="must" prioTexto="MUST">Visita tranquila del templo y del famoso escenario de madera.</TL>
+      <TL hora="09:45–10:15" titulo="Sannenzaka" tipo="andar">Empezamos la bajada por las calles históricas (escalones de piedra: cuidado).</TL>
+      <TL hora="10:15–11:00" titulo="Ninenzaka + Yasaka Pagoda" tipo="andar">Una de las zonas que queremos disfrutar sin convertirla en una simple foto.</TL>
+      <TL hora="11:00–11:45" titulo="Nene-no-Michi / exterior de Kodai-ji" tipo="andar">Paseo por calles tradicionales empedradas.</TL>
+      <TL hora="11:45–12:30" titulo="Maruyama Park + Yasaka Shrine" tipo="andar">Seguimos caminando hacia Gion.</TL>
+      <TL hora="~12:30" titulo="🍜 Gion · comida" tipo="descanso">Hora orientativa: comemos cuando nos venga bien. No buscamos otra visita inmediatamente después.</TL>
+      <TL hora="Después" titulo="Gion · paseo sin prisas" tipo="andar">Hanamikoji, Shirakawa/Shimbashi, Tatsumi Bridge, calles tradicionales, tiendas y cafés. Parte abierta: sin perseguir una hora concreta.</TL>
+      <TL hora="Tarde" titulo="🌙 Tarde libre" tipo="descanso">Si Gion sigue apeteciendo, continuamos. Si estamos cansados, taxi al hotel. Ninguna visita más obligatoria.</TL>
     </Timeline>
+    </Desplegable>
+
     <MapaAndando
       titulo="La bajada de Higashiyama a Gion"
       sub="Todo cuesta abajo o llano desde Kiyomizu. Calles empedradas y escalones."
@@ -169,8 +229,8 @@ const E = (n: number, nom?: string) => est('sagano', n, nom);
   </Seccion>
 
   <Seccion id="dia27">
-    <DiaHead fecha="MARTES · 27 OCT · ARASHIYAMA + ZEN + DORADO" titulo="🎋 Bambú → Tenryu-ji → Ryoan-ji → <strong>Kinkaku-ji</strong>" zona="Oeste y noroeste" />
-    <p class="lead">El día de los dos grandes objetivos visuales: Bosque de Bambú y Pabellón Dorado, con el jardín zen en medio.</p>
+    <DiaHead fecha="MARTES · 27 OCT · ARASHIYAMA + OTAGI + ZEN + DORADO" titulo="🎋 Bambú → Tenryu-ji → Otagi → Ryoan-ji → <strong>Kinkaku-ji</strong>" zona="Oeste y noroeste" />
+    <p class="lead">El día de los grandes objetivos visuales: Bosque de Bambú casi vacío a primera hora, las estatuas de Otagi y, por la tarde, el jardín zen y el Pabellón Dorado. Por la tarde, taxis cortos para no caminar de más.</p>
     <TarjetaEstacion
       kicker="Ida · JR Sagano Line (morado)"
       titulo={`Kyoto ${E(1)} → Saga-Arashiyama ${E(8)}`}
@@ -203,49 +263,77 @@ const E = (n: number, nom?: string) => est('sagano', n, nom);
       <Aviso tipo="oro" titulo="🎋 Importante"><p>No cogemos “cualquier tren hacia el oeste”. Buscamos <strong>JR Sagano Line → Saga-Arashiyama</strong>. El “Sagano Romantic Train” turístico es otra cosa.</p></Aviso>
     </TarjetaEstacion>
     <Timeline>
-      <TL hora="07:15" titulo="Hotel → Kyoto Station" tipo="andar" etiqueta="A pie">No necesitamos taxi.</TL>
-      <TL hora="07:30 aprox." titulo={`Kyoto ${E(1)} → Saga-Arashiyama ${E(8)}`} tipo="tren"><Fragment slot="lineas"><Linea l="sagano" dir="Saga-Arashiyama" /></Fragment>Buscamos <strong class="jp">嵯峨野線</strong> y comprobamos <strong class="jp">嵯峨嵐山</strong> en la pantalla.</TL>
-      <TL hora="08:00+" titulo="🎋 Bosque de Bambú" prio="must" prioTexto="MUST">Directos al Bamboo Grove antes de que aumente la gente.</TL>
-      <TL hora="08:30–10:00" titulo="Tenryu-ji" prio="maybe" prioTexto="⭐">Jardín y recinto. El jardín abre a las 08:30.</TL>
-      <TL hora="10:00–11:00" titulo="🌉 Togetsukyo" tipo="andar">Paseo y fotos junto al río. Sin correr.</TL>
-      <TL hora="11:00–11:30" titulo="Arashiyama → Ryoan-ji" tipo="taxi" etiqueta="Taxi">Para cuatro, el taxi ahorra tiempo y evita el autobús turístico.</TL>
-      <TL hora="11:30–12:30" titulo="🪨 Ryoan-ji" prio="must" prioTexto="MUST">Jardín zen de rocas. Aquí bajamos el ritmo.</TL>
-      <TL hora="12:30–13:00" titulo="Ryoan-ji → Kinkaku-ji" tipo="taxi" etiqueta="Taxi">Trayecto corto para proteger el tiempo del Pabellón Dorado.</TL>
-      <TL hora="13:00–14:00" titulo="✨ Kinkaku-ji · Pabellón Dorado" prio="must" prioTexto="MUST">Con calma y recorriendo el jardín. No es una visita de cinco minutos.</TL>
-      <TL hora="14:00+" titulo="🍜 Comida + regreso" tipo="descanso">Comemos y decidimos según la energía. Nijo-jo solo si vamos muy bien de tiempo y ganas. Vuelta en taxi al hotel.</TL>
+      <TL hora="07:15" titulo="Hotel → Kyoto Station" tipo="andar" etiqueta="A pie">No necesitamos taxi. Hoy salimos antes que los otros días: es la única forma de ver el bambú casi vacío.</TL>
+      <TL hora="07:30 aprox." titulo={`Kyoto ${E(1)} → Saga-Arashiyama ${E(8)}`} tipo="tren"><Fragment slot="lineas"><Linea l="sagano" dir="Saga-Arashiyama" /></Fragment>Buscamos <strong class="jp">嵯峨野線</strong> y comprobamos <strong class="jp">嵯峨嵐山</strong> en la pantalla. Llegada hacia las 07:45.</TL>
+      <TL hora="08:00–08:50" titulo="🎋 Bosque de Bambú" prio="must" prioTexto="MUST">De la estación al bosque, pasando por Nonomiya: unos 10–15 min. Luz de mañana y muy poca gente.</TL>
+      <TL hora="09:00–10:00" titulo="Tenryu-ji" prio="maybe" prioTexto="⭐">Entramos desde el bosque por la <strong>puerta norte, que abre a las 9:00</strong> (el jardín abre a las 8:30, pero por la puerta principal). Jardín con calma.</TL>
+      <TL hora="10:00–10:40" titulo="Subida a Otagi Nenbutsu-ji" tipo="andar" etiqueta="A pie">Unos 2,5–3 km cuesta arriba suave por la calle tradicional de Saga-Toriimoto: 30–40 min.</TL>
+      <TL hora="10:40–11:20" titulo="⛩️ Otagi Nenbutsu-ji">Las 1.200 estatuas sonrientes cubiertas de musgo. A esta hora sigue tranquilo. Abre de 8:00 a 17:00 y la entrada ronda los 300 ¥ (confirmar).</TL>
+      <TL hora="11:20" titulo="Otagi → Togetsukyo" tipo="taxi" etiqueta="Taxi">Unos 3,5 km · ~10 min · ~1.500 ¥ (estimado). Allí no siempre hay taxis esperando: lo pedimos con la app GO. Si vamos bien de piernas, a pie: 40–50 min cuesta abajo por Saga-Toriimoto, pero la comida se va a la hora punta.</TL>
+      <TL hora="11:35–12:15" titulo="🌉 Togetsukyo + río Katsura" tipo="andar">Paseo y fotos junto al río. Sin correr.</TL>
+      <TL hora="12:15–13:00" titulo="🍜 Comida temprana en Arashiyama" tipo="descanso">Antes de la hora punta nos ahorramos las colas. Celíaco: yudofu sin salsa (ver el protocolo abajo).</TL>
+      <TL hora="13:15" titulo="Togetsukyo → Ryoan-ji" tipo="taxi" etiqueta="Taxi 1">Unos 6 km · ~20 min · ~2.500–3.000 ¥ (~700 ¥ por persona).</TL>
+      <TL hora="13:35–14:20" titulo="🪨 Ryoan-ji" prio="must" prioTexto="MUST">Jardín zen de rocas. Aquí bajamos el ritmo.</TL>
+      <TL hora="14:25" titulo="Ryoan-ji → Kinkaku-ji" tipo="taxi" etiqueta="Taxi 2">Unos 1,5–2 km · 5–8 min · ~800–1.000 ¥ (~250 ¥ por persona). Trayecto corto para proteger el tiempo del Pabellón Dorado.</TL>
+      <TL hora="14:35–15:35" titulo="✨ Kinkaku-ji · Pabellón Dorado" prio="must" prioTexto="MUST">Con calma y recorriendo el jardín, con luz de tarde. No es una visita de cinco minutos. Abre de 9:00 a 17:00.</TL>
+      <TL hora="15:45" titulo="Kinkaku-ji → hotel" tipo="taxi" etiqueta="Taxi 3">Unos 8–9 km · 25–35 min · ~3.500–4.000 ¥ (~1.000 ¥ por persona). Nijo-jo solo si vamos muy adelantados y con ganas: la última entrada es sobre las 16:00.</TL>
     </Timeline>
+    <TablaTransporte
+      cab={['Tramo', 'Cómo', 'Distancia', 'Tiempo', 'Taxi (total · por persona)']}
+      filas={[
+        ['Saga-Arashiyama → Bosque de Bambú', '🚶 A pie, por Nonomiya', '~1 km', '10–15 min', '—'],
+        ['Bosque → Tenryu-ji', '🚶 Puerta norte', 'Al lado', '—', '—'],
+        ['Tenryu-ji → Otagi Nenbutsu-ji', '🚶 Cuesta arriba suave', '~2,5–3 km', '30–40 min', '—'],
+        ['Otagi → Togetsukyo', '🚕 Taxi (o 🚶 40–50 min)', '~3,5 km', '~10 min', '~1.500 ¥ · ~400 ¥'],
+        ['<strong>Taxi 1</strong> · Togetsukyo → Ryoan-ji', '🚕 Taxi', '~6 km', '~20 min', '~2.500–3.000 ¥ · ~700 ¥'],
+        ['<strong>Taxi 2</strong> · Ryoan-ji → Kinkaku-ji', '🚕 Taxi', '~1,5–2 km', '5–8 min', '~800–1.000 ¥ · ~250 ¥'],
+        ['<strong>Taxi 3</strong> · Kinkaku-ji → hotel', '🚕 Taxi', '~8–9 km', '25–35 min', '~3.500–4.000 ¥ · ~1.000 ¥'],
+      ]}
+    />
+    <Aviso tipo="azul" titulo="👟 ¿Llegaremos a los 30.000 pasos? No.">
+      <p>Bajando de Otagi en taxi, el día sale en unos <strong>8–9 km (~12.000 pasos)</strong>, contando los paseos dentro de los templos. Si bajamos a pie, unos 11–12 km (~15.000–17.000 pasos).</p>
+      <p>Distancias aproximadas sobre el mapa. Los precios son una estimación con la tarifa de Kyoto (500 ¥ los primeros 900 m y 100 ¥ cada 255 m), sin esperas: confirmar con la app GO.</p>
+    </Aviso>
     <MapaAndando
-      titulo="Arashiyama a pie"
-      sub="De la estación al bosque, Tenryu-ji y el puente. Todo llano."
+      titulo="Arashiyama a pie: bambú → Otagi"
+      sub="De la estación al bosque (pasando por Nonomiya) y Tenryu-ji, y subida suave hasta Otagi por Saga-Toriimoto."
       ciudad="Kyoto"
-      distancia="≈ 2,5 km"
-      tiempo="~35 min andando + visitas"
+      distancia="≈ 4 km"
+      tiempo="~55 min andando + visitas"
       puntos={[
-        { n: 'Saga-Arashiyama JR-E08', lat: 35.0186, lon: 135.6812, t: 'estacion', q: 'Saga-Arashiyama Station' },
-        { n: 'Nonomiya', lat: 35.0177, lon: 135.6745, q: 'Nonomiya Shrine, Kyoto' },
+        { n: 'Saga-Arashiyama JR-E08', lat: 35.0187, lon: 135.6813, t: 'estacion', q: 'Saga-Arashiyama Station' },
         { n: 'Bosque de Bambú', lat: 35.0170, lon: 135.6722, q: 'Arashiyama Bamboo Grove' },
-        { n: 'Tenryu-ji', lat: 35.0157, lon: 135.6740, q: 'Tenryu-ji, Kyoto' },
-        { n: 'Togetsukyo', lat: 35.0129, lon: 135.6777, t: 'fin', q: 'Togetsukyo Bridge' },
+        { n: 'Tenryu-ji', lat: 35.0160, lon: 135.6738, q: 'Tenryu-ji, Kyoto' },
+        { n: 'Saga-Toriimoto', lat: 35.0268, lon: 135.6645, q: 'Saga-Toriimoto Preserved Street, Kyoto' },
+        { n: 'Otagi Nenbutsu-ji', lat: 35.0314, lon: 135.6611, t: 'fin', q: 'Otagi Nenbutsu-ji, Kyoto' },
       ]}
       zonas={[{ n: 'Arashiyama', lat: 35.0145, lon: 135.6705 }]}
+      reco={{ t: '🚕 BAJADA: TAXI A TOGETSUKYO', d: '~10 min · o 40–50 min a pie' }}
     />
     <MapaAndando
       titulo="Taxi: Togetsukyo → Ryoan-ji → Kinkaku-ji"
       sub="Dos saltos cortos en taxi para proteger el tiempo de los dos MUST."
       ciudad="Kyoto"
       modo="driving"
-      distancia="≈ 6 km + 1,5 km"
-      tiempo="~20 min + ~5 min"
+      distancia="≈ 6 km + 1,5–2 km"
+      tiempo="~20 min + 5–8 min"
       puntos={[
         { n: 'Togetsukyo', lat: 35.0129, lon: 135.6777, t: 'inicio', q: 'Togetsukyo Bridge' },
         { n: 'Ryoan-ji', lat: 35.0345, lon: 135.7183, q: 'Ryoan-ji, Kyoto' },
         { n: 'Kinkaku-ji', lat: 35.0394, lon: 135.7292, t: 'fin', q: 'Kinkaku-ji, Kyoto' },
       ]}
     />
-    <Aviso tipo="oro" titulo="⚠️ No sobrecargar el 27"><p>Arashiyama + Ryoan-ji + Kinkaku-ji ya es un día potente. Nijo-jo es opcional, no una obligación.</p></Aviso>
+    <Aviso tipo="oro" titulo="⚠️ No sobrecargar el 27"><p>Arashiyama + Otagi + Ryoan-ji + Kinkaku-ji ya es un día potente. Nijo-jo es opcional, no una obligación.</p></Aviso>
+    <div class="taxi-grid">
+      <TarjetaTaxi etiqueta="Otagi → Togetsukyo" jp="渡月橋" romaji="Togetsukyo" frase="渡月橋までお願いします。" fraseEs="A Togetsukyo, por favor." />
+      <TarjetaTaxi etiqueta="Taxi 1 · Togetsukyo → Ryoan-ji" jp="龍安寺" romaji="Ryoan-ji" frase="龍安寺までお願いします。" fraseEs="A Ryoan-ji, por favor." />
+      <TarjetaTaxi etiqueta="Taxi 2 · Ryoan-ji → Kinkaku-ji" jp="金閣寺" romaji="Kinkaku-ji" frase="金閣寺までお願いします。" fraseEs="A Kinkaku-ji, por favor." />
+      <TarjetaTaxi etiqueta="Taxi 3 · Kinkaku-ji → hotel" jp={H.jp} romaji={H.nombre} frase="京都駅の烏丸口までお願いします。" fraseEs="A la salida Karasuma de Kyoto Station, por favor." dire={H.direccionJp} />
+    </div>
     <Galeria cols={3} h="200px">
       <Foto id="bambu" titulo="Bosque de Bambú" texto="El sendero entre bambúes. Temprano hay mucha menos gente." />
       <Foto id="tenryuji" titulo="Tenryu-ji" texto="Jardín con estanque frente a las montañas." />
+      <Foto id="otagi" titulo="Otagi Nenbutsu-ji" texto="Las estatuas sonrientes cubiertas de musgo." />
       <Foto id="togetsukyo" titulo="Togetsukyo" texto="El puente largo de madera sobre el río Katsura." />
       <Foto id="ryoanji" titulo="Ryoan-ji" texto="Quince rocas sobre grava rastrillada." />
       <Foto id="kinkakuji" titulo="Kinkaku-ji" texto="El Pabellón Dorado reflejado en el estanque." />
@@ -348,7 +436,9 @@ const E = (n: number, nom?: string) => est('sagano', n, nom);
 
   <Seccion id="taxi" kicker="Mostrar al taxista" titulo="🚕 Tarjetas para <strong>enseñar al taxista</strong>" lead="Pensadas para girar el móvil y enseñarlas directamente (⤢ a pantalla completa). No hace falta pronunciar el destino.">
     <div class="taxi-grid">
-      <TarjetaTaxi etiqueta="26 · Hotel → inicio" jp="清水寺" romaji="Kiyomizu-dera" frase="清水寺の近くまでお願いします。" fraseEs="Cerca de Kiyomizu-dera, por favor." />
+      <TarjetaTaxi etiqueta="26 · Plan A · Hotel → inicio" jp="銀閣寺" romaji="Ginkaku-ji" frase="銀閣寺までお願いします。" fraseEs="A Ginkaku-ji, por favor." />
+      <TarjetaTaxi etiqueta="26 · Hacia Kiyomizu" jp="清水寺" romaji="Kiyomizu-dera" frase="清水寺の近くまでお願いします。" fraseEs="Cerca de Kiyomizu-dera, por favor." />
+      <TarjetaTaxi etiqueta="27 · Otagi → Togetsukyo" jp="渡月橋" romaji="Togetsukyo" frase="渡月橋までお願いします。" fraseEs="A Togetsukyo, por favor." />
       <TarjetaTaxi etiqueta="27 · Arashiyama → Ryoan-ji" jp="龍安寺" romaji="Ryoan-ji" frase="龍安寺までお願いします。" fraseEs="A Ryoan-ji, por favor." />
       <TarjetaTaxi etiqueta="27 · Ryoan-ji → Kinkaku-ji" jp="金閣寺" romaji="Kinkaku-ji" frase="金閣寺までお願いします。" fraseEs="A Kinkaku-ji, por favor." />
       <TarjetaTaxi etiqueta="Vuelta al hotel" jp={H.jp} romaji={H.nombre} frase="京都駅の烏丸口までお願いします。" fraseEs="A la salida Karasuma de Kyoto Station, por favor." dire={H.direccionJp} />
